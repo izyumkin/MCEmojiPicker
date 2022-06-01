@@ -13,6 +13,13 @@
 		C432E14F2847380E00E694D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C432E14D2847380E00E694D8 /* Main.storyboard */; };
 		C432E1512847380E00E694D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C432E1502847380E00E694D8 /* Assets.xcassets */; };
 		C432E1542847380E00E694D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C432E1522847380E00E694D8 /* LaunchScreen.storyboard */; };
+		C432E16528473C8800E694D8 /* EmojiPickerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C432E16728473C8800E694D8 /* EmojiPickerLocalizable.strings */; };
+		C432E16E28473D0700E694D8 /* EmojiCategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E16D28473D0700E694D8 /* EmojiCategoriesModel.swift */; };
+		C432E17028473D2C00E694D8 /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */; };
+		C432E17228473D4300E694D8 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */; };
+		C432E17428473D5400E694D8 /* EmojiSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */; };
+		C432E17728473D7400E694D8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17628473D7400E694D8 /* UIView+Extension.swift */; };
+		C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,14 @@
 		C432E1502847380E00E694D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C432E1532847380E00E694D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C432E1552847380E00E694D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C432E16628473C8800E694D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmojiPickerLocalizable.strings; sourceTree = "<group>"; };
+		C432E16C28473CCC00E694D8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/EmojiPickerLocalizable.strings; sourceTree = "<group>"; };
+		C432E16D28473D0700E694D8 /* EmojiCategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoriesModel.swift; sourceTree = "<group>"; };
+		C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
+		C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSectionHeader.swift; sourceTree = "<group>"; };
+		C432E17628473D7400E694D8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +71,7 @@
 		C432E1462847380E00E694D8 /* EmojiPicker */ = {
 			isa = PBXGroup;
 			children = (
+				C432E15C28473BDE00E694D8 /* EmojiPicker */,
 				C432E1472847380E00E694D8 /* AppDelegate.swift */,
 				C432E1492847380E00E694D8 /* SceneDelegate.swift */,
 				C432E14B2847380E00E694D8 /* ViewController.swift */,
@@ -65,6 +81,68 @@
 				C432E1552847380E00E694D8 /* Info.plist */,
 			);
 			path = EmojiPicker;
+			sourceTree = "<group>";
+		};
+		C432E15C28473BDE00E694D8 /* EmojiPicker */ = {
+			isa = PBXGroup;
+			children = (
+				C432E16128473C1800E694D8 /* Resource */,
+				C432E15F28473C0A00E694D8 /* Model */,
+				C432E15E28473C0500E694D8 /* View */,
+				C432E15D28473BF900E694D8 /* Controller */,
+			);
+			path = EmojiPicker;
+			sourceTree = "<group>";
+		};
+		C432E15D28473BF900E694D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C432E15E28473C0500E694D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */,
+				C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */,
+				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C432E15F28473C0A00E694D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C432E16D28473D0700E694D8 /* EmojiCategoriesModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C432E16128473C1800E694D8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C432E17528473D6600E694D8 /* Extensions */,
+				C432E16228473C5500E694D8 /* Localization */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		C432E16228473C5500E694D8 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				C432E16728473C8800E694D8 /* EmojiPickerLocalizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		C432E17528473D6600E694D8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C432E17628473D7400E694D8 /* UIView+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,6 +187,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = C432E13B2847380E00E694D8;
 			productRefGroup = C432E1452847380E00E694D8 /* Products */;
@@ -127,6 +206,7 @@
 			files = (
 				C432E1542847380E00E694D8 /* LaunchScreen.storyboard in Resources */,
 				C432E1512847380E00E694D8 /* Assets.xcassets in Resources */,
+				C432E16528473C8800E694D8 /* EmojiPickerLocalizable.strings in Resources */,
 				C432E14F2847380E00E694D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +218,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C432E16E28473D0700E694D8 /* EmojiCategoriesModel.swift in Sources */,
+				C432E17228473D4300E694D8 /* EmojiCollectionViewCell.swift in Sources */,
+				C432E17728473D7400E694D8 /* UIView+Extension.swift in Sources */,
+				C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */,
 				C432E14C2847380E00E694D8 /* ViewController.swift in Sources */,
+				C432E17028473D2C00E694D8 /* EmojiPickerView.swift in Sources */,
 				C432E1482847380E00E694D8 /* AppDelegate.swift in Sources */,
+				C432E17428473D5400E694D8 /* EmojiSectionHeader.swift in Sources */,
 				C432E14A2847380E00E694D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +247,15 @@
 				C432E1532847380E00E694D8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		C432E16728473C8800E694D8 /* EmojiPickerLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C432E16628473C8800E694D8 /* en */,
+				C432E16C28473CCC00E694D8 /* ru */,
+			);
+			name = EmojiPickerLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -295,6 +390,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,6 +419,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

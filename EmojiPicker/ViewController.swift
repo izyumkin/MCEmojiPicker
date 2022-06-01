@@ -8,12 +8,49 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: - Private Properties
+    
+    @IBOutlet private weak var emojiButton: UIButton!
+    
+    // MARK: - Actions
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBAction func selectEmojiAction(_ sender: UIButton) {
+        let viewController = EmojiPickerViewController()
+        viewController.delegate = self
+        viewController.preferredContentSize = CGSize(width: 400, height: 500)
+        viewController.modalPresentationStyle = .popover
+        if let presentationController = viewController.presentationController {
+            presentationController.delegate = self
+        }
+        self.present(viewController, animated: true)
+        if let pop = viewController.popoverPresentationController {
+            pop.permittedArrowDirections = .up
+            pop.sourceView = sender
+            pop.sourceRect = CGRect(
+                x: 0,
+                y: 5,
+                width: sender.bounds.width,
+                height: sender.bounds.height
+            )
+        }
     }
-
-
+    
 }
 
+// MARK: - EmojiPickerDelegate
+
+extension ViewController: EmojiPickerDelegate {
+    func didGetEmoji(emoji: String) {
+        emojiButton.setTitle(emoji, for: .normal)
+    }
+}
+
+
+// MARK: - UIAdaptivePresentationControllerDelegate
+
+extension ViewController: UIAdaptivePresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+}

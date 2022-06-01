@@ -1,0 +1,16 @@
+/* 
+  EmojiPickerLocalizable.strings
+  EmojiPicker
+
+  Created by Иван Изюмкин on 01.06.2022.
+  
+*/
+
+"firstSmileCategoryTitle" = "EMOTICONS AND PEOPLE";
+"secondSmileCategoryTitle" = "ANIMALS AND NATURE";
+"thirdSmileCategoryTitle" = "FOOD AND DRINKS";
+"fourthSmileCategoryTitle" = "ACTIVITIES";
+"fifthSmileCategoryTitle" = "TRAVELLING AND PLACES";
+"sixthSmileCategoryTitle" = "ITEMS";
+"seventhSmileCategoryTitle" = "SYMBOLS";
+"eightSmileCategoryTitle" = "FLAGS";
