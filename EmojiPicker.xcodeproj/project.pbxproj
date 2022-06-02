@@ -20,6 +20,11 @@
 		C432E17428473D5400E694D8 /* EmojiSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */; };
 		C432E17728473D7400E694D8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17628473D7400E694D8 /* UIView+Extension.swift */; };
 		C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */; };
+		C46F7F20284861520008773A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F1F284861520008773A /* Observable.swift */; };
+		C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */; };
+		C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */; };
+		C46F7F2A284866F20008773A /* EmojiSectionHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F29284866F20008773A /* EmojiSectionHeaderViewModel.swift */; };
+		C46F7F2E284867080008773A /* EmojiSectionHeaderViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F2D284867080008773A /* EmojiSectionHeaderViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +44,11 @@
 		C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSectionHeader.swift; sourceTree = "<group>"; };
 		C432E17628473D7400E694D8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewController.swift; sourceTree = "<group>"; };
+		C46F7F1F284861520008773A /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModel.swift; sourceTree = "<group>"; };
+		C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
+		C46F7F29284866F20008773A /* EmojiSectionHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSectionHeaderViewModel.swift; sourceTree = "<group>"; };
+		C46F7F2D284867080008773A /* EmojiSectionHeaderViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSectionHeaderViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +96,12 @@
 		C432E15C28473BDE00E694D8 /* EmojiPicker */ = {
 			isa = PBXGroup;
 			children = (
+				C46F7F1E284860BA0008773A /* Bindings */,
 				C432E16128473C1800E694D8 /* Resource */,
+				C46F7F262848665A0008773A /* Protocols */,
 				C432E15F28473C0A00E694D8 /* Model */,
+				C46F7F212848653B0008773A /* ViewModel */,
 				C432E15E28473C0500E694D8 /* View */,
-				C432E15D28473BF900E694D8 /* Controller */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
@@ -98,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				C432E17828473DB800E694D8 /* EmojiPickerViewController.swift */,
+				C46F7F222848655E0008773A /* View */,
+				C46F7F23284865650008773A /* Cells */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -105,9 +119,7 @@
 		C432E15E28473C0500E694D8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */,
-				C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */,
-				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
+				C432E15D28473BF900E694D8 /* Controller */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +155,49 @@
 				C432E17628473D7400E694D8 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C46F7F1E284860BA0008773A /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				C46F7F1F284861520008773A /* Observable.swift */,
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
+		C46F7F212848653B0008773A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */,
+				C46F7F29284866F20008773A /* EmojiSectionHeaderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C46F7F222848655E0008773A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C46F7F23284865650008773A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */,
+				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C46F7F262848665A0008773A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */,
+				C46F7F2D284867080008773A /* EmojiSectionHeaderViewModelProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +279,13 @@
 				C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */,
 				C432E14C2847380E00E694D8 /* ViewController.swift in Sources */,
 				C432E17028473D2C00E694D8 /* EmojiPickerView.swift in Sources */,
+				C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */,
+				C46F7F20284861520008773A /* Observable.swift in Sources */,
+				C46F7F2A284866F20008773A /* EmojiSectionHeaderViewModel.swift in Sources */,
 				C432E1482847380E00E694D8 /* AppDelegate.swift in Sources */,
+				C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */,
 				C432E17428473D5400E694D8 /* EmojiSectionHeader.swift in Sources */,
+				C46F7F2E284867080008773A /* EmojiSectionHeaderViewModelProtocol.swift in Sources */,
 				C432E14A2847380E00E694D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

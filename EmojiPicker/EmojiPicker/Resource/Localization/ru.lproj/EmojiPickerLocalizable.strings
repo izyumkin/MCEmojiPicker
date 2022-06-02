@@ -6,11 +6,11 @@
   
 */
 
-"firstSmileCategoryTitle" = "СМАЙЛИКИ И ЛЮДИ";
-"secondSmileCategoryTitle" = "ЖИВОТНЫЕ И ПРИРОДА";
-"thirdSmileCategoryTitle" = "ЕДА И НАПИТКИ";
-"fourthSmileCategoryTitle" = "АКТИВНОСТЬ";
-"fifthSmileCategoryTitle" = "ПУТЕШЕСТВИЯ И МЕСТА";
-"sixthSmileCategoryTitle" = "ПРЕДМЕТЫ";
-"seventhSmileCategoryTitle" = "СИМВОЛЫ";
-"eightSmileCategoryTitle" = "ФЛАГИ";
+"emotionsAndPeople" = "СМАЙЛИКИ И ЛЮДИ";
+"animalsAndNature" = "ЖИВОТНЫЕ И ПРИРОДА";
+"foodAndDrinks" = "ЕДА И НАПИТКИ";
+"activities" = "АКТИВНОСТЬ";
+"travellingAndPlaces" = "ПУТЕШЕСТВИЯ И МЕСТА";
+"items" = "ПРЕДМЕТЫ";
+"symbols" = "СИМВОЛЫ";
+"flags" = "ФЛАГИ";

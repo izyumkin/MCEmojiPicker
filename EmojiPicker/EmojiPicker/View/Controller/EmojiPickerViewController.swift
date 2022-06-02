@@ -23,9 +23,12 @@ final class EmojiPickerViewController: UIViewController {
     private let emojiModel = EmojiCategoriesModel()
     private let generator = UIImpactFeedbackGenerator(style: .light)
     
+    private var viewModel: EmojiPickerViewModelProtocol
+    
     // MARK: - Initializers
     
-    init() {
+    init(viewModel: EmojiPickerViewModelProtocol = EmojiPickerViewModel()) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         setupDelegates()
     }
@@ -69,17 +72,14 @@ extension EmojiPickerViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+        guard kind == UICollectionView.elementKindSectionHeader,
+              let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: EmojiSectionHeader.identifier,
                 for: indexPath
-            ) as? EmojiSectionHeader else { return UICollectionReusableView() }
-            sectionHeader.sectionTitle = emojiModel.categoriesTitles[indexPath.section]
-            return sectionHeader
-        } else {
-            return UICollectionReusableView()
-        }
+              ) as? EmojiSectionHeader else { return UICollectionReusableView() }
+        sectionHeader.viewModel = viewModel.sectionHeaderViewModel(for: indexPath.section)
+        return sectionHeader
     }
 }
 
