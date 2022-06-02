@@ -20,7 +20,6 @@ final class EmojiPickerViewController: UIViewController {
     // MARK: - Private Properties
     
     private let emojiPickerView = EmojiPickerView()
-    private let emojiModel = EmojiCategoriesModel()
     private let generator = UIImpactFeedbackGenerator(style: .light)
     
     private var viewModel: EmojiPickerViewModelProtocol
@@ -31,6 +30,7 @@ final class EmojiPickerViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         setupDelegates()
+        bindViewModel()
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +45,14 @@ final class EmojiPickerViewController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func bindViewModel() {
+        viewModel.selectedEmoji.bind { [unowned self] emoji in
+            generator.impactOccurred()
+            delegate?.didGetEmoji(emoji: emoji)
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
     private func setupDelegates() {
         emojiPickerView.collectionView.delegate = self
         emojiPickerView.collectionView.dataSource = self
@@ -55,11 +63,11 @@ final class EmojiPickerViewController: UIViewController {
 
 extension EmojiPickerViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return emojiModel.categoriesCount
+        return viewModel.numberOfSections()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return emojiModel.emojiCategories[emojiModel.categoriesKeys[section]]?.count ?? 0
+        return viewModel.numberOfItems(in: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +75,7 @@ extension EmojiPickerViewController: UICollectionViewDataSource {
             withReuseIdentifier: EmojiCollectionViewCell.identifier,
             for: indexPath
         ) as? EmojiCollectionViewCell else { return UICollectionViewCell() }
-        cell.emoji = emojiModel.emojiCategories[emojiModel.categoriesKeys[indexPath.section]]?[indexPath.row] ?? ""
+        cell.emoji = viewModel.emoji(at: indexPath)
         return cell
     }
     
@@ -78,7 +86,7 @@ extension EmojiPickerViewController: UICollectionViewDataSource {
                 withReuseIdentifier: EmojiSectionHeader.identifier,
                 for: indexPath
               ) as? EmojiSectionHeader else { return UICollectionReusableView() }
-        sectionHeader.viewModel = viewModel.sectionHeaderViewModel(for: indexPath.section)
+        sectionHeader.categoryName = viewModel.sectionHeaderViewModel(for: indexPath.section)
         return sectionHeader
     }
 }
@@ -87,26 +95,13 @@ extension EmojiPickerViewController: UICollectionViewDataSource {
 
 extension EmojiPickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let emoji = emojiModel.emojiCategories[
-            emojiModel.categoriesKeys[indexPath.section]
-        ]?[indexPath.row] else { return }
-        generator.impactOccurred()
-        delegate?.didGetEmoji(emoji: emoji)
-        dismiss(animated: true, completion: nil)
+        viewModel.selectedEmoji.value = viewModel.emoji(at: indexPath)
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-    ) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-    }
-    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,

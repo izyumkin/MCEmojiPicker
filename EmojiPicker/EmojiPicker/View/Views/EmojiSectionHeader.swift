@@ -11,10 +11,9 @@ final class EmojiSectionHeader: UICollectionReusableView {
     
     // MARK: - Public Methods
     
-    public var viewModel: EmojiSectionHeaderViewModelProtocol? {
+    public var categoryName: String = "" {
         didSet {
-            guard let viewModel = viewModel else { return }
-            headerLabel.text = viewModel.sectionTitle
+            headerLabel.text = categoryName
         }
     }
     
