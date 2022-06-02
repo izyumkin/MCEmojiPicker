@@ -7,11 +7,11 @@
 
 import Foundation
 
+/// ViewModel which using in EmojiPickerViewController
 final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
     
-    /// The observed variable that is responsible for the choice of emoji
     public var selectedEmoji = Observable<String>(value: "")
     
     // MARK: - Private Properties
@@ -58,22 +58,18 @@ final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Public Methods
     
-    /// The method returns the number of categories with emojis
     public func numberOfSections() -> Int {
         return emojiCategories.count
     }
     
-    /// The method returns the number of emojis in the target section
     public func numberOfItems(in section: Int) -> Int {
         return emojiCategories[section].emojis.count
     }
     
-    /// This method is responsible for getting the emoji for the target indexPath
     public func emoji(at indexPath: IndexPath) -> String {
         return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
     
-    /// The method is responsible for getting the localized name of the emoji section
     public func sectionHeaderViewModel(for section: Int) -> String {
         return emojiCategories[section].categoryName
     }

@@ -30,8 +30,8 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupLayout()
         setupSelectedBackgroundView()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
