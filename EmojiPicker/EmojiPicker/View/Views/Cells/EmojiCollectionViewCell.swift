@@ -31,6 +31,7 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        setupSelectedBackgroundView()
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +46,14 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
             emojiLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             emojiLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
+    }
+    
+    private func setupSelectedBackgroundView() {
+        let selectedView = UIView()
+        selectedView.backgroundColor = .systemGray3
+        selectedView.clipsToBounds = true
+        selectedView.layer.cornerRadius = 8
+        selectedBackgroundView = selectedView
     }
     
 }

@@ -22,7 +22,7 @@ class Observable<T> {
         self.value = value
     }
     
-    func bind(_ listener: @escaping Listener) {
+    public func bind(_ listener: @escaping Listener) {
         self.listener = listener
     }
 }

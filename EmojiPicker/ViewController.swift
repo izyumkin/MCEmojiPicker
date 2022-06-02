@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             pop.sourceView = sender
             pop.sourceRect = CGRect(
                 x: 0,
-                y: 5,
+                y: 0,
                 width: sender.bounds.width,
                 height: sender.bounds.height
             )

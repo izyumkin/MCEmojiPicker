@@ -15,7 +15,7 @@ final class EmojiPickerView: UIView {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        collectionView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false

@@ -17,6 +17,8 @@ final class EmojiPickerViewController: UIViewController {
     
     public weak var delegate: EmojiPickerDelegate?
     
+    // TODO: - Add customizing the top padding from sourceView
+    
     // MARK: - Private Properties
     
     private let emojiPickerView = EmojiPickerView()
@@ -119,7 +121,7 @@ extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
-        let contentSize = emojiPickerView.collectionView.bounds.width - sideInsets
+        let contentSize = collectionView.bounds.width - sideInsets
         return CGSize(
             width: contentSize / 8,
             height: contentSize / 8

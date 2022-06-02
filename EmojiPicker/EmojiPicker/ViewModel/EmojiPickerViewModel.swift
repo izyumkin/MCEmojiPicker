@@ -19,6 +19,7 @@ final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     /// Localization file name
     private let localizationTableName = "EmojiPickerLocalizable"
     
+    // TODO: - Move the emoji category settings to a separate EmojiManager
     /// All emoji categories
     private lazy var emojiCategories: [EmojiCategory] = [
         EmojiCategory(
