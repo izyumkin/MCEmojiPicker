@@ -109,7 +109,7 @@ extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         return CGSize(
             width: collectionView.frame.width,
-            height: 15
+            height: 40
         )
     }
 
@@ -118,9 +118,11 @@ extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
+        let contentSize = emojiPickerView.collectionView.bounds.width - sideInsets
         return CGSize(
-            width: emojiPickerView.collectionView.bounds.width / 9,
-            height: emojiPickerView.collectionView.bounds.width / 9
+            width: contentSize / 8,
+            height: contentSize / 8
         )
     }
     

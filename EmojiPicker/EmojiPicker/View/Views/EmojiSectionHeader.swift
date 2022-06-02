@@ -31,6 +31,7 @@ final class EmojiSectionHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackground()
         setupLayout()
     }
     
@@ -40,13 +41,16 @@ final class EmojiSectionHeader: UICollectionReusableView {
     
     // MARK: - Private Methods
     
+    private func setupBackground() {
+        backgroundColor = .systemGroupedBackground
+    }
+    
     private func setupLayout() {
         addSubview(headerLabel)
         NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            headerLabel.topAnchor.constraint(equalTo: topAnchor),
-            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
         ])
     }
 }
