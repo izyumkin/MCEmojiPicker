@@ -48,7 +48,7 @@ final class EmojiSectionHeader: UICollectionReusableView {
     private func setupLayout() {
         addSubview(headerLabel)
         NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 7),
             headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
         ])

@@ -18,6 +18,8 @@ final class EmojiPickerViewController: UIViewController {
     public weak var delegate: EmojiPickerDelegate?
     
     // TODO: - Add customizing the top padding from sourceView
+    // TODO: - Add the background appearance setting
+    // TODO: - Add customizing for the generator UIImpactFeedbackGenerator.FeedbackStyle
     
     // MARK: - Private Properties
     
