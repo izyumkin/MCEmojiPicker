@@ -15,3 +15,9 @@ I share the module out of my [application](https://apps.apple.com/ru/app/id15001
 -   [ ] Select skin tones from popup
 -   [ ] Seach bar and search results
 -   [ ] Recently used
+
+## Localizations
+
+### For User Interfaces
+
+["ru", "en"]
