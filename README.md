@@ -6,3 +6,12 @@
 </p>
 
 I share the module out of my [application](https://apps.apple.com/ru/app/id1500111859) and make my own version of the emoji picker adaptation like on Mac.
+
+## Features
+
+-   [x] The main functionality for choosing emojis
+-   [x] Dark mode
+-   [ ] Segmented control for jumping an emoji section
+-   [ ] Select skin tones from popup
+-   [ ] Seach bar and search results
+-   [ ] Recently used
