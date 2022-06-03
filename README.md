@@ -18,6 +18,4 @@ I share the module out of my [application](https://apps.apple.com/ru/app/id15001
 
 ## Localizations
 
-### For User Interfaces
-
 ["ru", "en"]
