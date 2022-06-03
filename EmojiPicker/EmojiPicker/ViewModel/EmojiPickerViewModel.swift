@@ -7,7 +7,9 @@
 
 import Foundation
 
-/// ViewModel which using in EmojiPickerViewController
+/**
+ ViewModel which using in EmojiPickerViewController.
+ */
 final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
@@ -16,11 +18,15 @@ final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Private Properties
     
-    /// Localization file name
+    /**
+     Localization file name.
+     */
     private let localizationTableName = "EmojiPickerLocalizable"
     
     // TODO: - Move the emoji category settings to a separate EmojiManager
-    /// All emoji categories
+    /**
+     All emoji categories.
+     */
     private lazy var emojiCategories: [EmojiCategory] = [
         EmojiCategory(
             categoryName: NSLocalizedString("emotionsAndPeople", tableName: localizationTableName, comment: ""),
