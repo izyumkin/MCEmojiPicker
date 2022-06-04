@@ -18,45 +18,70 @@ public enum EmojiCategoryType: Int {
     case flags = 7
 }
 
+public enum CategoryViewState {
+    case standard
+    case highlighted
+    case selected
+}
+
 final class EmojiCategoryIconView: UIView {
     
     // MARK: - Private Properties
     
     private var type: EmojiCategoryType
+    private var iconTintColor: UIColor = .systemGray
     
     // MARK: - Initializers
     
     init(type: EmojiCategoryType) {
         self.type = type
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Drawing
+    // MARK: - Public Methods
     
+    public func updateIcon(with state: CategoryViewState) {
+        switch state {
+        case .standard:
+            iconTintColor = .systemGray
+        case .highlighted:
+            iconTintColor = .lightGray
+        case .selected:
+            // TODO: - Add the ability to customize the color of the selected category
+            iconTintColor = .systemBlue
+        }
+        setNeedsDisplay()
+    }
+}
+
+// MARK: - Drawing
+
+extension EmojiCategoryIconView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         switch type {
         case .people:
-            CategoryIconsDrawKit.drawPeopleCategory(frame: rect)
+            CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: iconTintColor)
         case .nature:
-            CategoryIconsDrawKit.drawNatureCategory(frame: rect)
+            CategoryIconsDrawKit.drawNatureCategory(frame: rect, tintColor: iconTintColor)
         case .foodAndDrink:
-            CategoryIconsDrawKit.drawFoodAndDrinkCategory(frame: rect)
+            CategoryIconsDrawKit.drawFoodAndDrinkCategory(frame: rect, tintColor: iconTintColor)
         case .activity:
-            CategoryIconsDrawKit.drawActivityCategory(frame: rect)
+            CategoryIconsDrawKit.drawActivityCategory(frame: rect, tintColor: iconTintColor)
         case .travelAndPlaces:
-            CategoryIconsDrawKit.drawTravelAndPlacesCategory(frame: rect)
+            CategoryIconsDrawKit.drawTravelAndPlacesCategory(frame: rect, tintColor: iconTintColor)
         case .objects:
-            CategoryIconsDrawKit.drawObjectsCategory(frame: rect)
+            CategoryIconsDrawKit.drawObjectsCategory(frame: rect, tintColor: iconTintColor)
         case .symbols:
-            CategoryIconsDrawKit.drawSymbolsCategory(frame: rect)
+            CategoryIconsDrawKit.drawSymbolsCategory(frame: rect, tintColor: iconTintColor)
         case .flags:
-            CategoryIconsDrawKit.drawFlagsCategory(frame: rect)
+            CategoryIconsDrawKit.drawFlagsCategory(frame: rect, tintColor: iconTintColor)
         }
     }
     
@@ -102,15 +127,13 @@ final class EmojiCategoryIconView: UIView {
 
         // MARK: - People Category
 
-        public class func drawPeopleCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+        public class func drawPeopleCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+            guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let oval4Path = UIBezierPath(ovalIn: CGRect(x: 14, y: 14, width: 372, height: 372))
             tintColor.setStroke()
@@ -221,15 +244,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Nature Category
 
-         public class func drawNatureCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawNatureCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let bezierPath = UIBezierPath()
             bezierPath.move(to: CGPoint(x: 252.54, y: 57.99))
@@ -369,15 +390,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Food And Drink Category
 
-         public class func drawFoodAndDrinkCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawFoodAndDrinkCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let bezierPath = UIBezierPath()
             bezierPath.move(to: CGPoint(x: 162.72, y: 99.23))
@@ -518,15 +537,13 @@ final class EmojiCategoryIconView: UIView {
             
         // MARK: - Activity Category
 
-         public class func drawActivityCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawActivityCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let ovalPath = UIBezierPath(ovalIn: CGRect(x: 12, y: 12, width: 376, height: 376))
             tintColor.setStroke()
@@ -668,15 +685,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Travel And Places Category
 
-         public class func drawTravelAndPlacesCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawTravelAndPlacesCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let bezierPath = UIBezierPath()
             bezierPath.move(to: CGPoint(x: 221, y: 51))
@@ -807,15 +822,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Objects Category
 
-         public class func drawObjectsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawObjectsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let bezierPath = UIBezierPath()
             bezierPath.move(to: CGPoint(x: 234.36, y: 197.39))
@@ -903,15 +916,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Symbols Category
 
-         public class func drawSymbolsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawSymbolsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             context.saveGState()
             context.beginTransparencyLayer(auxiliaryInfo: nil)
@@ -1065,15 +1076,13 @@ final class EmojiCategoryIconView: UIView {
         
         // MARK: - Flags Category
 
-         public class func drawFlagsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit) {
-            let context = UIGraphicsGetCurrentContext()!
+         public class func drawFlagsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
             let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
             context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
             context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
-            
-            let tintColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
             
             let bezierPath = UIBezierPath()
             bezierPath.move(to: CGPoint(x: 46, y: 20.09))
