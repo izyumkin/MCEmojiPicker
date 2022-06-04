@@ -15,9 +15,11 @@ final class EmojiCategoryView: UIView {
     private var categoryIndex: Int
     
     private var categoryIconViewInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let inset = bounds.width * 0.23
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
     private var isSelected = false
+    private var isFirstDraw = true
     
     // MARK: - Initializers
     
@@ -27,13 +29,19 @@ final class EmojiCategoryView: UIView {
             type: EmojiCategoryType(rawValue: categoryIndex) ?? .people
         )
         super.init(frame: .zero)
-        setupLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if isFirstDraw {
+            isFirstDraw.toggle()
+            setupLayout()
+        }
+    }
     
     // MARK: - Touches Handling
 

@@ -33,6 +33,16 @@ final class EmojiPickerView: UIView {
     
     // MARK: - Private Properties
     
+    private let categoriesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .systemGroupedBackground
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private var categoryViews = [EmojiCategoryView]()
+    
     /// Getting the upper indent from the arrow
     private var topArrowInset: CGFloat {
         guard let shapeLayer = superview?.superview?.mask?.layer as? CAShapeLayer,
@@ -40,20 +50,28 @@ final class EmojiPickerView: UIView {
         return topArrowInset
     }
     
+    private var categoriesControlHeight: CGFloat {
+        guard let shapeLayer = superview?.superview?.mask?.layer as? CAShapeLayer,
+              let popoverWidth = shapeLayer.path?.boundingBox.size.width else { return 0 }
+        return popoverWidth * 0.13
+    }
+    
     // MARK: - Initializers
     
     init() {
         super.init(frame: .zero)
         setupBackground()
+        setupCategoryViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         setupLayout()
+        setupCategoriesControlLayout()
     }
     
     // MARK: - Private Methods
@@ -64,12 +82,42 @@ final class EmojiPickerView: UIView {
     
     private func setupLayout() {
         addSubview(collectionView)
+        collectionView.contentInset.bottom = categoriesControlHeight
+        collectionView.verticalScrollIndicatorInsets.bottom = categoriesControlHeight
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: topAnchor, constant: topArrowInset),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    private func setupCategoriesControlLayout() {
+        let separatorView = UIView()
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.backgroundColor = .opaqueSeparator
+        
+        addSubview(categoriesStackView)
+        addSubview(separatorView)
+        NSLayoutConstraint.activate([
+            categoriesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            categoriesStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            categoriesStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            categoriesStackView.heightAnchor.constraint(equalToConstant: categoriesControlHeight),
+            
+            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorView.topAnchor.constraint(equalTo: categoriesStackView.topAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    private func setupCategoryViews() {
+        for categoryIndex in 0...7 {
+            let categoryView = EmojiCategoryView(categoryIndex: categoryIndex)
+            categoryViews.append(categoryView)
+            categoriesStackView.addArrangedSubview(categoryView)
+        }
     }
     
 }

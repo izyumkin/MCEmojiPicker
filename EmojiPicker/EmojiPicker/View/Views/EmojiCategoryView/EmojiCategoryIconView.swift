@@ -65,6 +65,16 @@ final class EmojiCategoryIconView: UIView {
 extension EmojiCategoryIconView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
+        let rect = CGRect(
+            origin: CGPoint(
+                x: 0,
+                y: (rect.height - rect.width) / 2
+            ),
+            size: CGSize(
+                width: rect.width,
+                height: rect.width
+            )
+        )
         switch type {
         case .people:
             CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: iconTintColor)

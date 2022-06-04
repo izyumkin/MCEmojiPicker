@@ -21,7 +21,7 @@ final class EmojiSectionHeader: UICollectionReusableView {
     
     private let headerLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.textColor = .lightGray
+        label.textColor = .systemGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
