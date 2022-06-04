@@ -13,6 +13,19 @@ class ViewController: UIViewController {
     
     @IBOutlet private weak var emojiButton: UIButton!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemPink
+        var yPosition = 300
+        for index in 0...7 {
+            let iconView = EmojiCategoryIconView(type: EmojiCategoryType(rawValue: index)!)
+            iconView.frame = CGRect(x: 0, y: yPosition, width: 30, height: 30)
+            iconView.center.x = view.frame.width / 2
+            view.addSubview(iconView)
+            yPosition += 35
+        }
+    }
+    
     // MARK: - Actions
 
     @IBAction func selectEmojiAction(_ sender: UIButton) {

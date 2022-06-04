@@ -23,6 +23,7 @@
 		C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */; };
 		C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */; };
 		C46F7F3328488E450008773A /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F3228488E450008773A /* EmojiModel.swift */; };
+		C49C7612284B6E00000C57CA /* EmojiCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModel.swift; sourceTree = "<group>"; };
 		C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
 		C46F7F3228488E450008773A /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
+		C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoryIconView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */,
+				C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */,
 				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
 				C46F7F23284865650008773A /* Cells */,
 			);
@@ -270,6 +273,7 @@
 				C432E1482847380E00E694D8 /* AppDelegate.swift in Sources */,
 				C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */,
 				C432E17428473D5400E694D8 /* EmojiSectionHeader.swift in Sources */,
+				C49C7612284B6E00000C57CA /* EmojiCategoryIconView.swift in Sources */,
 				C432E14A2847380E00E694D8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
