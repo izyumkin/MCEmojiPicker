@@ -18,23 +18,12 @@ class ViewController: UIViewController {
     @IBAction func selectEmojiAction(_ sender: UIButton) {
         let viewController = EmojiPickerViewController()
         viewController.delegate = self
-        viewController.preferredContentSize = CGSize(width: 400, height: 500)
-        viewController.modalPresentationStyle = .popover
-        if let presentationController = viewController.presentationController {
-            presentationController.delegate = self
-        }
+        viewController.sourceView = sender
+//        viewController.horizontalInset = 20
+//        viewController.isDismissAfterChoosing = false
+//        viewController.customHeight = 1000
+//        viewController.feedBackGeneratorStyle = .soft
         present(viewController, animated: true)
-        if let pop = viewController.popoverPresentationController {
-            pop.permittedArrowDirections = .up
-            pop.sourceView = sender
-            pop.sourceRect = CGRect(
-                origin: .zero,
-                size: CGSize(
-                    width: sender.bounds.width,
-                    height: sender.bounds.height
-                )
-            )
-        }
     }
     
 }
@@ -44,14 +33,5 @@ class ViewController: UIViewController {
 extension ViewController: EmojiPickerDelegate {
     func didGetEmoji(emoji: String) {
         emojiButton.setTitle(emoji, for: .normal)
-    }
-}
-
-
-// MARK: - UIAdaptivePresentationControllerDelegate
-
-extension ViewController: UIAdaptivePresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return .none
     }
 }

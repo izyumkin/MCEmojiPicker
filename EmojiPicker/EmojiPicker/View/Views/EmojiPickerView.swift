@@ -60,10 +60,20 @@ final class EmojiPickerView: UIView {
     /**
      Returns the upper indent from the arrow.
      */
-    private var topArrowInset: CGFloat {
+    private var upArrowInset: CGFloat {
         guard let shapeLayer = superview?.superview?.mask?.layer as? CAShapeLayer,
-              let topArrowInset = shapeLayer.path?.currentPoint.y else { return 0 }
-        return topArrowInset
+              let shapeLayerPath = shapeLayer.path else { return 0 }
+        let upArrowInset = shapeLayerPath.currentPoint.y
+        return upArrowInset < shapeLayerPath.boundingBoxOfPath.height / 2 ? upArrowInset : 0
+    }
+    /**
+     Returns the lower indent from the arrow.
+     */
+    private var downArrowInset: CGFloat {
+        guard let shapeLayer = superview?.superview?.mask?.layer as? CAShapeLayer,
+              let shapeLayerPath = shapeLayer.path else { return 0 }
+        let downArrowInset = shapeLayerPath.boundingBoxOfPath.height - shapeLayerPath.currentPoint.y
+        return downArrowInset < shapeLayerPath.boundingBoxOfPath.height / 2 ? downArrowInset : 0
     }
     /**
      Height for categoriesStackView.
@@ -71,7 +81,7 @@ final class EmojiPickerView: UIView {
     private var categoriesStackViewHeight: CGFloat {
         guard let shapeLayer = superview?.superview?.mask?.layer as? CAShapeLayer,
               let popoverWidth = shapeLayer.path?.boundingBox.size.width else { return 0 }
-        // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on Mac.
+        // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         return popoverWidth * 0.13
     }
     
@@ -123,8 +133,8 @@ final class EmojiPickerView: UIView {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: topArrowInset),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: upArrowInset),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -downArrowInset)
         ])
     }
     
@@ -138,7 +148,7 @@ final class EmojiPickerView: UIView {
         NSLayoutConstraint.activate([
             categoriesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             categoriesStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            categoriesStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            categoriesStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -downArrowInset),
             categoriesStackView.heightAnchor.constraint(equalToConstant: categoriesStackViewHeight),
             
             separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),

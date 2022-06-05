@@ -35,7 +35,7 @@ final class TouchableEmojiCategoryView: UIView {
      Insets for categoryIconView.
      */
     private var categoryIconViewInsets: UIEdgeInsets {
-        // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on Mac.
+        // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
