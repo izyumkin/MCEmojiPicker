@@ -1,7 +1,7 @@
 # EmojiPicker
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/50948518/172039356-50effcb5-1ced-4fff-8ae3-ba8f3c273ca0.gif" width="230">
+<img src="https://user-images.githubusercontent.com/50948518/172064777-0359c7c9-4d7f-4a8c-9914-c1da8cdabf00.gif" width="230">
 <img src="https://user-images.githubusercontent.com/50948518/171909950-ebf388f3-83a1-4b63-ad54-f58ba947e3bb.png" width="230">
 </p>
 
