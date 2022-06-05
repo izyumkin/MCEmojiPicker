@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         viewController.modalPresentationStyle = .popover
         if let presentationController = viewController.presentationController {
             presentationController.delegate = self
-        } 
+        }
         present(viewController, animated: true)
         if let pop = viewController.popoverPresentationController {
             pop.permittedArrowDirections = .up
