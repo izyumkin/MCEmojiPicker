@@ -11,7 +11,7 @@ I share the module out of my [application](https://apps.apple.com/ru/app/id15001
 
 -   [x] The main functionality for choosing emojis
 -   [x] Dark mode
--   [ ] Segmented control for jumping an emoji section
+-   [x] Segmented control for jumping an emoji section
 -   [ ] Select skin tones from popup
 -   [ ] Seach bar and search results
 -   [ ] Recently used
