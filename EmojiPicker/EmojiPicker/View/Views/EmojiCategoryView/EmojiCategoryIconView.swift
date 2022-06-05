@@ -51,7 +51,7 @@ final class EmojiCategoryIconView: UIView {
         case .standard:
             iconTintColor = .systemGray
         case .highlighted:
-            iconTintColor = .lightGray
+            iconTintColor = iconTintColor.withAlphaComponent(0.5)
         case .selected:
             // TODO: - Add the ability to customize the color of the selected category
             iconTintColor = .systemBlue
@@ -98,10 +98,14 @@ extension EmojiCategoryIconView {
     class CategoryIconsDrawKit {
 
         public enum ResizingBehavior: Int {
-            case aspectFit /// The content is proportionally resized to fit into the target rectangle.
-            case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
-            case stretch /// The content is stretched to match the entire target rectangle.
-            case center /// The content is centered in the target rectangle, but it is NOT resized.
+            /// The content is proportionally resized to fit into the target rectangle.
+            case aspectFit
+            /// The content is proportionally resized to completely fill the target rectangle.
+            case aspectFill
+            /// The content is stretched to match the entire target rectangle.
+            case stretch
+            /// The content is centered in the target rectangle, but it is NOT resized.
+            case center
 
             public func apply(rect: CGRect, target: CGRect) -> CGRect {
                 if rect == target || target == CGRect.zero {

@@ -15,7 +15,10 @@ protocol EmojiPickerViewModelProtocol {
      The observed variable that is responsible for the choice of emoji.
      */
     var selectedEmoji: Observable<String> { get set }
-    
+    /**
+     The observed variable that is responsible for the choice of emoji category.
+     */
+    var selectedEmojiCategoryIndex: Observable<Int> { get set }
     /**
      The method returns the number of categories with emojis.
      */
@@ -29,7 +32,7 @@ protocol EmojiPickerViewModelProtocol {
      */
     func emoji(at indexPath: IndexPath) -> String
     /**
-     The method is responsible for getting the localized name of the emoji section
+     The method is responsible for getting the localized name of the emoji section.
      */
     func sectionHeaderViewModel(for section: Int) -> String
 }

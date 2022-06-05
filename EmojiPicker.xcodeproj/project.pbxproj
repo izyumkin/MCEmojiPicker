@@ -62,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C426EC15284C71060077D3A3 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		C432E13B2847380E00E694D8 = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				C432E16F28473D2C00E694D8 /* EmojiPickerView.swift */,
-				C432E17328473D5400E694D8 /* EmojiSectionHeader.swift */,
 				C49C7613284BCB8B000C57CA /* EmojiCategoryView */,
 				C46F7F23284865650008773A /* Cells */,
 			);
@@ -179,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				C432E17128473D4300E694D8 /* EmojiCollectionViewCell.swift */,
+				C426EC15284C71060077D3A3 /* Header */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

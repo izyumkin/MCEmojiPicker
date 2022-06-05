@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EmojiPickerViewDelegate: AnyObject {
+    func didChoiceEmojiCategory(at index: Int)
+}
+
 final class EmojiPickerView: UIView {
     
     // MARK: - Public Properties
@@ -30,6 +34,8 @@ final class EmojiPickerView: UIView {
         )
         return collectionView
     }()
+    
+    public weak var delegate: EmojiPickerViewDelegate?
     
     // MARK: - Private Properties
     
@@ -74,6 +80,14 @@ final class EmojiPickerView: UIView {
         setupCategoriesControlLayout()
     }
     
+    // MARK: - Public Methods
+    
+    public func updateSelectedCategoryIcon(with categoryIndex: Int) {
+        categoryViews.forEach({
+            $0.updateCategoryViewState(selectedCategoryIndex: categoryIndex)
+        })
+    }
+    
     // MARK: - Private Methods
     
     private func setupBackground() {
@@ -115,9 +129,29 @@ final class EmojiPickerView: UIView {
     private func setupCategoryViews() {
         for categoryIndex in 0...7 {
             let categoryView = EmojiCategoryView(categoryIndex: categoryIndex)
+            categoryView.delegate = self
+            // Installing selected state for first categoryView
+            categoryView.updateCategoryViewState(selectedCategoryIndex: 0)
             categoryViews.append(categoryView)
             categoriesStackView.addArrangedSubview(categoryView)
         }
     }
-    
+}
+
+// MARK: - EmojiCategoryViewDelegate
+
+extension EmojiPickerView: EmojiCategoryViewDelegate {
+    func didChoiceCategory(at index: Int) {
+        guard let cellFrame = collectionView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 0, section: index))?.frame,
+              let headerFrame = collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: index))?.frame
+        else { return }
+        collectionView.setContentOffset(
+            CGPoint(
+                x:  -collectionView.contentInset.left,
+                y: cellFrame.minY - headerFrame.height
+            ),
+            animated: false
+        )
+        delegate?.didChoiceEmojiCategory(at: index)
+    }
 }

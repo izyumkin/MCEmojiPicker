@@ -7,18 +7,25 @@
 
 import UIKit
 
+protocol EmojiCategoryViewDelegate: AnyObject {
+    func didChoiceCategory(at index: Int)
+}
+
 final class EmojiCategoryView: UIView {
+    
+    // MARK: - Public Properties
+    
+    public weak var delegate: EmojiCategoryViewDelegate?
     
     // MARK: - Private Properties
     
     private var categoryIconView: EmojiCategoryIconView
-    private var categoryIndex: Int
     
     private var categoryIconViewInsets: UIEdgeInsets {
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
-    private var isSelected = false
+    private var categoryIndex: Int
     private var isFirstDraw = true
     
     // MARK: - Initializers
@@ -34,6 +41,8 @@ final class EmojiCategoryView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Life Cycle
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -52,8 +61,14 @@ final class EmojiCategoryView: UIView {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        isSelected.toggle()
-        categoryIconView.updateIcon(with: isSelected ? .selected : .standard)
+        categoryIconView.updateIcon(with: .selected)
+        delegate?.didChoiceCategory(at: categoryIndex)
+    }
+    
+    // MARK: - Public Methods
+    
+    public func updateCategoryViewState(selectedCategoryIndex: Int) {
+        categoryIconView.updateIcon(with: categoryIndex == selectedCategoryIndex ? .selected : .standard)
     }
     
     // MARK: - Private Methods
