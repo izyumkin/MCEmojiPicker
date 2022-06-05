@@ -103,6 +103,7 @@ extension EmojiPickerViewController: UICollectionViewDataSource {
 
 extension EmojiPickerViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Updating the selected category during scrolling
         let indexPathsForVisibleHeaders = emojiPickerView.collectionView.indexPathsForVisibleSupplementaryElements(
             ofKind: UICollectionView.elementKindSectionHeader
         ).sorted(by: { $0.section < $1.section })

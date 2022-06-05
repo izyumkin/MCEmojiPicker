@@ -7,11 +7,22 @@
 
 import UIKit
 
+/**
+ Delegate for handling touch gesture.
+ */
 protocol EmojiCategoryViewDelegate: AnyObject {
+    /**
+     Processes an event by category selection.
+     
+     - Parameter index: index of the selected category.
+     */
     func didChoiceCategory(at index: Int)
 }
 
-final class EmojiCategoryView: UIView {
+/**
+ The class store the category icon and processes handling touches.
+ */
+final class TouchableEmojiCategoryView: UIView {
     
     // MARK: - Public Properties
     
@@ -20,13 +31,18 @@ final class EmojiCategoryView: UIView {
     // MARK: - Private Properties
     
     private var categoryIconView: EmojiCategoryIconView
-    
+    /**
+     Insets for categoryIconView.
+     */
     private var categoryIconViewInsets: UIEdgeInsets {
+        // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on Mac.
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
+    /**
+     Target category index.
+     */
     private var categoryIndex: Int
-    private var isFirstDraw = true
     
     // MARK: - Initializers
     
@@ -46,34 +62,39 @@ final class EmojiCategoryView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if isFirstDraw {
-            isFirstDraw.toggle()
-            setupLayout()
-        }
+        setupLayout()
     }
     
     // MARK: - Touches Handling
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        categoryIconView.updateIcon(with: .highlighted)
+        categoryIconView.updateIconTintColor(for: .highlighted)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        categoryIconView.updateIcon(with: .selected)
+        categoryIconView.updateIconTintColor(for: .selected)
         delegate?.didChoiceCategory(at: categoryIndex)
     }
     
     // MARK: - Public Methods
     
+    /**
+     Updates the icon state to the selected one if the indexes match and the standard one if not.
+     
+     - Parameter selectedCategoryIndex: Selected category index.
+     */
     public func updateCategoryViewState(selectedCategoryIndex: Int) {
-        categoryIconView.updateIcon(with: categoryIndex == selectedCategoryIndex ? .selected : .standard)
+        categoryIconView.updateIconTintColor(
+            for: categoryIndex == selectedCategoryIndex ? .selected : .standard
+        )
     }
     
     // MARK: - Private Methods
     
     private func setupLayout() {
+        guard !categoryIconView.isDescendant(of: self) else { return }
         addSubview(categoryIconView)
         NSLayoutConstraint.activate([
             categoryIconView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: categoryIconViewInsets.left),
@@ -83,5 +104,3 @@ final class EmojiCategoryView: UIView {
         ])
     }
 }
-
-

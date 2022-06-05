@@ -7,6 +7,9 @@
 
 import UIKit
 
+/**
+ Enum with emoji categories.
+ */
 public enum EmojiCategoryType: Int {
     case people = 0
     case nature = 1
@@ -18,26 +21,41 @@ public enum EmojiCategoryType: Int {
     case flags = 7
 }
 
-public enum CategoryViewState {
+/**
+ States for EmojiCategoryIconView.
+ */
+public enum EmojiCategoryIconViewState {
     case standard
     case highlighted
     case selected
 }
 
+/**
+ Responsible for rendering the icon for the target emoji category in the desired color..
+ */
 final class EmojiCategoryIconView: UIView {
     
     // MARK: - Private Properties
     
+    /**
+     Target icon type.
+     */
     private var type: EmojiCategoryType
+    /**
+     Target color for the icon.
+     */
     private var iconTintColor: UIColor = .systemGray
+    /**
+     Current icon state.
+     */
+    private var state: EmojiCategoryIconViewState = .standard
     
     // MARK: - Initializers
     
     init(type: EmojiCategoryType) {
         self.type = type
         super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .clear
+        setupBackground()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,7 +64,14 @@ final class EmojiCategoryIconView: UIView {
     
     // MARK: - Public Methods
     
-    public func updateIcon(with state: CategoryViewState) {
+    /**
+     New centered rect based on bounds width to prevent stretching of the icon.
+     
+     - Parameter state: Target icon state. Based on this state, the target color will be selected.
+     */
+    public func updateIconTintColor(for state: EmojiCategoryIconViewState) {
+        guard self.state != state else { return }
+        self.state = state
         switch state {
         case .standard:
             iconTintColor = .systemGray
@@ -58,6 +83,13 @@ final class EmojiCategoryIconView: UIView {
         }
         setNeedsDisplay()
     }
+    
+    // MARK: - Private Methods
+    
+    private func setupBackground() {
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .clear
+    }
 }
 
 // MARK: - Drawing
@@ -65,6 +97,9 @@ final class EmojiCategoryIconView: UIView {
 extension EmojiCategoryIconView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
+        /**
+         New centered rect based on bounds width to prevent stretching of the icon.
+         */
         let rect = CGRect(
             origin: CGPoint(
                 x: 0,
@@ -95,16 +130,27 @@ extension EmojiCategoryIconView {
         }
     }
     
-    class CategoryIconsDrawKit {
+    /**
+     Responsible for rendering icons for emoji categories.
+     */
+    private class CategoryIconsDrawKit: NSObject {
 
         public enum ResizingBehavior: Int {
-            /// The content is proportionally resized to fit into the target rectangle.
+            /**
+             The content is proportionally resized to fit into the target rectangle.
+             */
             case aspectFit
-            /// The content is proportionally resized to completely fill the target rectangle.
+            /**
+             The content is proportionally resized to completely fill the target rectangle.
+             */
             case aspectFill
-            /// The content is stretched to match the entire target rectangle.
+            /**
+             The content is stretched to match the entire target rectangle.
+             */
             case stretch
-            /// The content is centered in the target rectangle, but it is NOT resized.
+            /**
+             The content is centered in the target rectangle, but it is NOT resized.
+             */
             case center
 
             public func apply(rect: CGRect, target: CGRect) -> CGRect {

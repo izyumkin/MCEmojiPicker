@@ -24,7 +24,7 @@
 		C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */; };
 		C46F7F3328488E450008773A /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F3228488E450008773A /* EmojiModel.swift */; };
 		C49C7612284B6E00000C57CA /* EmojiCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */; };
-		C49C7615284BCB9A000C57CA /* EmojiCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7614284BCB9A000C57CA /* EmojiCategoryView.swift */; };
+		C49C7615284BCB9A000C57CA /* TouchableEmojiCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +48,7 @@
 		C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
 		C46F7F3228488E450008773A /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
 		C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoryIconView.swift; sourceTree = "<group>"; };
-		C49C7614284BCB9A000C57CA /* EmojiCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoryView.swift; sourceTree = "<group>"; };
+		C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableEmojiCategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,7 +202,7 @@
 		C49C7613284BCB8B000C57CA /* EmojiCategoryView */ = {
 			isa = PBXGroup;
 			children = (
-				C49C7614284BCB9A000C57CA /* EmojiCategoryView.swift */,
+				C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */,
 				C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */,
 			);
 			path = EmojiCategoryView;
@@ -282,7 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C432E17228473D4300E694D8 /* EmojiCollectionViewCell.swift in Sources */,
-				C49C7615284BCB9A000C57CA /* EmojiCategoryView.swift in Sources */,
+				C49C7615284BCB9A000C57CA /* TouchableEmojiCategoryView.swift in Sources */,
 				C432E17728473D7400E694D8 /* UIView+Extension.swift in Sources */,
 				C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */,
 				C432E14C2847380E00E694D8 /* ViewController.swift in Sources */,
