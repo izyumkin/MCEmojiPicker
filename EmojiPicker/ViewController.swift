@@ -28,10 +28,11 @@ class ViewController: UIViewController {
             pop.permittedArrowDirections = .up
             pop.sourceView = sender
             pop.sourceRect = CGRect(
-                x: 0,
-                y: 0,
-                width: sender.bounds.width,
-                height: sender.bounds.height
+                origin: .zero,
+                size: CGSize(
+                    width: sender.bounds.width,
+                    height: sender.bounds.height
+                )
             )
         }
     }
