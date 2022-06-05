@@ -31,7 +31,7 @@ public enum EmojiCategoryIconViewState {
 }
 
 /**
- Responsible for rendering the icon for the target emoji category in the desired color..
+ Responsible for rendering the icon for the target emoji category in the desired color.
  */
 final class EmojiCategoryIconView: UIView {
     
