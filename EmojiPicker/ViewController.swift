@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         if let presentationController = viewController.presentationController {
             presentationController.delegate = self
         }
-        self.present(viewController, animated: true)
+        present(viewController, animated: true)
         if let pop = viewController.popoverPresentationController {
             pop.permittedArrowDirections = .up
             pop.sourceView = sender
