@@ -12,6 +12,8 @@ protocol EmojiPickerDelegate: AnyObject {
 }
 
 // TODO: - Add the background appearance setting
+// TODO: - Add the ability to select localization
+// TODO: - Add the ability to choice blur background mode
 
 final class EmojiPickerViewController: UIViewController {
     
@@ -21,6 +23,13 @@ final class EmojiPickerViewController: UIViewController {
      Delegate for selecting an emoji object.
      */
     public weak var delegate: EmojiPickerDelegate?
+    
+    /**
+     The direction of the arrow for EmojiPicker.
+     
+     The default value of this property is .up.
+     */
+    public var arrowDirection: PickerArrowDirectionMode = .up
     
     /**
      Custom height for EmojiPicker.
@@ -75,8 +84,8 @@ final class EmojiPickerViewController: UIViewController {
     // MARK: - Private Properties
     
     private let emojiPickerView = EmojiPickerView()
-    private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
     
+    private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
     private var viewModel: EmojiPickerViewModelProtocol
     
     // MARK: - Initializers
@@ -102,10 +111,6 @@ final class EmojiPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPreferredContentSize()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setupArrowDirections()
         setupHorizontalInset()
     }
@@ -149,13 +154,9 @@ final class EmojiPickerViewController: UIViewController {
     }
     
     private func setupArrowDirections() {
-        guard let sourceView = sourceView else {
-            popoverPresentationController?.permittedArrowDirections = .up
-            return
-        }
-        let screenHeight = UIScreen.main.bounds.height
-        let availableSpaceAtBottomOfScreen = screenHeight - sourceView.frame.origin.y + sourceView.frame.height
-        popoverPresentationController?.permittedArrowDirections = availableSpaceAtBottomOfScreen >= emojiPickerView.bounds.height ? .up : .down
+        popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(
+            rawValue: arrowDirection.rawValue
+        )
     }
     
     private func setupHorizontalInset() {

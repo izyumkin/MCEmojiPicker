@@ -25,6 +25,7 @@
 		C46F7F3328488E450008773A /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F3228488E450008773A /* EmojiModel.swift */; };
 		C49C7612284B6E00000C57CA /* EmojiCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */; };
 		C49C7615284BCB9A000C57CA /* TouchableEmojiCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */; };
+		C4B791EC284DD73700F5E3A0 /* PickerArrowDirectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B791EB284DD73700F5E3A0 /* PickerArrowDirectionMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		C46F7F3228488E450008773A /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
 		C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoryIconView.swift; sourceTree = "<group>"; };
 		C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableEmojiCategoryView.swift; sourceTree = "<group>"; };
+		C4B791EB284DD73700F5E3A0 /* PickerArrowDirectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerArrowDirectionMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				C46F7F3228488E450008773A /* EmojiModel.swift */,
+				C4B791EB284DD73700F5E3A0 /* PickerArrowDirectionMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */,
 				C432E14C2847380E00E694D8 /* ViewController.swift in Sources */,
 				C432E17028473D2C00E694D8 /* EmojiPickerView.swift in Sources */,
+				C4B791EC284DD73700F5E3A0 /* PickerArrowDirectionMode.swift in Sources */,
 				C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */,
 				C46F7F20284861520008773A /* Observable.swift in Sources */,
 				C46F7F3328488E450008773A /* EmojiModel.swift in Sources */,

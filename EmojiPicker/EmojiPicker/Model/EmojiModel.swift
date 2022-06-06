@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiCategory {
+public struct EmojiCategory {
     var categoryName: String
     var emojis: [String]
 }
