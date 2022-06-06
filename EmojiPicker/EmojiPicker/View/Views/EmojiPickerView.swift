@@ -23,7 +23,7 @@ final class EmojiPickerView: UIView {
     
     // MARK: - Public Properties
     
-    public lazy var collectionView: UICollectionView = {
+    public let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -44,6 +44,8 @@ final class EmojiPickerView: UIView {
     }()
     
     public weak var delegate: EmojiPickerViewDelegate?
+    
+    public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
     
     // MARK: - Private Properties
     
@@ -70,7 +72,6 @@ final class EmojiPickerView: UIView {
     init() {
         super.init(frame: .zero)
         setupBackground()
-        setupCategoryViews()
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +80,7 @@ final class EmojiPickerView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        setupCategoryViews()
         setupLayout()
         setupCollectionViewBottomInsets()
         setupCategoriesControlLayout()
@@ -140,8 +142,11 @@ final class EmojiPickerView: UIView {
     
     private func setupCategoryViews() {
         for categoryIndex in 0...7 {
-            let categoryView = TouchableEmojiCategoryView(categoryIndex: categoryIndex)
-            categoryView.delegate = self
+            let categoryView = TouchableEmojiCategoryView(
+                delegate: self,
+                categoryIndex: categoryIndex,
+                selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor
+            )
             // Installing selected state for first categoryView
             categoryView.updateCategoryViewState(selectedCategoryIndex: 0)
             categoryViews.append(categoryView)

@@ -58,6 +58,18 @@ final class EmojiPickerViewController: UIViewController {
     public var isDismissAfterChoosing: Bool = true
     
     /**
+     Color for the selected emoji category.
+     
+     The default value of this property is .systemBlue.
+     */
+    public var selectedEmojiCategoryTintColor: UIColor? {
+        didSet {
+            guard let selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor else { return }
+            emojiPickerView.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
+        }
+    }
+    
+    /**
      The view containing the anchor rectangle for the popover..
      */
     public var sourceView: UIView? {

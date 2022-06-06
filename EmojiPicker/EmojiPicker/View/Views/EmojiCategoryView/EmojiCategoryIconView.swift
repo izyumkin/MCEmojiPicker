@@ -41,10 +41,17 @@ final class EmojiCategoryIconView: UIView {
      Target icon type.
      */
     private var type: EmojiCategoryType
+    
     /**
-     Target color for the icon.
+     Current tint color for the icon.
      */
-    private var iconTintColor: UIColor = .systemGray
+    private var currentIconTintColor: UIColor = .systemGray
+    
+    /**
+     Selected tint color for the icon.
+     */
+    private var selectedIconTintColor: UIColor
+    
     /**
      Current icon state.
      */
@@ -52,8 +59,12 @@ final class EmojiCategoryIconView: UIView {
     
     // MARK: - Initializers
     
-    init(type: EmojiCategoryType) {
+    init(
+        type: EmojiCategoryType,
+        selectedIconTintColor: UIColor
+    ) {
         self.type = type
+        self.selectedIconTintColor = selectedIconTintColor
         super.init(frame: .zero)
         setupBackground()
     }
@@ -74,12 +85,11 @@ final class EmojiCategoryIconView: UIView {
         self.state = state
         switch state {
         case .standard:
-            iconTintColor = .systemGray
+            currentIconTintColor = .systemGray
         case .highlighted:
-            iconTintColor = iconTintColor.withAlphaComponent(0.5)
+            currentIconTintColor = currentIconTintColor.withAlphaComponent(0.5)
         case .selected:
-            // TODO: - Add the ability to customize the color of the selected category
-            iconTintColor = .systemBlue
+            currentIconTintColor = selectedIconTintColor
         }
         setNeedsDisplay()
     }
@@ -112,21 +122,21 @@ extension EmojiCategoryIconView {
         )
         switch type {
         case .people:
-            CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: currentIconTintColor)
         case .nature:
-            CategoryIconsDrawKit.drawNatureCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawNatureCategory(frame: rect, tintColor: currentIconTintColor)
         case .foodAndDrink:
-            CategoryIconsDrawKit.drawFoodAndDrinkCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawFoodAndDrinkCategory(frame: rect, tintColor: currentIconTintColor)
         case .activity:
-            CategoryIconsDrawKit.drawActivityCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawActivityCategory(frame: rect, tintColor: currentIconTintColor)
         case .travelAndPlaces:
-            CategoryIconsDrawKit.drawTravelAndPlacesCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawTravelAndPlacesCategory(frame: rect, tintColor: currentIconTintColor)
         case .objects:
-            CategoryIconsDrawKit.drawObjectsCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawObjectsCategory(frame: rect, tintColor: currentIconTintColor)
         case .symbols:
-            CategoryIconsDrawKit.drawSymbolsCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawSymbolsCategory(frame: rect, tintColor: currentIconTintColor)
         case .flags:
-            CategoryIconsDrawKit.drawFlagsCategory(frame: rect, tintColor: iconTintColor)
+            CategoryIconsDrawKit.drawFlagsCategory(frame: rect, tintColor: currentIconTintColor)
         }
     }
     

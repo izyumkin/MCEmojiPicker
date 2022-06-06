@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         let viewController = EmojiPickerViewController()
         viewController.delegate = self
         viewController.sourceView = sender
+//        viewController.selectedEmojiCategoryTintColor = .red
 //        viewController.arrowDirection = .up
 //        viewController.horizontalInset = 20
 //        viewController.isDismissAfterChoosing = false

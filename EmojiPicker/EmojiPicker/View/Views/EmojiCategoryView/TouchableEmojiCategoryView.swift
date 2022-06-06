@@ -24,10 +24,6 @@ protocol EmojiCategoryViewDelegate: AnyObject {
  */
 final class TouchableEmojiCategoryView: UIView {
     
-    // MARK: - Public Properties
-    
-    public weak var delegate: EmojiCategoryViewDelegate?
-    
     // MARK: - Private Properties
     
     private var categoryIconView: EmojiCategoryIconView
@@ -44,12 +40,20 @@ final class TouchableEmojiCategoryView: UIView {
      */
     private var categoryIndex: Int
     
+    private weak var delegate: EmojiCategoryViewDelegate?
+    
     // MARK: - Initializers
     
-    init(categoryIndex: Int) {
+    init(
+        delegate: EmojiCategoryViewDelegate,
+        categoryIndex: Int,
+        selectedEmojiCategoryTintColor: UIColor
+    ) {
+        self.delegate = delegate
         self.categoryIndex = categoryIndex
         self.categoryIconView = EmojiCategoryIconView(
-            type: EmojiCategoryType(rawValue: categoryIndex) ?? .people
+            type: EmojiCategoryType(rawValue: categoryIndex) ?? .people,
+            selectedIconTintColor: selectedEmojiCategoryTintColor
         )
         super.init(frame: .zero)
     }
