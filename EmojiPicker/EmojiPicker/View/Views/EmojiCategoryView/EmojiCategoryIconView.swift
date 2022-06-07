@@ -8,20 +8,6 @@
 import UIKit
 
 /**
- Enum with emoji categories.
- */
-public enum EmojiCategoryType: Int {
-    case people = 0
-    case nature = 1
-    case foodAndDrink = 2
-    case activity = 3
-    case travelAndPlaces = 4
-    case objects = 5
-    case symbols = 6
-    case flags = 7
-}
-
-/**
  States for EmojiCategoryIconView.
  */
 public enum EmojiCategoryIconViewState {
