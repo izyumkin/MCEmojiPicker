@@ -8,6 +8,9 @@
 import Foundation
 import UIKit.UIDevice
 
+/**
+ The class is responsible for getting a relevant set of emojis for iOS version.
+ */
 final class UnicodeManager: UnicodeManagerProtocol {
     
     // MARK: - Private Methods
@@ -35,6 +38,11 @@ final class UnicodeManager: UnicodeManagerProtocol {
         }
     }
     
+    /**
+     The method returns a localized name for the emoji category.
+     
+     - Parameter type: Emoji category type.
+     */
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
         // Localization file name.
         let localizationTableName = "EmojiPickerLocalizable"
