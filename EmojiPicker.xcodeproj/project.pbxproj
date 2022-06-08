@@ -23,6 +23,7 @@
 		C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */; };
 		C46F7F282848666E0008773A /* EmojiPickerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */; };
 		C46F7F3328488E450008773A /* EmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46F7F3228488E450008773A /* EmojiModel.swift */; };
+		C47642002851068800314898 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47641FF2851068800314898 /* UIColor+Extension.swift */; };
 		C49C7612284B6E00000C57CA /* EmojiCategoryIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */; };
 		C49C7615284BCB9A000C57CA /* TouchableEmojiCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */; };
 		C4B791EC284DD73700F5E3A0 /* PickerArrowDirectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B791EB284DD73700F5E3A0 /* PickerArrowDirectionMode.swift */; };
@@ -57,6 +58,7 @@
 		C46F7F24284865AB0008773A /* EmojiPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModel.swift; sourceTree = "<group>"; };
 		C46F7F272848666E0008773A /* EmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
 		C46F7F3228488E450008773A /* EmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiModel.swift; sourceTree = "<group>"; };
+		C47641FF2851068800314898 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		C49C7611284B6E00000C57CA /* EmojiCategoryIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCategoryIconView.swift; sourceTree = "<group>"; };
 		C49C7614284BCB9A000C57CA /* TouchableEmojiCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableEmojiCategoryView.swift; sourceTree = "<group>"; };
 		C4B791EB284DD73700F5E3A0 /* PickerArrowDirectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerArrowDirectionMode.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				C432E17628473D7400E694D8 /* UIView+Extension.swift */,
 				C4FD7434284FCB1F00DBE7BC /* Array+Extension.swift */,
+				C47641FF2851068800314898 /* UIColor+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				C432E17928473DB800E694D8 /* EmojiPickerViewController.swift in Sources */,
 				C432E14C2847380E00E694D8 /* ViewController.swift in Sources */,
 				C432E17028473D2C00E694D8 /* EmojiPickerView.swift in Sources */,
+				C47642002851068800314898 /* UIColor+Extension.swift in Sources */,
 				C4B791EC284DD73700F5E3A0 /* PickerArrowDirectionMode.swift in Sources */,
 				C46F7F25284865AB0008773A /* EmojiPickerViewModel.swift in Sources */,
 				C46F7F20284861520008773A /* Observable.swift in Sources */,
@@ -514,7 +518,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,7 +547,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

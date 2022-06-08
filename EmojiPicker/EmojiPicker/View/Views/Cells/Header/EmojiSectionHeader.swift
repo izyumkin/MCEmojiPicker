@@ -42,7 +42,7 @@ final class EmojiSectionHeader: UICollectionReusableView {
     // MARK: - Private Methods
     
     private func setupBackground() {
-        backgroundColor = .systemGroupedBackground
+        backgroundColor = .popoverBackgroundColor
     }
     
     private func setupLayout() {
