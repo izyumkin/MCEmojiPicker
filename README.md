@@ -12,6 +12,7 @@ I share the module out of my [application](https://apps.apple.com/ru/app/id15001
 -   [x] The main functionality for choosing emojis
 -   [x] Dark mode
 -   [x] Segmented control for jumping an emoji section
+-   [x] Automatic adjustment of the relevant set of emoji for the iOS version
 -   [ ] Select skin tones from popup
 -   [ ] Seach bar and search results
 -   [ ] Recently used
