@@ -155,7 +155,7 @@ final class EmojiPickerViewController: UIViewController {
     
     private func setupPreferredContentSize() {
         let sideInset: CGFloat = 20
-        let screenWidth: CGFloat = UIScreen.main.bounds.width
+        let screenWidth: CGFloat = UIScreen.main.nativeBounds.width / UIScreen.main.nativeScale
         let popoverWidth: CGFloat = screenWidth - (sideInset * 2)
         // The number 0.16 was taken based on the proportion of height to the width of the EmojiPicker on MacOS.
         let heightProportionToWidth: CGFloat = 1.16

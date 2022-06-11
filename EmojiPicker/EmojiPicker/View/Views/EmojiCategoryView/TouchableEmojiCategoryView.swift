@@ -69,7 +69,7 @@ final class TouchableEmojiCategoryView: UIView {
         setupLayout()
     }
     
-    // MARK: - Touches Handling
+    // MARK: - Events Handling
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

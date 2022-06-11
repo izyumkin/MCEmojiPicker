@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: - Rewrite the collectionView setting to DiffableDataSource
 /**
  Delegate for event handling in EmojiPickerView.
  */
