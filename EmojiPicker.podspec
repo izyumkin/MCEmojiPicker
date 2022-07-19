@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "EmojiPicker"
-  s.version      = "1.0.2"
+  s.version      = "1.0.4"
   s.summary      = "Emoji picker for iOS like on macOS"
   s.homepage     = "https://github.com/izzyumkin/EmojiPicker"
   s.license      = { :type => "MIT", :file => "LICENSE" }

@@ -57,24 +57,44 @@ final class UnicodeManager: UnicodeManagerProtocol {
     /// - Parameter type: Emoji category type
     /// - Returns: Name of the category
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
-        let localizationTableName = "Localizable"
+        #if SWIFT_PACKAGE
         switch type {
         case .people:
-            return NSLocalizedString("emotionsAndPeople", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")
         case .nature:
-            return NSLocalizedString("animalsAndNature", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("animalsAndNature", bundle: .module, comment: "")
         case .foodAndDrink:
-            return NSLocalizedString("foodAndDrinks", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("foodAndDrinks", bundle: .module, comment: "")
         case .activity:
-            return NSLocalizedString("activities", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("activities", bundle: .module, comment: "")
         case .travelAndPlaces:
-            return NSLocalizedString("travellingAndPlaces", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("travellingAndPlaces", bundle: .module, comment: "")
         case .objects:
-            return NSLocalizedString("objects", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("objects", bundle: .module, comment: "")
         case .symbols:
-            return NSLocalizedString("symbols", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("symbols", bundle: .module, comment: "")
         case .flags:
-            return NSLocalizedString("flags", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("flags", bundle: .module, comment: "")
         }
+        #else
+        switch type {
+        case .people:
+            return NSLocalizedString("emotionsAndPeople", bundle: .main, comment: "")
+        case .nature:
+            return NSLocalizedString("animalsAndNature", bundle: .main, comment: "")
+        case .foodAndDrink:
+            return NSLocalizedString("foodAndDrinks", bundle: .main, comment: "")
+        case .activity:
+            return NSLocalizedString("activities", bundle: .main, comment: "")
+        case .travelAndPlaces:
+            return NSLocalizedString("travellingAndPlaces", bundle: .main, comment: "")
+        case .objects:
+            return NSLocalizedString("objects", bundle: .main, comment: "")
+        case .symbols:
+            return NSLocalizedString("symbols", bundle: .main, comment: "")
+        case .flags:
+            return NSLocalizedString("flags", bundle: .main, comment: "")
+        }
+        #endif
     }
 }
