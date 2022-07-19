@@ -31,7 +31,7 @@ Create `UIButton` and add selector as action:
 }
 ```
 
-And then recieve emoji in delegate method:
+And then recieve emoji in the delegate method:
 ```swift
 extension ViewController: EmojiPickerDelegate {
     func didGetEmoji(emoji: String) {
