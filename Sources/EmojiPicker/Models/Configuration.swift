@@ -23,12 +23,19 @@ import UIKit
 
 extension EmojiPicker {
     public struct Configuration {
+        /// A view controller on which EmojiPicker is being presented
         public var sourceViewController: UIViewController
+        /// The view containing the anchor rectangle for the popover
         public var sender: UIView
+        /// Tint color for the selected emoji category
         public var selectedEmojiCategoryTintColor: UIColor?
+        /// The direction of the arrow for EmojiPicker
         public var arrowDirection: PickerArrowDirectionMode
+        /// Inset from the sourceView border
         public var horizontalInset: CGFloat
+        /// Defines whether to dismiss emoji picker or not after choosing
         public var isDismissAfterChoosing: Bool
+        /// Custom height for EmojiPicker
         public var customHeight: CGFloat?
         
         public init(sourceViewController: UIViewController,
