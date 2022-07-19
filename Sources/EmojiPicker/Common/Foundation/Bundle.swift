@@ -27,6 +27,6 @@ extension Bundle {
     }
     
     private static let sdkResourcesURL: URL = {
-        return Bundle(for: UnicodeManager.self).url(forResource: "Resources", withExtension: "bundle")!
+        return Bundle(for: UnicodeManager.self).url(forResource: "Sources/EmojiPicker/Resources", withExtension: "bundle")!
     }()
 }
