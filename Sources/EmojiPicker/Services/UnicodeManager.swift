@@ -59,7 +59,12 @@ final class UnicodeManager: UnicodeManagerProtocol {
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
         switch type {
         case .people:
+            // - ERROR | xcodebuild: error: type 'Bundle' has no member 'module'
+        #if SWIFT_PACKAGE
             return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")
+        #else
+            return NSLocalizedString("emotionsAndPeople", bundle: .main, comment: "")
+        #endif
         case .nature:
             return NSLocalizedString("animalsAndNature", bundle: .module, comment: "")
         case .foodAndDrink:
