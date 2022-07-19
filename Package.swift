@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "EmojiPicker",
     defaultLocalization: "en",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS("11.1")],
     products: [
         .library(
             name: "EmojiPicker",
@@ -17,6 +17,5 @@ let package = Package(
             name: "EmojiPicker",
             dependencies: [],
             resources: [.process("Resources")])
-    ],
-    swiftLanguageVersions: [.v5]
+    ]
 )

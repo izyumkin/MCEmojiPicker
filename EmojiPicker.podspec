@@ -8,8 +8,10 @@ Pod::Spec.new do |s|
   s.author       = { "Egor Badmaev" => "badmaeve2511@gmail.com" }
   s.source       = { :git => "https://github.com/htmlprogrammist/EmojiPicker.git", :tag => s.version }
   s.source_files = 'Sources/EmojiPicker/**/*.swift'
-  
-  s.swift_version = '5.1'
-  s.ios.deployment_target = '12.0'
+  s.resource_bundles = {
+    s.name => 'Sources/EmojiPicker/Resources/**/*',
+  }
+  s.ios.deployment_target = '11.1'
+  s.swift_version = '4.2'
 
 end
