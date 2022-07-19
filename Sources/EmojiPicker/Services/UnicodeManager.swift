@@ -57,24 +57,23 @@ final class UnicodeManager: UnicodeManagerProtocol {
     /// - Parameter type: Emoji category type
     /// - Returns: Name of the category
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
-        let localizationTableName = "EmojiPickerLocalizable" // Localization file name
         switch type {
         case .people:
-            return NSLocalizedString("emotionsAndPeople", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")
         case .nature:
-            return NSLocalizedString("animalsAndNature", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("animalsAndNature", bundle: .module, comment: "")
         case .foodAndDrink:
-            return NSLocalizedString("foodAndDrinks", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("foodAndDrinks", bundle: .module, comment: "")
         case .activity:
-            return NSLocalizedString("activities", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("activities", bundle: .module, comment: "")
         case .travelAndPlaces:
-            return NSLocalizedString("travellingAndPlaces", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("travellingAndPlaces", bundle: .module, comment: "")
         case .objects:
-            return NSLocalizedString("items", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("items", bundle: .module, comment: "")
         case .symbols:
-            return NSLocalizedString("symbols", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("symbols", bundle: .module, comment: "")
         case .flags:
-            return NSLocalizedString("flags", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("flags", bundle: .module, comment: "")
         }
     }
 }
