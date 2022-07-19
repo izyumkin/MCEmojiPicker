@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "EmojiPicker",
             dependencies: [],
-            resources: [.process("Resources")])
+            resources: [.copy("Resources")])
     ],
     swiftLanguageVersions: [.v5]
 )
