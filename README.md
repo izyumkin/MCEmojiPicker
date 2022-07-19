@@ -31,6 +31,15 @@ Create `UIButton` and add selector as action:
 }
 ```
 
+And then recieve emoji in delegate method:
+```swift
+extension ViewController: EmojiPickerDelegate {
+    func didGetEmoji(emoji: String) {
+        emojiButton.setTitle(emoji, for: .normal)
+    }
+}
+```
+
 ## Usage
 `sourceViewController` is the view controller on which EmojiPicker is being presenter. 
 
@@ -90,4 +99,5 @@ configuration.feedBackGeneratorStyle = .soft
 - [ ] Recently used
 
 ## Localizations
-["ru", "en"]
+* English 🇬🇧
+* Russian 🇷🇺
