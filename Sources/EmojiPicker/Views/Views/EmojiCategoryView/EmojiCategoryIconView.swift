@@ -34,22 +34,14 @@ final class EmojiCategoryIconView: UIView {
     private var type: EmojiCategoryType
     /// Current tint color for the icon
     private var currentIconTintColor: UIColor = .systemGray
-    
-    /**
-     Selected tint color for the icon.
-     */
+    /// Selected tint color for the icon
     private var selectedIconTintColor: UIColor
-    
-    /**
-     Current icon state.
-     */
+    /// Current icon state
     private var state: EmojiCategoryIconViewState = .standard
     
     // MARK: - Init
-    
-    init(
-        type: EmojiCategoryType,
-        selectedIconTintColor: UIColor
+    init(type: EmojiCategoryType,
+         selectedIconTintColor: UIColor
     ) {
         self.type = type
         self.selectedIconTintColor = selectedIconTintColor
@@ -62,7 +54,6 @@ final class EmojiCategoryIconView: UIView {
     }
     
     // MARK: - Public methods
-    
     /**
      New centered rect based on bounds width to prevent stretching of the icon.
      
@@ -94,9 +85,8 @@ extension EmojiCategoryIconView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         /// New centered rect based on bounds width to prevent stretching of the icon
-        let rect = CGRect(
-            origin: CGPoint(x: 0, y: (rect.height - rect.width) / 2),
-            size: CGSize(width: rect.width, height: rect.width)
+        let rect = CGRect(origin: CGPoint(x: 0, y: (rect.height - rect.width) / 2),
+                          size: CGSize(width: rect.width, height: rect.width)
         )
         
         switch type {
@@ -792,7 +782,9 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            context.restoreGState()
+            if #available(iOS 13.0, *) {
+                context.restoreGState()
+            }
         }
         
         // MARK: - Objects Category
@@ -1054,7 +1046,9 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            context.restoreGState()
+            if #available(iOS 13.0, *) {
+                context.restoreGState()
+            }
         }
         
         // MARK: - Flags Category
