@@ -59,21 +59,21 @@ final class UnicodeManager: UnicodeManagerProtocol {
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
         switch type {
         case .people:
-            return NSLocalizedString("emotionsAndPeople", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")
         case .nature:
-            return NSLocalizedString("animalsAndNature", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("animalsAndNature", bundle: .module, comment: "")
         case .foodAndDrink:
-            return NSLocalizedString("foodAndDrinks", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("foodAndDrinks", bundle: .module, comment: "")
         case .activity:
-            return NSLocalizedString("activities", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("activities", bundle: .module, comment: "")
         case .travelAndPlaces:
-            return NSLocalizedString("travellingAndPlaces", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("travellingAndPlaces", bundle: .module, comment: "")
         case .objects:
-            return NSLocalizedString("objects", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("objects", bundle: .module, comment: "")
         case .symbols:
-            return NSLocalizedString("symbols", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("symbols", bundle: .module, comment: "")
         case .flags:
-            return NSLocalizedString("flags", bundle: Bundle.sdkResources, comment: "")
+            return NSLocalizedString("flags", bundle: .module, comment: "")
         }
     }
 }

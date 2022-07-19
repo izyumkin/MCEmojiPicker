@@ -4,14 +4,14 @@ import PackageDescription
 
 let package = Package(
     name: "AppImport",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS("11.1")],
     products: [
         .library(
             name: "AppImport",
             targets: ["AppImport"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "1.0.2"))
+        .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "1.0.3"))
     ],
     targets: [
         .target(
