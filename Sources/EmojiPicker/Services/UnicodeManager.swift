@@ -57,28 +57,24 @@ final class UnicodeManager: UnicodeManagerProtocol {
     /// - Parameter type: Emoji category type
     /// - Returns: Name of the category
     public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
+        let localizationTableName = "Localizable"
         switch type {
         case .people:
-            // - ERROR | xcodebuild: error: type 'Bundle' has no member 'module'
-        #if SWIFT_PACKAGE
-            return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")
-        #else
-            return NSLocalizedString("emotionsAndPeople", bundle: .main, comment: "")
-        #endif
+            return NSLocalizedString("emotionsAndPeople", tableName: localizationTableName, comment: "")
         case .nature:
-            return NSLocalizedString("animalsAndNature", bundle: .module, comment: "")
+            return NSLocalizedString("animalsAndNature", tableName: localizationTableName, comment: "")
         case .foodAndDrink:
-            return NSLocalizedString("foodAndDrinks", bundle: .module, comment: "")
+            return NSLocalizedString("foodAndDrinks", tableName: localizationTableName, comment: "")
         case .activity:
-            return NSLocalizedString("activities", bundle: .module, comment: "")
+            return NSLocalizedString("activities", tableName: localizationTableName, comment: "")
         case .travelAndPlaces:
-            return NSLocalizedString("travellingAndPlaces", bundle: .module, comment: "")
+            return NSLocalizedString("travellingAndPlaces", tableName: localizationTableName, comment: "")
         case .objects:
-            return NSLocalizedString("items", bundle: .module, comment: "")
+            return NSLocalizedString("objects", tableName: localizationTableName, comment: "")
         case .symbols:
-            return NSLocalizedString("symbols", bundle: .module, comment: "")
+            return NSLocalizedString("symbols", tableName: localizationTableName, comment: "")
         case .flags:
-            return NSLocalizedString("flags", bundle: .module, comment: "")
+            return NSLocalizedString("flags", tableName: localizationTableName, comment: "")
         }
     }
 }
