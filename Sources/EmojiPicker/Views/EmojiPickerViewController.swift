@@ -82,7 +82,7 @@ final class EmojiPickerViewController: UIViewController {
     }
     
     /**
-     Feedback generator style. To turn off, set `nil` to this parameter..
+     Feedback generator style. To turn off, set `nil` to this parameter.
      
      The default value of this property is `.light`.
      */

@@ -57,6 +57,7 @@ extension UIColor {
 }
 
 extension UIColor {
+    /// Support for dark and light color versions
     convenience init(light: UIColor, dark: UIColor) {
         if #available(iOS 13.0, *) {
             self.init(dynamicProvider: { trait in

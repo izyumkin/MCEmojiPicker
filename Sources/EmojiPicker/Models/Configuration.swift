@@ -37,6 +37,8 @@ extension EmojiPicker {
         public var isDismissAfterChoosing: Bool
         /// Custom height for EmojiPicker
         public var customHeight: CGFloat?
+        /// Feedback generator style. To turn off, set `nil` to this parameter
+        public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = .light
         
         public init(sourceViewController: UIViewController,
                     sender: UIView,

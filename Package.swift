@@ -11,15 +11,12 @@ let package = Package(
             name: "EmojiPicker",
             targets: ["EmojiPicker"]),
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "EmojiPicker",
             dependencies: [],
-            resources: [.process("Resources")]),
-        .testTarget(
-            name: "EmojiPickerTests",
-            dependencies: ["EmojiPicker"]),
-    ]
+            resources: [.process("Resources")])
+    ],
+    swiftLanguageVersions: [.v5]
 )
