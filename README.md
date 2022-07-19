@@ -13,9 +13,9 @@ Ready for use on iOS 12+
 The [Swift Package Manager](https://www.swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
 
 Once you have your Swift package set up, adding as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
-```
+```swift
 dependencies: [
-    .package(url: "https://github.com/izzyumkin/EmojiPicker", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/izzyumkin/EmojiPicker", .upToNextMajor(from: "1.0.2"))
 ]
 ```
 
@@ -23,23 +23,62 @@ dependencies: [
 If you prefer not to use any of dependency managers, you can integrate manually. Put `Sources/EmojiPicker` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
 
 ## Quick Start
-
+Create `UIButton` and add selector as action:
+```swift
+@objc private func openEmojiPickerModule(sender: UIButton) {
+    let configuration = EmojiPicker.Configuration(sourceViewController: self, sender: sender)
+    EmojiPicker.present(with: configuration)
+}
+```
 
 ## Usage
-### Selected emoji category tint color
+`sourceViewController` is the view controller on which EmojiPicker is being presenter. 
 
+`sender` is the view containing the anchor rectangle for the popover. You can create any `UIView` instances and set them as the `sender`
+
+Also, there is way more settings for configuration:
+
+### Selected emoji category tint color
+Color for the selected emoji category. The default value of this property is `.systemBlue`.
+
+```
+configuration.selectedEmojiCategoryTintColor = .systemRed
+```
 
 ### Arrow direction
+The direction of the arrow for EmojiPicker. The default value of this property is `.up`
 
+```
+configuration.arrowDirection = .up,
+```
 
 ### Horizontal inset
+Inset from the `sourceView` border. The default value of this property is `0`
 
+```
+configuration.horizontalInset = 0
+```
 
 ### Is dismiss after choosing
+Defines whether to dismiss emoji picker or not after choosing. The default value of this property is `true`
 
+```
+configuration.isDismissAfterChoosing = true
+```
 
 ### Custom height
+Custom height for EmojiPicker. The default value of this property is `nil`
 
+```
+configuration.customHeight = 300
+```
+
+### Feedback generator style
+Feedback generator style. To turn off, set `nil` to this parameter. The default value of this property is `.light`.
+
+```
+configuration.feedBackGeneratorStyle = .soft
+```
 
 ## To do
 - [x] The main functionality for choosing emojis
