@@ -41,6 +41,7 @@ extension ViewController: EmojiPickerDelegate {
 ```
 
 ## Usage
+### Required parameters
 `sourceViewController` is the view controller on which EmojiPicker is being presenter. 
 
 `sender` is the view containing the anchor rectangle for the popover. You can create any `UIView` instances and set them as the `sender`
@@ -50,42 +51,42 @@ Also, there is way more settings for configuration:
 ### Selected emoji category tint color
 Color for the selected emoji category. The default value of this property is `.systemBlue`.
 
-```
+```swift
 configuration.selectedEmojiCategoryTintColor = .systemRed
 ```
 
 ### Arrow direction
 The direction of the arrow for EmojiPicker. The default value of this property is `.up`
 
-```
+```swift
 configuration.arrowDirection = .up,
 ```
 
 ### Horizontal inset
 Inset from the `sourceView` border. The default value of this property is `0`
 
-```
+```swift
 configuration.horizontalInset = 0
 ```
 
 ### Is dismiss after choosing
 Defines whether to dismiss emoji picker or not after choosing. The default value of this property is `true`
 
-```
+```swift
 configuration.isDismissAfterChoosing = true
 ```
 
 ### Custom height
 Custom height for EmojiPicker. The default value of this property is `nil`
 
-```
+```swift
 configuration.customHeight = 300
 ```
 
 ### Feedback generator style
 Feedback generator style. To turn off, set `nil` to this parameter. The default value of this property is `.light`.
 
-```
+```swift
 configuration.feedBackGeneratorStyle = .soft
 ```
 
