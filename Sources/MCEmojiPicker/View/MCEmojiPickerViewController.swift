@@ -108,12 +108,11 @@ public final class MCEmojiPickerViewController: UIViewController {
     private let emojiPickerView = MCEmojiPickerView()
     
     private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-    private var viewModel: MCEmojiPickerViewModelProtocol
+    private var viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()
     
     // MARK: - Initializers
     
-    init(viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()) {
-        self.viewModel = viewModel
+    public init() {
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()
         setupDelegates()
