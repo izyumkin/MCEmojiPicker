@@ -48,28 +48,28 @@ viewController.selectedEmojiCategoryTintColor = .systemRed
 ```
 
 ### Arrow direction
-The direction of the arrow for EmojiPicker. The default value of this property is `.up`
+The direction of the arrow for EmojiPicker. The default value of this property is `.up`.
 
 ```swift
 viewController.arrowDirection = .up
 ```
 
 ### Horizontal inset
-Inset from the `sourceView` border. The default value of this property is `0`
+Inset from the `sourceView` border. The default value of this property is `0`.
 
 ```swift
 viewController.horizontalInset = 0
 ```
 
 ### Is dismiss after choosing
-Defines whether to dismiss emoji picker or not after choosing. The default value of this property is `true`
+Defines whether to dismiss emoji picker or not after choosing. The default value of this property is `true`.
 
 ```swift
 viewController.isDismissAfterChoosing = true
 ```
 
 ### Custom height
-Custom height for EmojiPicker. The default value of this property is `nil`
+Custom height for EmojiPicker. The default value of this property is `nil`.
 
 ```swift
 viewController.customHeight = 300
