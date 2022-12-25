@@ -59,6 +59,7 @@
 		C4346B38295842B100817147 /* MCUnicodeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUnicodeManagerProtocol.swift; sourceTree = "<group>"; };
 		C4346B3A295842B100817147 /* MCUnicodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUnicodeManager.swift; sourceTree = "<group>"; };
 		C4D457132958455B00CF8345 /* MCEmojiPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEmojiPicker.h; sourceTree = "<group>"; };
+		C4D4574829587CE200CF8345 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MCEmojiPickerLocalizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +301,7 @@
 				en,
 				Base,
 				ru,
+				uk,
 			);
 			mainGroup = C4346AFE2958429100817147;
 			productRefGroup = C4346B092958429100817147 /* Products */;
@@ -360,6 +362,7 @@
 			children = (
 				C4346B34295842B100817147 /* en */,
 				C4346B35295842B100817147 /* ru */,
+				C4D4574829587CE200CF8345 /* uk */,
 			);
 			name = MCEmojiPickerLocalizable.strings;
 			sourceTree = "<group>";
