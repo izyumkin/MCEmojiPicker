@@ -56,25 +56,27 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
      - Parameter type: Emoji category type.
      */
     public func getEmojiCategoryTitle(for type: MCEmojiCategoryType) -> String {
-        // Localization file name.
-        let localizationTableName = "MCEmojiPickerLocalizable"
+        let path = Bundle(for: MCUnicodeManager.self).path(forResource: "MCEmojiPicker", ofType: "bundle") ?? ""
+        // Localization bundle.
+        let bundle = Bundle(path: path) ?? Bundle.main
+        
         switch type {
         case .people:
-            return NSLocalizedString("emotionsAndPeople", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("emotionsAndPeople", bundle: bundle, comment: "")
         case .nature:
-            return NSLocalizedString("animalsAndNature", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("animalsAndNature", bundle: bundle, comment: "")
         case .foodAndDrink:
-            return NSLocalizedString("foodAndDrinks", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("foodAndDrinks", bundle: bundle, comment: "")
         case .activity:
-            return NSLocalizedString("activities", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("activities", bundle: bundle, comment: "")
         case .travelAndPlaces:
-            return NSLocalizedString("travellingAndPlaces", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("travellingAndPlaces", bundle: bundle, comment: "")
         case .objects:
-            return NSLocalizedString("items", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("items", bundle: bundle, comment: "")
         case .symbols:
-            return NSLocalizedString("symbols", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("symbols", bundle: bundle, comment: "")
         case .flags:
-            return NSLocalizedString("flags", tableName: localizationTableName, comment: "")
+            return NSLocalizedString("flags", bundle: bundle, comment: "")
         }
     }
 }
