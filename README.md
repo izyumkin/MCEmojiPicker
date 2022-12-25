@@ -1,4 +1,4 @@
-# EmojiPicker
+# MCEmojiPicker
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/50948518/172110164-b0dec76f-495d-4112-ad00-2708ffdda54a.gif" width="230">
