@@ -11,10 +11,6 @@ public protocol EmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
 }
 
-// TODO: - Add the background appearance setting
-// TODO: - Add the ability to select localization
-// TODO: - Add the ability to choice blur background mode
-
 final class EmojiPickerViewController: UIViewController {
     
     // MARK: - Public Properties
