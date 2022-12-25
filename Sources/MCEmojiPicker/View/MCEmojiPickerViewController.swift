@@ -25,7 +25,7 @@ public protocol MCEmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
 }
 
-final class MCEmojiPickerViewController: UIViewController {
+public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Public Properties
     
