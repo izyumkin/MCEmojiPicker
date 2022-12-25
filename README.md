@@ -11,8 +11,11 @@
 
 I share the module out of my [application](https://apps.apple.com/ru/app/id1500111859) and make my own version of the emoji picker adaptation like on Mac.
 
+## Requirements
+
+Swift `4.2` & `5.0`. Ready for use on iOS 11.1+
+
 ## Installation
-Ready for use with Swift 4.2+ on iOS 11.1+
 
 ### CocoaPods
 
