@@ -93,5 +93,6 @@ viewController.feedBackGeneratorStyle = .soft
 -   [ ] Recently used
 
 ## Localizations
-* English 🇬🇧
+* English 🇺🇸
 * Russian 🇷🇺
+* Ukraine 🇺🇦
