@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'MCEmojiPicker'
-  s.version = '1.0.5'
+  s.version = '1.0.6'
   s.license = 'MIT'
   s.summary = 'Test framework'
   s.homepage = 'https://github.com/izyumkin/MCEmojiPicker'
