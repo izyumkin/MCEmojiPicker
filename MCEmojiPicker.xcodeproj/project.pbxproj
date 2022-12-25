@@ -58,6 +58,7 @@
 		C4346B37295842B100817147 /* MCEmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCEmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
 		C4346B38295842B100817147 /* MCUnicodeManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUnicodeManagerProtocol.swift; sourceTree = "<group>"; };
 		C4346B3A295842B100817147 /* MCUnicodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCUnicodeManager.swift; sourceTree = "<group>"; };
+		C4D457132958455B00CF8345 /* MCEmojiPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCEmojiPicker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				C4346B13295842B100817147 /* MCEmojiPicker */,
+				C4D457122958451F00CF8345 /* Supporting Files */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -235,6 +237,14 @@
 				C4346B3A295842B100817147 /* MCUnicodeManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		C4D457122958451F00CF8345 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C4D457132958455B00CF8345 /* MCEmojiPicker.h */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
