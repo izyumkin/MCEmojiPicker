@@ -22,7 +22,7 @@ pod 'MCEmojiPicker'
 Create `UIButton` and add selector as action:
 ```swift
 @objc private func selectEmojiAction(_ sender: UIButton) {
-    let viewController = EmojiPickerViewController()
+    let viewController = MCEmojiPickerViewController()
     viewController.delegate = self
     viewController.sourceView = sender
     present(viewController, animated: true)
@@ -31,7 +31,7 @@ Create `UIButton` and add selector as action:
 
 And then recieve emoji in the delegate method:
 ```swift
-extension ViewController: EmojiPickerDelegate {
+extension ViewController: MCEmojiPickerDelegate {
     func didGetEmoji(emoji: String) {
         emojiButton.setTitle(emoji, for: .normal)
     }
