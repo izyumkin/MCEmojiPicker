@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EmojiPickerDelegate: AnyObject {
+public protocol EmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
 }
 
