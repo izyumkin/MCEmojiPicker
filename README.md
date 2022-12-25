@@ -7,6 +7,17 @@
 
 I share the module out of my [application](https://apps.apple.com/ru/app/id1500111859) and make my own version of the emoji picker adaptation like on Mac.
 
+## Installation
+Ready for use with Swift 4.2+ on iOS 11.1+
+
+### CocoaPods:
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate `MCEmojiPicker` into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+pod 'MCEmojiPicker'
+```
+
 ## Quick Start
 Create `UIButton` and add selector as action:
 ```swift
