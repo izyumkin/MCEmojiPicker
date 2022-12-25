@@ -8,9 +8,7 @@
 import Foundation
 import UIKit.UIDevice
 
-/**
- The class is responsible for getting a relevant set of emojis for iOS version.
- */
+/// The class is responsible for getting a relevant set of emojis for iOS version.
 final class UnicodeManager: UnicodeManagerProtocol {
     
     // MARK: - Private Methods

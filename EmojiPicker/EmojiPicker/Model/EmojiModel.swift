@@ -7,9 +7,7 @@
 
 import Foundation
 
-/**
- Enum with emoji categories.
- */
+/// Enum with emoji categories.
 public enum EmojiCategoryType: Int {
     case people = 0
     case nature = 1

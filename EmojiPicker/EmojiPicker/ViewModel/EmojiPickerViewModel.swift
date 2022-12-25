@@ -7,9 +7,7 @@
 
 import Foundation
 
-/**
- ViewModel which using in EmojiPickerViewController.
- */
+/// ViewModel which using in EmojiPickerViewController.
 final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
@@ -19,9 +17,7 @@ final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
     // MARK: - Private Properties
     
-    /**
-     All emoji categories.
-     */
+    /// All emoji categories.
     private var emojiCategories = [EmojiCategory]()
     
     // MARK: - Initializers

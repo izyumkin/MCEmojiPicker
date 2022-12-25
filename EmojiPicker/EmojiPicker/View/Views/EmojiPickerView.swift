@@ -7,10 +7,7 @@
 
 import UIKit
 
-// TODO: - Rewrite the collectionView setting to DiffableDataSource
-/**
- Delegate for event handling in EmojiPickerView.
- */
+/// Delegate for event handling in EmojiPickerView.
 protocol EmojiPickerViewDelegate: AnyObject {
     /**
      Processes an event by category selection.
@@ -60,9 +57,7 @@ final class EmojiPickerView: UIView {
     
     private var categoryViews = [TouchableEmojiCategoryView]()
     
-    /**
-     Height for categoriesStackView.
-     */
+    /// Height for categoriesStackView.
     private var categoriesStackViewHeight: CGFloat {
         // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         return bounds.width * 0.13

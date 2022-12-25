@@ -7,9 +7,7 @@
 
 import UIKit
 
-/**
- Delegate for handling touch gesture.
- */
+/// Delegate for handling touch gesture.
 protocol EmojiCategoryViewDelegate: AnyObject {
     /**
      Processes an event by category selection.
@@ -19,25 +17,19 @@ protocol EmojiCategoryViewDelegate: AnyObject {
     func didChoiceCategory(at index: Int)
 }
 
-/**
- The class store the category icon and processes handling touches.
- */
+/// The class store the category icon and processes handling touches.
 final class TouchableEmojiCategoryView: UIView {
     
     // MARK: - Private Properties
     
     private var categoryIconView: EmojiCategoryIconView
-    /**
-     Insets for categoryIconView.
-     */
+    /// Insets for categoryIconView.
     private var categoryIconViewInsets: UIEdgeInsets {
         // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
-    /**
-     Target category index.
-     */
+    /// Target category index.
     private var categoryIndex: Int
     
     private weak var delegate: EmojiCategoryViewDelegate?

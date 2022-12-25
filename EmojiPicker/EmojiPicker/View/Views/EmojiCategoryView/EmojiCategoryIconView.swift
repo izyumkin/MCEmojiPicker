@@ -7,40 +7,28 @@
 
 import UIKit
 
-/**
- States for EmojiCategoryIconView.
- */
+/// States for EmojiCategoryIconView.
 public enum EmojiCategoryIconViewState {
     case standard
     case highlighted
     case selected
 }
 
-/**
- Responsible for rendering the icon for the target emoji category in the desired color.
- */
+/// Responsible for rendering the icon for the target emoji category in the desired color.
 final class EmojiCategoryIconView: UIView {
     
     // MARK: - Private Properties
     
-    /**
-     Target icon type.
-     */
+    /// Target icon type.
     private var type: EmojiCategoryType
     
-    /**
-     Current tint color for the icon.
-     */
+    /// Current tint color for the icon.
     private var currentIconTintColor: UIColor = .systemGray
     
-    /**
-     Selected tint color for the icon.
-     */
+    /// Selected tint color for the icon.
     private var selectedIconTintColor: UIColor
     
-    /**
-     Current icon state.
-     */
+    /// Current icon state.
     private var state: EmojiCategoryIconViewState = .standard
     
     // MARK: - Initializers
@@ -93,9 +81,7 @@ final class EmojiCategoryIconView: UIView {
 extension EmojiCategoryIconView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
-        /**
-         New centered rect based on bounds width to prevent stretching of the icon.
-         */
+        // New centered rect based on bounds width to prevent stretching of the icon.
         let rect = CGRect(
             origin: CGPoint(
                 x: 0,
@@ -126,27 +112,17 @@ extension EmojiCategoryIconView {
         }
     }
     
-    /**
-     Responsible for rendering icons for emoji categories.
-     */
+    /// Responsible for rendering icons for emoji categories.
     private class CategoryIconsDrawKit: NSObject {
 
         public enum ResizingBehavior: Int {
-            /**
-             The content is proportionally resized to fit into the target rectangle.
-             */
+            /// The content is proportionally resized to fit into the target rectangle.
             case aspectFit
-            /**
-             The content is proportionally resized to completely fill the target rectangle.
-             */
+            /// The content is proportionally resized to completely fill the target rectangle.
             case aspectFill
-            /**
-             The content is stretched to match the entire target rectangle.
-             */
+            /// The content is stretched to match the entire target rectangle.
             case stretch
-            /**
-             The content is centered in the target rectangle, but it is NOT resized.
-             */
+            /// The content is centered in the target rectangle, but it is NOT resized.
             case center
 
             public func apply(rect: CGRect, target: CGRect) -> CGRect {
