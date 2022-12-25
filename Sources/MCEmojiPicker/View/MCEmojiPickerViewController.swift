@@ -126,11 +126,11 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Life Cycle
     
-    override func loadView() {
+    public override func loadView() {
         view = emojiPickerView
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupPreferredContentSize()
         setupArrowDirections()
@@ -195,15 +195,15 @@ public final class MCEmojiPickerViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 
 extension MCEmojiPickerViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.numberOfSections()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItems(in: section)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: MCEmojiCollectionViewCell.identifier,
             for: indexPath
@@ -212,7 +212,7 @@ extension MCEmojiPickerViewController: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader,
               let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -227,7 +227,7 @@ extension MCEmojiPickerViewController: UICollectionViewDataSource {
 // MARK: - UIScrollViewDelegate
 
 extension MCEmojiPickerViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Updating the selected category during scrolling
         let indexPathsForVisibleHeaders = emojiPickerView.collectionView.indexPathsForVisibleSupplementaryElements(
             ofKind: UICollectionView.elementKindSectionHeader
@@ -242,7 +242,7 @@ extension MCEmojiPickerViewController: UIScrollViewDelegate {
 // MARK: - UICollectionViewDelegate
 
 extension MCEmojiPickerViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         viewModel.selectedEmoji.value = viewModel.emoji(at: indexPath)
     }
@@ -251,7 +251,7 @@ extension MCEmojiPickerViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension MCEmojiPickerViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int
@@ -262,7 +262,7 @@ extension MCEmojiPickerViewController: UICollectionViewDelegateFlowLayout {
         )
     }
 
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
@@ -275,7 +275,7 @@ extension MCEmojiPickerViewController: UICollectionViewDelegateFlowLayout {
         )
     }
     
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
@@ -283,7 +283,7 @@ extension MCEmojiPickerViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
     
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
@@ -304,7 +304,7 @@ extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
 // MARK: - UIAdaptivePresentationControllerDelegate
 
 extension MCEmojiPickerViewController: UIAdaptivePresentationControllerDelegate {
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+    public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
 }
