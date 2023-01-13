@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F0BB7EC3297157D3004EEBFC /* EmojiPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0BB7EBA297157D3004EEBFC /* EmojiPicker.framework */; };
-		F0BB7EC8297157D3004EEBFC /* EmojiPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7EC7297157D3004EEBFC /* EmojiPickerTests.swift */; };
+		F0BB7EC8297157D3004EEBFC /* ConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7EC7297157D3004EEBFC /* ConfigurationTests.swift */; };
 		F0BB7ED629715831004EEBFC /* EmojiPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = F0BB7ED329715830004EEBFC /* EmojiPicker.h */; };
 		F0BB7ED829715831004EEBFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F0BB7ED529715830004EEBFC /* README.md */; };
 		F0BB7EDB297158BD004EEBFC /* EmojiPicker.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F0BB7ED9297158BC004EEBFC /* EmojiPicker.podspec */; };
@@ -35,6 +35,8 @@
 		F0BB7F2C297159A6004EEBFC /* Unicode 11.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7F15297159A6004EEBFC /* Unicode 11.swift */; };
 		F0BB7F2D297159A6004EEBFC /* UnicodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7F16297159A6004EEBFC /* UnicodeManager.swift */; };
 		F0BB7F2F29715ABF004EEBFC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7F2E29715ABF004EEBFC /* Bundle.swift */; };
+		F0BB7F35297169E5004EEBFC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F0BB7F34297169E4004EEBFC /* LICENSE */; };
+		F0BB7F3829716AFD004EEBFC /* EmojiPickerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB7F3729716AFD004EEBFC /* EmojiPickerDelegateMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +52,7 @@
 /* Begin PBXFileReference section */
 		F0BB7EBA297157D3004EEBFC /* EmojiPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmojiPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0BB7EC2297157D3004EEBFC /* EmojiPickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmojiPickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0BB7EC7297157D3004EEBFC /* EmojiPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerTests.swift; sourceTree = "<group>"; };
+		F0BB7EC7297157D3004EEBFC /* ConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationTests.swift; sourceTree = "<group>"; };
 		F0BB7ED329715830004EEBFC /* EmojiPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiPicker.h; sourceTree = "<group>"; };
 		F0BB7ED429715830004EEBFC /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		F0BB7ED529715830004EEBFC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		F0BB7F3129715BA9004EEBFC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F0BB7F3229715BB7004EEBFC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F0BB7F3329715BBB004EEBFC /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F0BB7F34297169E4004EEBFC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F0BB7F3729716AFD004EEBFC /* EmojiPickerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerDelegateMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 				F0BB7ED229715830004EEBFC /* Sources */,
 				F0BB7EC6297157D3004EEBFC /* EmojiPickerTests */,
 				F0BB7ED9297158BC004EEBFC /* EmojiPicker.podspec */,
+				F0BB7F34297169E4004EEBFC /* LICENSE */,
 				F0BB7EBB297157D3004EEBFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,7 +133,8 @@
 		F0BB7EC6297157D3004EEBFC /* EmojiPickerTests */ = {
 			isa = PBXGroup;
 			children = (
-				F0BB7EC7297157D3004EEBFC /* EmojiPickerTests.swift */,
+				F0BB7F3629716AE9004EEBFC /* Mocks */,
+				F0BB7EC7297157D3004EEBFC /* ConfigurationTests.swift */,
 			);
 			path = EmojiPickerTests;
 			sourceTree = "<group>";
@@ -276,6 +282,14 @@
 			path = Unicode;
 			sourceTree = "<group>";
 		};
+		F0BB7F3629716AE9004EEBFC /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F0BB7F3729716AFD004EEBFC /* EmojiPickerDelegateMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -376,6 +390,7 @@
 			files = (
 				F0BB7ED829715831004EEBFC /* README.md in Resources */,
 				F0BB7F18297159A6004EEBFC /* Localizable.strings in Resources */,
+				F0BB7F35297169E5004EEBFC /* LICENSE in Resources */,
 				F0BB7EDB297158BD004EEBFC /* EmojiPicker.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,7 +438,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0BB7EC8297157D3004EEBFC /* EmojiPickerTests.swift in Sources */,
+				F0BB7EC8297157D3004EEBFC /* ConfigurationTests.swift in Sources */,
+				F0BB7F3829716AFD004EEBFC /* EmojiPickerDelegateMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
