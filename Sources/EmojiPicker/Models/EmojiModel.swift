@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-/// Describes types of emoji categories
-public enum EmojiCategoryType: Int {
+/// Describes types of emoji categories.
+enum EmojiCategoryType: Int {
     case people
     case nature
     case foodAndDrink
@@ -32,7 +32,7 @@ public enum EmojiCategoryType: Int {
 }
 
 /// Describes emoji categories
-public struct EmojiCategory {
+struct EmojiCategory {
     var categoryName: String
     var emojis: [[Int]]
 }

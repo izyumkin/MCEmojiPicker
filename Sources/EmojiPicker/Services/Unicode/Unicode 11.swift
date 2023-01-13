@@ -22,7 +22,7 @@
 import Foundation
 
 extension UnicodeManager {
-    public var unicode11: [EmojiCategory] {
+    var unicode11: [EmojiCategory] {
         return [
             EmojiCategory(
                 categoryName: getEmojiCategoryTitle(for: .people),

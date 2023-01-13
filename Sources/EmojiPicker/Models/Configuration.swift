@@ -21,40 +21,41 @@
 
 import UIKit
 
-extension EmojiPicker {
-    public struct Configuration {
-        /// A view controller on which EmojiPicker is being presented
-        public var sourceViewController: UIViewController
-        /// The view containing the anchor rectangle for the popover
-        public var sender: UIView
-        /// Tint color for the selected emoji category
-        public var selectedEmojiCategoryTintColor: UIColor?
-        /// The direction of the arrow for EmojiPicker
-        public var arrowDirection: PickerArrowDirectionMode
-        /// Inset from the sourceView border
-        public var horizontalInset: CGFloat
-        /// Defines whether to dismiss emoji picker or not after choosing
-        public var isDismissAfterChoosing: Bool
-        /// Custom height for EmojiPicker
-        public var customHeight: CGFloat?
-        /// Feedback generator style. To turn off, set `nil` to this parameter
-        public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = .light
-        
-        public init(sourceViewController: UIViewController,
-                    sender: UIView,
-                    selectedEmojiCategoryTintColor: UIColor? = nil,
-                    arrowDirection: PickerArrowDirectionMode = .up,
-                    horizontalInset: CGFloat = 0,
-                    isDismissAfterChoosing: Bool = true,
-                    customHeight: CGFloat? = nil
-        ) {
-            self.sourceViewController = sourceViewController
-            self.sender = sender
-            self.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
-            self.arrowDirection = arrowDirection
-            self.horizontalInset = horizontalInset
-            self.isDismissAfterChoosing = isDismissAfterChoosing
-            self.customHeight = customHeight
-        }
+/// Configuration for an EmojiPicker.
+public struct Configuration {
+    /// A view controller on which EmojiPicker is being presented.
+    public var sourceViewController: UIViewController
+    /// The view containing the anchor rectangle for the popover.
+    public var sender: UIView
+    /// Tint color for the selected emoji category.
+    public var selectedEmojiCategoryTintColor: UIColor?
+    /// The direction of the arrow for EmojiPicker.
+    public var arrowDirection: PickerArrowDirectionMode
+    /// Inset from the sourceView border.
+    public var horizontalInset: CGFloat
+    /// Defines whether to dismiss emoji picker or not after choosing.
+    public var isDismissAfterChoosing: Bool
+    /// Custom height for EmojiPicker.
+    public var customHeight: CGFloat?
+    /// Feedback generator style. To turn off, set `nil` to this parameter.
+    public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle?
+    
+    public init(sourceViewController: UIViewController,
+                sender: UIView,
+                selectedEmojiCategoryTintColor: UIColor? = nil,
+                arrowDirection: PickerArrowDirectionMode = .up,
+                horizontalInset: CGFloat = 0,
+                isDismissAfterChoosing: Bool = true,
+                customHeight: CGFloat? = nil,
+                feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle = .light
+    ) {
+        self.sourceViewController = sourceViewController
+        self.sender = sender
+        self.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
+        self.arrowDirection = arrowDirection
+        self.horizontalInset = horizontalInset
+        self.isDismissAfterChoosing = isDismissAfterChoosing
+        self.customHeight = customHeight
+        self.feedBackGeneratorStyle = feedBackGeneratorStyle
     }
 }

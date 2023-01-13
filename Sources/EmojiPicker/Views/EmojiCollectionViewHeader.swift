@@ -23,14 +23,15 @@ import UIKit
 
 final class EmojiCollectionViewHeader: UICollectionReusableView {
     
-    // MARK: - Public methods
-    public var categoryName: String = "" {
+    var categoryName: String = "" {
         didSet {
             headerLabel.text = categoryName
         }
     }
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
+
+    
     private let headerLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = .systemGray
@@ -40,6 +41,7 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
     }()
     
     // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -50,7 +52,8 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private methods
+    // MARK: - Private Pethods
+    
     private func setupLayout() {
         backgroundColor = .popoverBackgroundColor
         addSubview(headerLabel)

@@ -20,7 +20,7 @@
 // SOFTWARE.
 
 extension UnicodeManager {
-    public var unicode13: [EmojiCategory] {
+    var unicode13: [EmojiCategory] {
         return [
             EmojiCategory(
                 categoryName: getEmojiCategoryTitle(for: .people),

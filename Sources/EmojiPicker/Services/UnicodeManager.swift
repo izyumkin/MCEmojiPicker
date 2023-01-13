@@ -21,22 +21,23 @@
 
 import UIKit
 
-/// The protocol is necessary to hide unnecessary methods with Unicode categories in UnicodeManager
+/// The protocol is necessary to hide unnecessary methods with Unicode categories in UnicodeManager.
 protocol UnicodeManagerProtocol {
-    /// Returns relevant emojis for the current iOS version
+    /// Returns relevant emojis for the current iOS version.
     func getEmojisForCurrentIOSVersion() -> [EmojiCategory]
 }
 
-/// The class is responsible for getting a relevant set of emojis for iOS version
+/// The class is responsible for getting a relevant set of emojis for iOS version.
 final class UnicodeManager: UnicodeManagerProtocol {
     
     private var currentVersion: Float {
         return (UIDevice.current.systemVersion as NSString).floatValue
     }
     
-    /// Gets version of iOS for current device
-    /// - Returns: Array of emoji categories (and array of emojis inside them)
-    public func getEmojisForCurrentIOSVersion() -> [EmojiCategory] {
+    /// Gets version of iOS for current device.
+    ///
+    /// - Returns: Array of emoji categories (and array of emojis inside them).
+    func getEmojisForCurrentIOSVersion() -> [EmojiCategory] {
         switch currentVersion {
         case 12.1...13.1:
             return unicode11
@@ -54,9 +55,10 @@ final class UnicodeManager: UnicodeManagerProtocol {
     }
     
     /// Returns a localized name for the emoji category.
-    /// - Parameter type: Emoji category type
-    /// - Returns: Name of the category
-    public func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
+    ///
+    /// - Parameter type: Emoji category type.
+    /// - Returns: Name of the category.
+    func getEmojiCategoryTitle(for type: EmojiCategoryType) -> String {
         switch type {
         case .people:
             return NSLocalizedString("emotionsAndPeople", bundle: .module, comment: "")

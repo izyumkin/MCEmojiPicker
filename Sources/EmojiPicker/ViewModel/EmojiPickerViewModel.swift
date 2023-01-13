@@ -40,8 +40,8 @@ protocol EmojiPickerViewModelProtocol {
 /// ViewModel which using in EmojiPickerViewController
 final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
     
-    public var selectedEmoji = Observable<String>(value: "")
-    public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
+    var selectedEmoji = Observable<String>(value: "")
+    var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     
     /// All emoji categories
     private var emojiCategories = [EmojiCategory]()
@@ -50,19 +50,19 @@ final class EmojiPickerViewModel: EmojiPickerViewModelProtocol {
         emojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
     }
     
-    public func numberOfSections() -> Int {
+    func numberOfSections() -> Int {
         return emojiCategories.count
     }
     
-    public func numberOfItems(in section: Int) -> Int {
+    func numberOfItems(in section: Int) -> Int {
         return emojiCategories[section].emojis.count
     }
     
-    public func emoji(at indexPath: IndexPath) -> String {
+    func emoji(at indexPath: IndexPath) -> String {
         return emojiCategories[indexPath.section].emojis[indexPath.row].emoji()
     }
     
-    public func sectionHeaderViewModel(for section: Int) -> String {
+    func sectionHeaderViewModel(for section: Int) -> String {
         return emojiCategories[section].categoryName
     }
 }

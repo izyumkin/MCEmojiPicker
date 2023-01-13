@@ -36,7 +36,8 @@ protocol EmojiCategoryViewDelegate: AnyObject {
  */
 final class TouchableEmojiCategoryView: UIView {
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
+
     private var categoryIconView: EmojiCategoryIconView
     /**
      Insets for categoryIconView.
@@ -54,6 +55,7 @@ final class TouchableEmojiCategoryView: UIView {
     private weak var delegate: EmojiCategoryViewDelegate?
     
     // MARK: - Init
+
     init(delegate: EmojiCategoryViewDelegate,
          categoryIndex: Int,
          selectedEmojiCategoryTintColor: UIColor
@@ -94,13 +96,14 @@ final class TouchableEmojiCategoryView: UIView {
      
      - Parameter selectedCategoryIndex: Selected category index.
      */
-    public func updateCategoryViewState(selectedCategoryIndex: Int) {
+    func updateCategoryViewState(selectedCategoryIndex: Int) {
         categoryIconView.updateIconTintColor(
             for: categoryIndex == selectedCategoryIndex ? .selected : .standard
         )
     }
     
-    // MARK: - Private methods
+    // MARK: - Private Methods
+
     private func setupLayout() {
         guard !categoryIconView.isDescendant(of: self) else { return }
         addSubview(categoryIconView)

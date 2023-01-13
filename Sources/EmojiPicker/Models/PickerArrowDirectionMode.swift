@@ -21,6 +21,9 @@
 
 import Foundation
 
+/// Specifies the direction of the popover arrow.
+///
+/// - Important: This enum represents `UIPopoverArrowDirection` struct from UIKit, but it has only 2 directions.
 public enum PickerArrowDirectionMode: UInt {
     case up = 1
     case down = 2

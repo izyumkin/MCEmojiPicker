@@ -32,40 +32,39 @@ final class EmojiPickerViewController: UIViewController {
     /**
      The direction of the arrow for EmojiPicker.
      
-     The default value of this property is `.up`.
+     - Note: The default value of this property is `.up`.
      */
-    public var arrowDirection: PickerArrowDirectionMode = .up
+    public var arrowDirection: PickerArrowDirectionMode
     
     /**
      Custom height for EmojiPicker.
-     But it will be limited by the distance from `sourceView.origin.y` to the upper or lower bound(depends on `permittedArrowDirections`).
      
-     The default value of this property is `nil`.
+     - Note: The default value of this property is `nil`.
+     - Important: it will be limited by the distance from `sourceView.origin.y` to the upper or lower bound(depends on `permittedArrowDirections`).
      */
-    public var customHeight: CGFloat? = nil
+    public var customHeight: CGFloat?
     
     /**
      Inset from the sourceView border.
      
-     The default value of this property is `0`.
+     - Note: The default value of this property is `0`.
      */
-    public var horizontalInset: CGFloat = 0
+    public var horizontalInset: CGFloat
     
     /**
      A boolean value that determines whether the screen will be hidden after the emoji is selected.
      
-     If this property’s value is true, the EmojiPicker will be dismissed after the emoji is selected.
+     If this property’s value is `true`, the EmojiPicker will be dismissed after the emoji is selected.
+     If you want EmojiPicker not to dismissed after emoji selection, you must set this property to `false`.
      
-     If you want EmojiPicker not to dismissed after emoji selection, you must set this property to false.
-     
-     The default value of this property is `true`.
+     - Note: The default value of this property is `true`.
      */
-    public var isDismissAfterChoosing: Bool = true
+    public var isDismissAfterChoosing: Bool
     
     /**
      Color for the selected emoji category.
      
-     The default value of this property is `.systemBlue`.
+     - Note: The default value of this property is `.systemBlue`.
      */
     public var selectedEmojiCategoryTintColor: UIColor? {
         didSet {
@@ -84,9 +83,9 @@ final class EmojiPickerViewController: UIViewController {
     /**
      Feedback generator style. To turn off, set `nil` to this parameter.
      
-     The default value of this property is `.light`.
+     - Note: The default value of this property is `.light`.
      */
-    public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = .light {
+    public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? {
         didSet {
             guard let feedBackGeneratorStyle = feedBackGeneratorStyle else {
                 generator = nil
@@ -97,13 +96,21 @@ final class EmojiPickerViewController: UIViewController {
     }
     
     private let emojiPickerView = EmojiPickerView()
-    private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
+    private var generator: UIImpactFeedbackGenerator?
     private var viewModel: EmojiPickerViewModelProtocol
     
-    init(viewModel: EmojiPickerViewModelProtocol = EmojiPickerViewModel()) {
-        self.viewModel = viewModel
+    /// Creates EmojiPicker view controller with provided configuration.
+    init(configuration: Configuration) {
+        arrowDirection = configuration.arrowDirection
+        selectedEmojiCategoryTintColor = configuration.selectedEmojiCategoryTintColor
+        horizontalInset = configuration.horizontalInset
+        isDismissAfterChoosing = configuration.isDismissAfterChoosing
+        customHeight = configuration.customHeight
+        viewModel = EmojiPickerViewModel()
+        
         super.init(nibName: nil, bundle: nil)
-        setupPopoverPresentationStyle()
+        modalPresentationStyle = .popover
+        
         setupDelegates()
         bindViewModel()
     }
@@ -124,7 +131,8 @@ final class EmojiPickerViewController: UIViewController {
         setupHorizontalInset()
     }
     
-    // MARK: - Private methods
+    // MARK: - Private Methods
+    
     private func bindViewModel() {
         viewModel.selectedEmoji.bind { [unowned self] emoji in
             generator?.impactOccurred()
@@ -145,20 +153,17 @@ final class EmojiPickerViewController: UIViewController {
         presentationController?.delegate = self
     }
     
-    private func setupPopoverPresentationStyle() {
-        modalPresentationStyle = .popover
-    }
-    
+    /// Sets up preferred content size.
+    ///
+    /// - Note: The number `0.16` was taken based on the proportion of height to the width of the EmojiPicker on MacOS.
     private func setupPreferredContentSize() {
         let sideInset: CGFloat = 20
         let screenWidth: CGFloat = UIScreen.main.nativeBounds.width / UIScreen.main.nativeScale
         let popoverWidth: CGFloat = screenWidth - (sideInset * 2)
-        // The number 0.16 was taken based on the proportion of height to the width of the EmojiPicker on MacOS.
         let heightProportionToWidth: CGFloat = 1.16
-        preferredContentSize = CGSize(
-            width: popoverWidth,
-            height: customHeight ?? popoverWidth * heightProportionToWidth
-        )
+        
+        preferredContentSize = CGSize(width: popoverWidth,
+                                      height: customHeight ?? popoverWidth * heightProportionToWidth)
     }
     
     private func setupArrowDirections() {
@@ -169,6 +174,7 @@ final class EmojiPickerViewController: UIViewController {
     
     private func setupHorizontalInset() {
         guard let sourceView = sourceView else { return }
+        
         popoverPresentationController?.sourceRect = CGRect(
             x: 0,
             y: popoverPresentationController?.permittedArrowDirections == .up ? horizontalInset : -horizontalInset,
@@ -179,7 +185,9 @@ final class EmojiPickerViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
 extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.numberOfSections()
     }
@@ -191,16 +199,21 @@ extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCollectionViewCell.identifier, for: indexPath) as? EmojiCollectionViewCell
         else { return UICollectionViewCell() }
+        
         cell.emoji = viewModel.emoji(at: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader,
-              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EmojiCollectionViewHeader.identifier, for: indexPath) as? EmojiCollectionViewHeader
-        else { return UICollectionReusableView() }
-        sectionHeader.categoryName = viewModel.sectionHeaderViewModel(for: indexPath.section)
-        return sectionHeader
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EmojiCollectionViewHeader.identifier, for: indexPath) as? EmojiCollectionViewHeader
+            else { return UICollectionReusableView() }
+            sectionHeader.categoryName = viewModel.sectionHeaderViewModel(for: indexPath.section)
+            return sectionHeader
+        default:
+            return UICollectionReusableView()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -210,12 +223,15 @@ extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionVie
 }
 
 // MARK: - UIScrollViewDelegate
+
 extension EmojiPickerViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Updating the selected category during scrolling
         let indexPathsForVisibleHeaders = emojiPickerView.collectionView.indexPathsForVisibleSupplementaryElements(
             ofKind: UICollectionView.elementKindSectionHeader
         ).sorted(by: { $0.section < $1.section })
+        
         if let selectedEmojiCategoryIndex = indexPathsForVisibleHeaders.first?.section,
            viewModel.selectedEmojiCategoryIndex.value != selectedEmojiCategoryIndex {
             viewModel.selectedEmojiCategoryIndex.value = selectedEmojiCategoryIndex
@@ -226,6 +242,7 @@ extension EmojiPickerViewController: UIScrollViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 40)
     }
@@ -246,7 +263,9 @@ extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - EmojiPickerViewDelegate
+
 extension EmojiPickerViewController: EmojiPickerViewDelegate {
+    
     func didChoiceEmojiCategory(at index: Int) {
         generator?.impactOccurred()
         viewModel.selectedEmojiCategoryIndex.value = index
@@ -254,7 +273,9 @@ extension EmojiPickerViewController: EmojiPickerViewDelegate {
 }
 
 // MARK: - UIAdaptivePresentationControllerDelegate
+
 extension EmojiPickerViewController: UIAdaptivePresentationControllerDelegate {
+    
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }

@@ -21,18 +21,18 @@
 
 import UIKit
 
-/// Delegate for event handling in `EmojiPickerView`
+/// Delegate for event handling in `EmojiPickerView`.
 protocol EmojiPickerViewDelegate: AnyObject {
-    /**
-     Processes an event by category selection.
-     - Parameter index: index of the selected category.
-     */
+    /// Processes an event by category selection.
+    ///
+    /// - Parameter index: index of the selected category.
     func didChoiceEmojiCategory(at index: Int)
 }
 
 final class EmojiPickerView: UIView {
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
+
     private let separatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -50,14 +50,14 @@ final class EmojiPickerView: UIView {
     
     private var categoryViews = [TouchableEmojiCategoryView]()
     
-    /// Describes height for `categoriesStackView`
+    /// Describes height for `categoriesStackView`.
+    ///
+    /// - Note: The number `0.13` was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
     private var categoriesStackViewHeight: CGFloat {
-        // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         return bounds.width * 0.13
     }
     
-    // MARK: - Public properties
-    public let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -70,11 +70,12 @@ final class EmojiPickerView: UIView {
         return collectionView
     }()
     
-    public weak var delegate: EmojiPickerViewDelegate?
+    weak var delegate: EmojiPickerViewDelegate?
     
-    public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
+    var selectedEmojiCategoryTintColor: UIColor = .systemBlue
     
     // MARK: - Init
+
     init() {
         super.init(frame: .zero)
         
@@ -93,15 +94,17 @@ final class EmojiPickerView: UIView {
     
     /**
      Passes the index of the selected category to all categoryViews to update the state.
+     
      - Parameter categoryIndex: Selected category index.
      */
-    public func updateSelectedCategoryIcon(with categoryIndex: Int) {
-        categoryViews.forEach({
+    func updateSelectedCategoryIcon(with categoryIndex: Int) {
+        categoryViews.forEach {
             $0.updateCategoryViewState(selectedCategoryIndex: categoryIndex)
-        })
+        }
     }
     
-    // MARK: - Private methods
+    // MARK: - Private Methods
+
     private func setupView() {
         backgroundColor = .popoverBackgroundColor
         
@@ -141,10 +144,9 @@ final class EmojiPickerView: UIView {
         }
     }
     
-    /**
-     Scroll collectionView to header for selected category.
-     - Parameter section: Selected category index.
-     */
+    /// Scrolls collectionView to header for selected category.
+    ///
+    /// - Parameter section: Selected category index.
     private func scrollToHeader(for section: Int) {
         guard let cellFrame = collectionView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 0, section: section))?.frame,
               let headerFrame = collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: section))?.frame
@@ -154,7 +156,9 @@ final class EmojiPickerView: UIView {
 }
 
 // MARK: - EmojiCategoryViewDelegate
+
 extension EmojiPickerView: EmojiCategoryViewDelegate {
+    
     func didChoiceCategory(at index: Int) {
         scrollToHeader(for: index)
         delegate?.didChoiceEmojiCategory(at: index)

@@ -21,32 +21,34 @@
 
 import UIKit
 
-/// Describes states for `EmojiCategoryIconView`
-public enum EmojiCategoryIconViewState {
+/// Describes states for `EmojiCategoryIconView`.
+enum EmojiCategoryIconViewState {
     case standard
     case highlighted
     case selected
 }
 
-/// Responsible for rendering the icon for the target emoji category in the desired color
+/// Responsible for rendering the icon for the target emoji category in the desired color.
 final class EmojiCategoryIconView: UIView {
-    /// Target icon type
+    /// Target icon type.
     private var type: EmojiCategoryType
-    /// Current tint color for the icon
+    /// Current tint color for the icon.
     private var currentIconTintColor: UIColor = .systemGray
-    /// Selected tint color for the icon
+    /// Selected tint color for the icon.
     private var selectedIconTintColor: UIColor
-    /// Current icon state
+    /// Current icon state.
     private var state: EmojiCategoryIconViewState = .standard
     
     // MARK: - Init
+    
     init(type: EmojiCategoryType,
          selectedIconTintColor: UIColor
     ) {
         self.type = type
         self.selectedIconTintColor = selectedIconTintColor
         super.init(frame: .zero)
-        setupBackground()
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,12 +56,11 @@ final class EmojiCategoryIconView: UIView {
     }
     
     // MARK: - Public methods
-    /**
-     New centered rect based on bounds width to prevent stretching of the icon.
-     
-     - Parameter state: Target icon state. Based on this state, the target color will be selected.
-     */
-    public func updateIconTintColor(for state: EmojiCategoryIconViewState) {
+    
+    /// New centered rect based on bounds width to prevent stretching of the icon.
+    ///
+    /// - Parameter state: Target icon state. Based on this state, the target color will be selected.
+    func updateIconTintColor(for state: EmojiCategoryIconViewState) {
         guard self.state != state else { return }
         self.state = state
         switch state {
@@ -72,18 +73,15 @@ final class EmojiCategoryIconView: UIView {
         }
         setNeedsDisplay()
     }
-    
-    // MARK: - Private methods
-    private func setupBackground() {
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .clear
-    }
 }
 
 // MARK: - Drawing
+
 extension EmojiCategoryIconView {
-    public override func draw(_ rect: CGRect) {
+    
+    override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
         /// New centered rect based on bounds width to prevent stretching of the icon
         let rect = CGRect(origin: CGPoint(x: 0, y: (rect.height - rect.width) / 2),
                           size: CGSize(width: rect.width, height: rect.width)
@@ -112,25 +110,25 @@ extension EmojiCategoryIconView {
     /// Responsible for rendering icons for emoji categories
     private class CategoryIconsDrawKit: NSObject {
         
-        public enum ResizingBehavior: Int {
-            /**
-             The content is proportionally resized to fit into the target rectangle.
-             */
+        enum ResizingBehavior: Int {
+            /// The content is proportionally resized to fit into the target rectangle.
             case aspectFit
-            /**
-             The content is proportionally resized to completely fill the target rectangle.
-             */
+            /// The content is proportionally resized to completely fill the target rectangle.
             case aspectFill
-            /**
-             The content is stretched to match the entire target rectangle.
-             */
+            /// The content is stretched to match the entire target rectangle.
             case stretch
-            /**
-             The content is centered in the target rectangle, but it is NOT resized.
-             */
+            /// The content is centered in the target rectangle, but it is NOT resized.
             case center
             
-            public func apply(rect: CGRect, target: CGRect) -> CGRect {
+            
+            /// Applies provided rectangle to the target one.
+            ///
+            /// - Parameters:
+            ///   - rect: Stock rect.
+            ///   - target: Target rect.
+            ///
+            /// - Returns: Final rect.
+            func apply(rect: CGRect, target: CGRect) -> CGRect {
                 if rect == target || target == CGRect.zero {
                     return rect
                 }
@@ -163,7 +161,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - People Category
-        public class func drawPeopleCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawPeopleCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -213,7 +212,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - Nature Category
-        public class func drawNatureCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawNatureCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -358,7 +358,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - Food And Drink Category
-        public class func drawFoodAndDrinkCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawFoodAndDrinkCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -504,7 +505,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - Activity Category
-        public class func drawActivityCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawActivityCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -650,7 +652,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - Travel And Places Category
-        public class func drawTravelAndPlacesCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawTravelAndPlacesCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -782,13 +785,12 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            if #available(iOS 13.0, *) {
-                context.restoreGState()
-            }
+            context.restoreGState()
         }
         
         // MARK: - Objects Category
-        public class func drawObjectsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawObjectsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -891,7 +893,8 @@ extension EmojiCategoryIconView {
         }
         
         // MARK: - Symbols Category
-        public class func drawSymbolsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawSymbolsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -1046,13 +1049,12 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            if #available(iOS 13.0, *) {
-                context.restoreGState()
-            }
+            context.restoreGState()
         }
         
         // MARK: - Flags Category
-        public class func drawFlagsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        
+        class func drawFlagsCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()

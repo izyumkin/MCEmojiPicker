@@ -23,15 +23,14 @@ import UIKit
 
 final class EmojiCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Public Properties
-    
-    public var emoji: String? {
+    var emoji: String? {
         didSet {
             emojiLabel.text = emoji
         }
     }
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
+
     
     private let emojiLabel: UILabel = {
         let label = UILabel()
@@ -53,7 +52,8 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private methods
+    // MARK: - Private Methods
+
     
     private func setupLayout() {
         contentView.addSubview(emojiLabel)
