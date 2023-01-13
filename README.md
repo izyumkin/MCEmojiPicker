@@ -19,7 +19,7 @@ Once you have your Swift package set up, adding as a dependency is as easy as ad
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "2.0.0"))
+    .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "2.0.2"))
 ]
 ```
 
