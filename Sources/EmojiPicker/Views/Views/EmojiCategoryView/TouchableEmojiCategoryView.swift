@@ -23,27 +23,24 @@ import UIKit
 
 /// Delegate for handling touch gesture
 protocol EmojiCategoryViewDelegate: AnyObject {
-    /**
-     Processes an event by category selection.
-     
-     - Parameter index: index of the selected category.
-     */
+    /// Processes an event by category selection.
+    ///
+    /// - Parameter index: Index of the selected category.
     func didChoiceCategory(at index: Int)
 }
 
-/**
- The class store the category icon and processes handling touches.
- */
+/// The class store the category icon and processes handling touches.
 final class TouchableEmojiCategoryView: UIView {
     
     // MARK: - Private Properties
-
+    
     private var categoryIconView: EmojiCategoryIconView
     /**
      Insets for categoryIconView.
+     
+     - Note: The number `0.23` was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
      */
     private var categoryIconViewInsets: UIEdgeInsets {
-        // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
@@ -55,7 +52,7 @@ final class TouchableEmojiCategoryView: UIView {
     private weak var delegate: EmojiCategoryViewDelegate?
     
     // MARK: - Init
-
+    
     init(delegate: EmojiCategoryViewDelegate,
          categoryIndex: Int,
          selectedEmojiCategoryTintColor: UIColor
@@ -73,7 +70,8 @@ final class TouchableEmojiCategoryView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Life cycle
+    // MARK: - Life Cycle
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         setupLayout()
@@ -83,19 +81,18 @@ final class TouchableEmojiCategoryView: UIView {
         super.touchesBegan(touches, with: event)
         categoryIconView.updateIconTintColor(for: .highlighted)
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         categoryIconView.updateIconTintColor(for: .selected)
         delegate?.didChoiceCategory(at: categoryIndex)
     }
     
-    // MARK: - Public methods
-    /**
-     Updates the icon state to the selected one if the indexes match and the standard one if not.
-     
-     - Parameter selectedCategoryIndex: Selected category index.
-     */
+    // MARK: - Public Methods
+    
+    /// Updates the icon state to the selected one if the indexes match and the standard one if not.
+    ///
+    /// - Parameter selectedCategoryIndex: Selected category index.
     func updateCategoryViewState(selectedCategoryIndex: Int) {
         categoryIconView.updateIconTintColor(
             for: categoryIndex == selectedCategoryIndex ? .selected : .standard
@@ -103,9 +100,10 @@ final class TouchableEmojiCategoryView: UIView {
     }
     
     // MARK: - Private Methods
-
+    
     private func setupLayout() {
         guard !categoryIconView.isDescendant(of: self) else { return }
+        
         addSubview(categoryIconView)
         
         NSLayoutConstraint.activate([

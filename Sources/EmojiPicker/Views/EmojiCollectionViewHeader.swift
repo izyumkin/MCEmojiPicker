@@ -30,7 +30,6 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
     }
     
     // MARK: - Private Properties
-
     
     private let headerLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -52,7 +51,7 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private Pethods
+    // MARK: - Private Methods
     
     private func setupLayout() {
         backgroundColor = .popoverBackgroundColor

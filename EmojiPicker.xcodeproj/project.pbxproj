@@ -146,12 +146,12 @@
 			isa = PBXGroup;
 			children = (
 				F0BB7EF1297159A6004EEBFC /* ViewModel */,
-				F0BB7EF3297159A6004EEBFC /* Resources */,
-				F0BB7EF8297159A6004EEBFC /* Models */,
-				F0BB7EFC297159A6004EEBFC /* Extensions */,
-				F0BB7F02297159A6004EEBFC /* Bindings */,
 				F0BB7F04297159A6004EEBFC /* Views */,
+				F0BB7EF8297159A6004EEBFC /* Models */,
 				F0BB7F0E297159A6004EEBFC /* Services */,
+				F0BB7F02297159A6004EEBFC /* Bindings */,
+				F0BB7EFC297159A6004EEBFC /* Extensions */,
+				F0BB7EF3297159A6004EEBFC /* Resources */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
@@ -183,9 +183,9 @@
 		F0BB7EF8297159A6004EEBFC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F0BB7EFB297159A6004EEBFC /* Configuration.swift */,
 				F0BB7EF9297159A6004EEBFC /* EmojiModel.swift */,
 				F0BB7EFA297159A6004EEBFC /* PickerArrowDirectionMode.swift */,
-				F0BB7EFB297159A6004EEBFC /* Configuration.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

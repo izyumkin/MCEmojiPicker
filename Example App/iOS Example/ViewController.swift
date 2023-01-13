@@ -26,8 +26,9 @@ class ViewController: UIViewController {
     }
     
     @objc private func openEmojiPickerModule(sender: UIButton) {
-        let configuration = EmojiPicker.Configuration(sourceViewController: self, sender: sender)
-        EmojiPicker.present(with: configuration)
+        let configuration = Configuration(sourceViewController: self, sender: sender)
+        let viewController = EmojiPickerViewController(configuration: configuration)
+        present(viewController, animated: true)
     }
     
     private func setupView() {

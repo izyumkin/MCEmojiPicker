@@ -31,6 +31,23 @@ protocol EmojiPickerViewDelegate: AnyObject {
 
 final class EmojiPickerView: UIView {
     
+    weak var delegate: EmojiPickerViewDelegate?
+    
+    var selectedEmojiCategoryTintColor: UIColor = .systemBlue
+    
+    let collectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionHeadersPinToVisibleBounds = true
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.verticalScrollIndicatorInsets.top = 8
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: EmojiCollectionViewCell.identifier)
+        collectionView.register(EmojiCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EmojiCollectionViewHeader.identifier)
+        return collectionView
+    }()
+    
     // MARK: - Private Properties
 
     private let separatorView: UIView = {
@@ -57,23 +74,6 @@ final class EmojiPickerView: UIView {
         return bounds.width * 0.13
     }
     
-    let collectionView: UICollectionView = {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.verticalScrollIndicatorInsets.top = 8
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: EmojiCollectionViewCell.identifier)
-        collectionView.register(EmojiCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: EmojiCollectionViewHeader.identifier)
-        return collectionView
-    }()
-    
-    weak var delegate: EmojiPickerViewDelegate?
-    
-    var selectedEmojiCategoryTintColor: UIColor = .systemBlue
-    
     // MARK: - Init
 
     init() {
@@ -92,11 +92,9 @@ final class EmojiPickerView: UIView {
         setupView()
     }
     
-    /**
-     Passes the index of the selected category to all categoryViews to update the state.
-     
-     - Parameter categoryIndex: Selected category index.
-     */
+    /// Passes the index of the selected category to all categoryViews to update the state.
+    ///
+    /// - Parameter categoryIndex: Selected category index.
     func updateSelectedCategoryIcon(with categoryIndex: Int) {
         categoryViews.forEach {
             $0.updateCategoryViewState(selectedCategoryIndex: categoryIndex)

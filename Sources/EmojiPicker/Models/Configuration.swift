@@ -24,7 +24,7 @@ import UIKit
 /// Configuration for an EmojiPicker.
 public struct Configuration {
     /// A view controller on which EmojiPicker is being presented.
-    public var sourceViewController: UIViewController
+    public var delegate: EmojiPickerDelegate
     /// The view containing the anchor rectangle for the popover.
     public var sender: UIView
     /// Tint color for the selected emoji category.
@@ -40,7 +40,7 @@ public struct Configuration {
     /// Feedback generator style. To turn off, set `nil` to this parameter.
     public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle?
     
-    public init(sourceViewController: UIViewController,
+    public init(delegate: EmojiPickerDelegate,
                 sender: UIView,
                 selectedEmojiCategoryTintColor: UIColor? = nil,
                 arrowDirection: PickerArrowDirectionMode = .up,
@@ -49,7 +49,7 @@ public struct Configuration {
                 customHeight: CGFloat? = nil,
                 feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle = .light
     ) {
-        self.sourceViewController = sourceViewController
+        self.delegate = delegate
         self.sender = sender
         self.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
         self.arrowDirection = arrowDirection

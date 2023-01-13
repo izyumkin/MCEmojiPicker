@@ -25,7 +25,7 @@ public protocol EmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
 }
 
-final class EmojiPickerViewController: UIViewController {
+public final class EmojiPickerViewController: UIViewController {
     /// Delegate for selecting an emoji object
     public weak var delegate: EmojiPickerDelegate?
     
@@ -100,7 +100,9 @@ final class EmojiPickerViewController: UIViewController {
     private var viewModel: EmojiPickerViewModelProtocol
     
     /// Creates EmojiPicker view controller with provided configuration.
-    init(configuration: Configuration) {
+    public init(configuration: Configuration) {
+        delegate = configuration.delegate
+        sourceView = configuration.sender
         arrowDirection = configuration.arrowDirection
         selectedEmojiCategoryTintColor = configuration.selectedEmojiCategoryTintColor
         horizontalInset = configuration.horizontalInset
@@ -120,11 +122,11 @@ final class EmojiPickerViewController: UIViewController {
     }
     
     // MARK: - Life cycle
-    override func loadView() {
+    override public func loadView() {
         view = emojiPickerView
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         setupPreferredContentSize()
         setupArrowDirections()
@@ -188,15 +190,15 @@ final class EmojiPickerViewController: UIViewController {
 
 extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.numberOfSections()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfItems(in: section)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCollectionViewCell.identifier, for: indexPath) as? EmojiCollectionViewCell
         else { return UICollectionViewCell() }
         
@@ -204,7 +206,7 @@ extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionVie
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EmojiCollectionViewHeader.identifier, for: indexPath) as? EmojiCollectionViewHeader
@@ -216,7 +218,7 @@ extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionVie
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         viewModel.selectedEmoji.value = viewModel.emoji(at: indexPath)
     }
@@ -226,8 +228,8 @@ extension EmojiPickerViewController: UICollectionViewDataSource, UICollectionVie
 
 extension EmojiPickerViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // Updating the selected category during scrolling
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        /// This code updates the selected category during scrolling.
         let indexPathsForVisibleHeaders = emojiPickerView.collectionView.indexPathsForVisibleSupplementaryElements(
             ofKind: UICollectionView.elementKindSectionHeader
         ).sorted(by: { $0.section < $1.section })
@@ -243,21 +245,21 @@ extension EmojiPickerViewController: UIScrollViewDelegate {
 
 extension EmojiPickerViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 40)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
         let contentSize = collectionView.bounds.width - sideInsets
         return CGSize(width: contentSize / 8, height: contentSize / 8)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
 }
@@ -276,7 +278,7 @@ extension EmojiPickerViewController: EmojiPickerViewDelegate {
 
 extension EmojiPickerViewController: UIAdaptivePresentationControllerDelegate {
     
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+    public func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
 }

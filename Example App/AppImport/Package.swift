@@ -11,7 +11,7 @@ let package = Package(
             targets: ["AppImport"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "1.0.3"))
+        .package(url: "https://github.com/htmlprogrammist/EmojiPicker", .upToNextMajor(from: "2.0.0"))
     ],
     targets: [
         .target(

@@ -30,6 +30,9 @@ enum EmojiCategoryIconViewState {
 
 /// Responsible for rendering the icon for the target emoji category in the desired color.
 final class EmojiCategoryIconView: UIView {
+    
+    // MARK: - Private Properties
+    
     /// Target icon type.
     private var type: EmojiCategoryType
     /// Current tint color for the icon.
@@ -55,7 +58,7 @@ final class EmojiCategoryIconView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public methods
+    // MARK: - Public Methods
     
     /// New centered rect based on bounds width to prevent stretching of the icon.
     ///

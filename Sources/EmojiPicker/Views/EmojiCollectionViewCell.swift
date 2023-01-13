@@ -30,7 +30,6 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Private Properties
-
     
     private let emojiLabel: UILabel = {
         let label = UILabel()
@@ -53,7 +52,6 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Private Methods
-
     
     private func setupLayout() {
         contentView.addSubview(emojiLabel)
@@ -69,9 +67,11 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
         let selectedView = UIView()
         selectedView.backgroundColor = .selectedCellBackgroundViewColor
         selectedView.clipsToBounds = true
+        
         if #available(iOS 13.0, *) {
             selectedView.layer.cornerCurve = .continuous
         }
+        
         selectedView.layer.cornerRadius = 8
         selectedBackgroundView = selectedView
     }
