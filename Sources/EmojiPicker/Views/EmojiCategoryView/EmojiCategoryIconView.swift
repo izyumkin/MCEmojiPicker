@@ -788,7 +788,10 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            context.restoreGState()
+            
+            if #available(iOS 13.0, *) {
+                context.restoreGState()
+            }
         }
         
         // MARK: - Objects Category
@@ -1052,7 +1055,10 @@ extension EmojiCategoryIconView {
             bezierPath.fill()
             
             context.endTransparencyLayer()
-            context.restoreGState()
+            
+            if #available(iOS 13.0, *) {
+                context.restoreGState()
+            }
         }
         
         // MARK: - Flags Category

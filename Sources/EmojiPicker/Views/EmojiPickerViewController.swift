@@ -101,8 +101,6 @@ public final class EmojiPickerViewController: UIViewController {
     
     /// Creates EmojiPicker view controller with provided configuration.
     public init(configuration: Configuration) {
-        delegate = configuration.delegate
-        sourceView = configuration.sender
         arrowDirection = configuration.arrowDirection
         selectedEmojiCategoryTintColor = configuration.selectedEmojiCategoryTintColor
         horizontalInset = configuration.horizontalInset
@@ -112,6 +110,9 @@ public final class EmojiPickerViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .popover
+        
+        delegate = configuration.delegate
+        sourceView = configuration.sender
         
         setupDelegates()
         bindViewModel()

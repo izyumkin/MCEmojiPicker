@@ -237,16 +237,8 @@
 				F0BB7F05297159A6004EEBFC /* EmojiPickerViewController.swift */,
 				F0BB7F06297159A6004EEBFC /* EmojiCollectionViewHeader.swift */,
 				F0BB7F07297159A6004EEBFC /* EmojiCollectionViewCell.swift */,
-				F0BB7F08297159A6004EEBFC /* Views */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		F0BB7F08297159A6004EEBFC /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F0BB7F09297159A6004EEBFC /* EmojiCategoryView */,
 				F0BB7F0C297159A6004EEBFC /* EmojiPickerView.swift */,
+				F0BB7F09297159A6004EEBFC /* EmojiCategoryView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
