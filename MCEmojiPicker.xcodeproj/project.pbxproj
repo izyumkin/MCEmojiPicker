@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C44CF2382976518100D5262A /* MCEmojiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF2372976518100D5262A /* MCEmojiPreviewView.swift */; };
+		C44CF23A297651A400D5262A /* MCEmojiPreviewBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF239297651A400D5262A /* MCEmojiPreviewBackgroundView.swift */; };
+		C44CF23C297651C700D5262A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF23B297651C700D5262A /* Double+Extension.swift */; };
+		C44CF23F2976527000D5262A /* MCEmojiSkinTonePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF23E2976527000D5262A /* MCEmojiSkinTonePickerView.swift */; };
+		C44CF2412976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */; };
 		C46490932958A7A100556DF4 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46490922958A7A100556DF4 /* Bundle+Extension.swift */; };
 		C481883E2958A5DE00F5AB36 /* MCUnicodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* MCUnicodeManager.swift */; };
 		OBJ_55 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Observable.swift */; };
@@ -33,6 +38,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C44CF2352976514300D5262A /* MCEmojiPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MCEmojiPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C44CF2372976518100D5262A /* MCEmojiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiPreviewView.swift; sourceTree = "<group>"; };
+		C44CF239297651A400D5262A /* MCEmojiPreviewBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiPreviewBackgroundView.swift; sourceTree = "<group>"; };
+		C44CF23B297651C700D5262A /* Double+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		C44CF23E2976527000D5262A /* MCEmojiSkinTonePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerView.swift; sourceTree = "<group>"; };
+		C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerBackgroundView.swift; sourceTree = "<group>"; };
 		C46490922958A7A100556DF4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		OBJ_12 /* MCEmojiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiModel.swift; sourceTree = "<group>"; };
@@ -60,7 +71,6 @@
 		OBJ_48 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		OBJ_49 /* MCEmojiPicker.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = MCEmojiPicker.podspec; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		"mcemojipicker::MCEmojiPicker::Product" /* MCEmojiPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MCEmojiPicker.framework; path = /Users/ivanizumkin/Desktop/iOS/MCEmojiPicker/build/Debug/MCEmojiPicker.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C44CF2362976517300D5262A /* EmojiPreviewView */ = {
+			isa = PBXGroup;
+			children = (
+				C44CF2372976518100D5262A /* MCEmojiPreviewView.swift */,
+				C44CF239297651A400D5262A /* MCEmojiPreviewBackgroundView.swift */,
+			);
+			path = EmojiPreviewView;
+			sourceTree = "<group>";
+		};
+		C44CF23D2976526100D5262A /* EmojiSkinTonePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				C44CF23E2976527000D5262A /* MCEmojiSkinTonePickerView.swift */,
+				C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */,
+			);
+			path = EmojiSkinTonePickerView;
+			sourceTree = "<group>";
+		};
 		OBJ_11 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_19 /* Array+Extension.swift */,
+				C44CF23B297651C700D5262A /* Double+Extension.swift */,
 				OBJ_20 /* UIColor+Extension.swift */,
 				OBJ_21 /* UIView+Extension.swift */,
 				C46490922958A7A100556DF4 /* Bundle+Extension.swift */,
@@ -145,28 +174,14 @@
 		OBJ_33 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_34 /* Cells */,
-				OBJ_38 /* EmojiCategoryView */,
 				OBJ_41 /* MCEmojiPickerView.swift */,
+				OBJ_37 /* MCEmojiCollectionViewCell.swift */,
+				OBJ_36 /* MCEmojiSectionHeader.swift */,
+				C44CF2362976517300D5262A /* EmojiPreviewView */,
+				C44CF23D2976526100D5262A /* EmojiSkinTonePickerView */,
+				OBJ_38 /* EmojiCategoryView */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		OBJ_34 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_35 /* Header */,
-				OBJ_37 /* MCEmojiCollectionViewCell.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		OBJ_35 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_36 /* MCEmojiSectionHeader.swift */,
-			);
-			path = Header;
 			sourceTree = "<group>";
 		};
 		OBJ_38 /* EmojiCategoryView */ = {
@@ -194,6 +209,7 @@
 				OBJ_47 /* LICENSE */,
 				OBJ_48 /* README.md */,
 				OBJ_49 /* MCEmojiPicker.podspec */,
+				C44CF2352976514300D5262A /* MCEmojiPicker.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,7 +260,7 @@
 			);
 			name = MCEmojiPicker;
 			productName = MCEmojiPicker;
-			productReference = "mcemojipicker::MCEmojiPicker::Product" /* MCEmojiPicker.framework */;
+			productReference = C44CF2352976514300D5262A /* MCEmojiPicker.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -278,11 +294,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				C44CF2412976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift in Sources */,
 				OBJ_55 /* Observable.swift in Sources */,
 				OBJ_56 /* MCEmojiModel.swift in Sources */,
 				OBJ_57 /* MCPickerArrowDirectionMode.swift in Sources */,
 				OBJ_58 /* MCEmojiPickerViewModelProtocol.swift in Sources */,
+				C44CF23C297651C700D5262A /* Double+Extension.swift in Sources */,
 				OBJ_59 /* MCUnicodeManagerProtocol.swift in Sources */,
+				C44CF23A297651A400D5262A /* MCEmojiPreviewBackgroundView.swift in Sources */,
 				OBJ_60 /* Array+Extension.swift in Sources */,
 				OBJ_61 /* UIColor+Extension.swift in Sources */,
 				OBJ_62 /* UIView+Extension.swift in Sources */,
@@ -297,7 +316,9 @@
 				OBJ_71 /* MCEmojiSectionHeader.swift in Sources */,
 				OBJ_72 /* MCEmojiCollectionViewCell.swift in Sources */,
 				OBJ_73 /* MCEmojiCategoryIconView.swift in Sources */,
+				C44CF23F2976527000D5262A /* MCEmojiSkinTonePickerView.swift in Sources */,
 				OBJ_74 /* MCTouchableEmojiCategoryView.swift in Sources */,
+				C44CF2382976518100D5262A /* MCEmojiPreviewView.swift in Sources */,
 				C481883E2958A5DE00F5AB36 /* MCUnicodeManager.swift in Sources */,
 				OBJ_75 /* MCEmojiPickerView.swift in Sources */,
 				OBJ_76 /* MCEmojiPickerViewModel.swift in Sources */,

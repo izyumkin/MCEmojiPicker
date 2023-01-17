@@ -37,6 +37,11 @@ extension UIColor {
         light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
         dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)
     )
+    /// Background color for preview and skin tone views.
+    static let previewAndSkinToneBackgroundViewColor = UIColor(
+        light: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+        dark: UIColor(red: 0.45, green: 0.45, blue: 0.46, alpha: 1.0)
+    )
 }
 
 
