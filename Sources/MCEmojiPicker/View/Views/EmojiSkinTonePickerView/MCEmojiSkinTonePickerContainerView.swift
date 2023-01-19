@@ -100,8 +100,10 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
 // MARK: - MCEmojiSkinTonePickerViewDelegate
 
 extension MCEmojiSkinTonePickerContainerView: MCEmojiSkinTonePickerViewDelegate {
-    func didSelectEmojiTone(_ emojiToneIndex: Int) {
-        print(MCEmojiSkinTone(rawValue: emojiToneIndex))
+    func didSelectEmojiTone(_ emojiToneIndex: Int?) {
         removeFromSuperview()
+        guard let emojiToneIndex = emojiToneIndex,
+              let emojiTone = MCEmojiSkinTone(rawValue: emojiToneIndex) else { return }
+        print("Selected tone:", emojiTone)
     }
 }

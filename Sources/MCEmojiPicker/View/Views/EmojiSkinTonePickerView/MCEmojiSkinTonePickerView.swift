@@ -22,7 +22,7 @@
 import UIKit
 
 protocol MCEmojiSkinTonePickerViewDelegate: AnyObject {
-    func didSelectEmojiTone(_ emojiToneIndex: Int)
+    func didSelectEmojiTone(_ emojiToneIndex: Int?)
 }
 
 final class MCEmojiSkinTonePickerView: UIView {
@@ -51,7 +51,7 @@ final class MCEmojiSkinTonePickerView: UIView {
         arrangedSubviews.remove(at: 1)
         return arrangedSubviews
     }()
-    private var selectedSkinTone = 0
+    private var selectedSkinTone: Int?
     
     private var sender: UIView = UIView()
     private var sourceView: UIView = UIView()
@@ -86,38 +86,42 @@ final class MCEmojiSkinTonePickerView: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        updateCurrentSelectedSkinToneIndex(with: touches)
+        updateCurrentSelectedSkinToneIndex(with: touches, state: .began)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        updateCurrentSelectedSkinToneIndex(with: touches)
+        updateCurrentSelectedSkinToneIndex(with: touches, state: .changed)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        print("Tap select at index - \(selectedSkinTone)")
         delegate?.didSelectEmojiTone(selectedSkinTone)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        print("Move select at index - \(selectedSkinTone)")
         delegate?.didSelectEmojiTone(selectedSkinTone)
     }
     
     // MARK: - Private Methods
     
-    private func updateCurrentSelectedSkinToneIndex(with touches: Set<UITouch>) {
-        guard let touch = touches.first,
-              let currentIndex = emojiLabels.firstIndex(where: {
-                  return $0.frame.contains(
-                      .init(
-                          x: touch.location(in: contentStackView).x,
-                          y: $0.frame.midY
-                      )
-                  )
-              }) else { return }
+    private func updateCurrentSelectedSkinToneIndex(
+        with touches: Set<UITouch>,
+        state: UIGestureRecognizer.State
+    ) {
+        guard
+            let location = touches.first?.location(in: contentStackView),
+            let currentIndex = emojiLabels.firstIndex(where: {
+                return $0.frame.contains(
+                    .init(
+                        x: location.x,
+                        y: $0.frame.midY
+                    )
+                )
+            }),
+            !(state == .began && !contentStackView.frame.contains(location))
+        else { return }
         selectedSkinTone = currentIndex
         for (index, emojiLabel) in emojiLabels.enumerated() {
             let isCurrentLabel = index == currentIndex
