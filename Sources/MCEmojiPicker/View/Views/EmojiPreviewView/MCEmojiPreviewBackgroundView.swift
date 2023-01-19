@@ -75,6 +75,8 @@ final class MCEmojiPreviewBackgroundView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods
+    
     private func initFramesForRectangles() {
         bottomRectangleFrame = .init(
             x: senderFrame.origin.x,

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41491DD297920FD0090ED53 /* MCEmojiSkinTonePickerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41491DC297920FD0090ED53 /* MCEmojiSkinTonePickerContainerView.swift */; };
+		C41491DF297923CB0090ED53 /* MCEmojiSkinTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41491DE297923CB0090ED53 /* MCEmojiSkinTone.swift */; };
 		C44CF2382976518100D5262A /* MCEmojiPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF2372976518100D5262A /* MCEmojiPreviewView.swift */; };
 		C44CF23A297651A400D5262A /* MCEmojiPreviewBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF239297651A400D5262A /* MCEmojiPreviewBackgroundView.swift */; };
 		C44CF23C297651C700D5262A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF23B297651C700D5262A /* Double+Extension.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C41491DC297920FD0090ED53 /* MCEmojiSkinTonePickerContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerContainerView.swift; sourceTree = "<group>"; };
+		C41491DE297923CB0090ED53 /* MCEmojiSkinTone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTone.swift; sourceTree = "<group>"; };
 		C44CF2352976514300D5262A /* MCEmojiPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MCEmojiPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44CF2372976518100D5262A /* MCEmojiPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiPreviewView.swift; sourceTree = "<group>"; };
 		C44CF239297651A400D5262A /* MCEmojiPreviewBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiPreviewBackgroundView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			children = (
 				C44CF23E2976527000D5262A /* MCEmojiSkinTonePickerView.swift */,
 				C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */,
+				C41491DC297920FD0090ED53 /* MCEmojiSkinTonePickerContainerView.swift */,
 			);
 			path = EmojiSkinTonePickerView;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_12 /* MCEmojiModel.swift */,
+				C41491DE297923CB0090ED53 /* MCEmojiSkinTone.swift */,
 				OBJ_13 /* MCPickerArrowDirectionMode.swift */,
 			);
 			path = Model;
@@ -311,6 +317,7 @@
 				OBJ_65 /* MCUnicode13.swift in Sources */,
 				OBJ_66 /* MCUnicode13v1.swift in Sources */,
 				OBJ_67 /* MCUnicode14.swift in Sources */,
+				C41491DF297923CB0090ED53 /* MCEmojiSkinTone.swift in Sources */,
 				OBJ_68 /* MCUnicode5.swift in Sources */,
 				OBJ_70 /* MCEmojiPickerViewController.swift in Sources */,
 				OBJ_71 /* MCEmojiSectionHeader.swift in Sources */,
@@ -320,6 +327,7 @@
 				OBJ_74 /* MCTouchableEmojiCategoryView.swift in Sources */,
 				C44CF2382976518100D5262A /* MCEmojiPreviewView.swift in Sources */,
 				C481883E2958A5DE00F5AB36 /* MCUnicodeManager.swift in Sources */,
+				C41491DD297920FD0090ED53 /* MCEmojiSkinTonePickerContainerView.swift in Sources */,
 				OBJ_75 /* MCEmojiPickerView.swift in Sources */,
 				OBJ_76 /* MCEmojiPickerViewModel.swift in Sources */,
 			);

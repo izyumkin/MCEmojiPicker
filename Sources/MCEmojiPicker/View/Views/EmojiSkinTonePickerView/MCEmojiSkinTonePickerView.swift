@@ -21,7 +21,22 @@
 
 import UIKit
 
+protocol MCEmojiSkinTonePickerViewDelegate: AnyObject {
+    func didSelectEmojiTone(_ emojiToneIndex: Int)
+}
+
 final class MCEmojiSkinTonePickerView: UIView {
+    
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let topInset = 8.0
+        static let horizontalAmountInset = 24.0
+        static let stackViewSpacing = 4.0
+        static let separatorInset = 12.0
+        static let separatorWidth = 0.3
+        static let separatorColor: UIColor = .labelColor.withAlphaComponent(0.2)
+    }
     
     // MARK: - Private Properties
     
@@ -30,37 +45,90 @@ final class MCEmojiSkinTonePickerView: UIView {
         senderFrame: sender.convert(sender.bounds, to: self)
     )
     
+    private var contentStackView = UIStackView()
+    private lazy var emojiLabels: [UIView] = {
+        var arrangedSubviews = contentStackView.arrangedSubviews
+        arrangedSubviews.remove(at: 1)
+        return arrangedSubviews
+    }()
+    private var selectedSkinTone = 0
+    
     private var sender: UIView = UIView()
     private var sourceView: UIView = UIView()
     private var emojiPickerFrame: CGRect
     
+    private weak var delegate: MCEmojiSkinTonePickerViewDelegate?
+    
     // MARK: - Initializers
     
     init(
+        delegate: MCEmojiSkinTonePickerViewDelegate,
         emoji: String?,
         sender: UIView,
         sourceView: UIView,
         emojiPickerFrame: CGRect
     ) {
+        self.delegate = delegate
         self.sender = sender
         self.sourceView = sourceView
         self.emojiPickerFrame = emojiPickerFrame
         super.init(frame: .zero)
-        isUserInteractionEnabled = false
         setupLayout()
         setupBackground()
+        setupContent()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        updateCurrentSelectedSkinToneIndex(with: touches)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        updateCurrentSelectedSkinToneIndex(with: touches)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        print("Tap select at index - \(selectedSkinTone)")
+        delegate?.didSelectEmojiTone(selectedSkinTone)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        print("Move select at index - \(selectedSkinTone)")
+        delegate?.didSelectEmojiTone(selectedSkinTone)
+    }
+    
     // MARK: - Private Methods
+    
+    private func updateCurrentSelectedSkinToneIndex(with touches: Set<UITouch>) {
+        guard let touch = touches.first,
+              let currentIndex = emojiLabels.firstIndex(where: {
+                  return $0.frame.contains(
+                      .init(
+                          x: touch.location(in: contentStackView).x,
+                          y: $0.frame.midY
+                      )
+                  )
+              }) else { return }
+        selectedSkinTone = currentIndex
+        for (index, emojiLabel) in emojiLabels.enumerated() {
+            let isCurrentLabel = index == currentIndex
+            emojiLabel.backgroundColor = isCurrentLabel ? .systemBlue : .clear
+        }
+    }
     
     private func setupLayout() {
         let sourceRect = sender.convert(sender.bounds, to: sourceView)
         let targetViewSize = CGSize(
-            width: sourceRect.width * 6,
+            width: sourceRect.width * 7.25,
             height: sourceRect.height * 2.65
         )
         
@@ -82,6 +150,51 @@ final class MCEmojiSkinTonePickerView: UIView {
     
     private func setupBackground() {
         addSubview(backgroundView)
+    }
+    
+    private func setupContent() {
+        let emoji = [0x1F919]
+        
+        let itemHeight = sender.convert(sender.bounds, to: sourceView).size.height
+        let separatorSpacing = Constants.separatorInset * 2 + Constants.separatorWidth
+        let itemsSpacing = Constants.stackViewSpacing * Double(MCEmojiSkinTone.allCases.count - 2)
+        let allSpacings = separatorSpacing + itemsSpacing + Constants.horizontalAmountInset
+        let itemWidth = (backgroundView.contentFrame.width - allSpacings) / Double(MCEmojiSkinTone.allCases.count)
+        
+        var arrangedSubviews: [UIView] = MCEmojiSkinTone.allCases.map({
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.widthAnchor.constraint(equalToConstant: itemWidth).isActive = true
+            label.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
+            label.clipsToBounds = true
+            label.layer.cornerRadius = itemHeight * 0.12
+            label.font = UIFont.systemFont(ofSize: 29)
+            label.text = (emoji + [$0.skinKey]).emoji()
+            label.textAlignment = .center
+            return label
+        })
+        let separatorView: UIView = {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.widthAnchor.constraint(equalToConstant: Constants.separatorWidth).isActive = true
+            view.heightAnchor.constraint(equalToConstant: itemHeight - Constants.topInset).isActive = true
+            view.backgroundColor = Constants.separatorColor
+            return view
+        }()
+        arrangedSubviews.insert(separatorView, at: 1)
+        
+        contentStackView = UIStackView(arrangedSubviews: arrangedSubviews)
+        contentStackView.alignment = .center
+        contentStackView.spacing = Constants.stackViewSpacing
+        contentStackView.frame = .init(
+            x: Constants.horizontalAmountInset / 2,
+            y: Constants.topInset,
+            width: backgroundView.contentFrame.width - Constants.horizontalAmountInset,
+            height: itemHeight
+        )
+        contentStackView.setCustomSpacing(Constants.separatorInset, after: separatorView)
+        contentStackView.setCustomSpacing(Constants.separatorInset, after: arrangedSubviews[0])
+        addSubview(contentStackView)
     }
     
 }

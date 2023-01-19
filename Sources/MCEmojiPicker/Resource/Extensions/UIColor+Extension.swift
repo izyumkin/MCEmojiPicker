@@ -22,25 +22,30 @@
 import UIKit
 
 extension UIColor {
-    /// Color for EmojiPicker background - .systemGroupedBackground.
+    /// Color for EmojiPicker background - `.systemGroupedBackground`.
     static let popoverBackgroundColor = UIColor(
         light:  UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.0),
         dark: UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
     )
-    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - .opaqueSeparator.
+    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - `.opaqueSeparator`.
     static let selectedCellBackgroundViewColor = UIColor(
         light: UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
         dark: UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0)
     )
-    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - .systemGray3.
+    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - `.systemGray3`.
     static let separatorColor = UIColor(
         light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
         dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)
     )
-    /// Background color for preview and skin tone views.
+    /// Color for preview and skinTone background view.
     static let previewAndSkinToneBackgroundViewColor = UIColor(
         light: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         dark: UIColor(red: 0.45, green: 0.45, blue: 0.46, alpha: 1.0)
+    )
+    /// Default color - `.label`.
+    static let labelColor = UIColor(
+        light: UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0),
+        dark: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     )
 }
 

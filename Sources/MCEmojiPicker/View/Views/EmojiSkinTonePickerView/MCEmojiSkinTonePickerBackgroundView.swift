@@ -77,6 +77,8 @@ final class MCEmojiSkinTonePickerBackgroundView: UIView {
         return nil
     }
     
+    // MARK: - Private Methods
+    
     private func initFramesForRectangles() {
         bottomRectangleFrame = .init(
             x: senderFrame.origin.x,
