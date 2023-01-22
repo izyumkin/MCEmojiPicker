@@ -140,8 +140,9 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.selectedEmoji.bind { [unowned self] emoji in
-            generator?.impactOccurred()
-            delegate?.didGetEmoji(emoji: emoji)
+            guard let emoji = emoji else { return }
+            feedbackImpactOccurred()
+            delegate?.didGetEmoji(emoji: emoji.string)
             if isDismissAfterChoosing {
                 dismiss(animated: true, completion: nil)
             }
@@ -153,8 +154,6 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     private func setupDelegates() {
         emojiPickerView.delegate = self
-        emojiPickerView.collectionView.delegate = self
-        emojiPickerView.collectionView.dataSource = self
         presentationController?.delegate = self
     }
     
@@ -163,7 +162,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     }
     
     private func setupPreferredContentSize() {
-        let sideInset: CGFloat = 20
+        let sideInset: CGFloat = 19
         let screenWidth: CGFloat = UIScreen.main.nativeBounds.width / UIScreen.main.nativeScale
         let popoverWidth: CGFloat = screenWidth - (sideInset * 2)
         // The number 0.16 was taken based on the proportion of height to the width of the EmojiPicker on MacOS.
@@ -191,112 +190,54 @@ public final class MCEmojiPickerViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-
-extension MCEmojiPickerViewController: UICollectionViewDataSource {
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.numberOfSections()
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItems(in: section)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: MCEmojiCollectionViewCell.identifier,
-            for: indexPath
-        ) as? MCEmojiCollectionViewCell else { return UICollectionViewCell() }
-        cell.emoji = viewModel.emoji(at: indexPath)
-        return cell
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader,
-              let sectionHeader = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: MCEmojiSectionHeader.identifier,
-                for: indexPath
-              ) as? MCEmojiSectionHeader else { return UICollectionReusableView() }
-        sectionHeader.categoryName = viewModel.sectionHeaderViewModel(for: indexPath.section)
-        return sectionHeader
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-
-extension MCEmojiPickerViewController: UIScrollViewDelegate {
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // Updating the selected category during scrolling
-        let indexPathsForVisibleHeaders = emojiPickerView.collectionView.indexPathsForVisibleSupplementaryElements(
-            ofKind: UICollectionView.elementKindSectionHeader
-        ).sorted(by: { $0.section < $1.section })
-        if let selectedEmojiCategoryIndex = indexPathsForVisibleHeaders.first?.section,
-           viewModel.selectedEmojiCategoryIndex.value != selectedEmojiCategoryIndex {
-            viewModel.selectedEmojiCategoryIndex.value = selectedEmojiCategoryIndex
-        }
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension MCEmojiPickerViewController: UICollectionViewDelegate {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
-        viewModel.selectedEmoji.value = viewModel.emoji(at: indexPath)
-    }
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension MCEmojiPickerViewController: UICollectionViewDelegateFlowLayout {
-    public func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        referenceSizeForHeaderInSection section: Int
-    ) -> CGSize {
-        return CGSize(
-            width: collectionView.frame.width,
-            height: 40
-        )
-    }
-
-    public func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
-        let contentSize = collectionView.bounds.width - sideInsets
-        return CGSize(
-            width: contentSize / 8,
-            height: contentSize / 8
-        )
-    }
-    
-    public func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 0
-    }
-    
-    public func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 0
-    }
-}
-
 // MARK: - EmojiPickerViewDelegate
 
 extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
     func didChoiceEmojiCategory(at index: Int) {
-        generator?.impactOccurred()
+        updateCurrentSelectedEmojiCategoryIndex(with: index)
+    }
+    
+    func numberOfSections() -> Int {
+        viewModel.numberOfSections()
+    }
+    
+    func numberOfItems(in section: Int) -> Int {
+        viewModel.numberOfItems(in: section)
+    }
+    
+    func emoji(at indexPath: IndexPath) -> MCEmoji {
+        viewModel.emoji(at: indexPath)
+    }
+    
+    func sectionHeaderViewModel(for section: Int) -> String {
+        viewModel.sectionHeaderViewModel(for: section)
+    }
+    
+    func getCurrentSelectedEmojiCategoryIndex() -> Int {
+        viewModel.selectedEmojiCategoryIndex.value
+    }
+    
+    func updateCurrentSelectedEmojiCategoryIndex(with index: Int) {
         viewModel.selectedEmojiCategoryIndex.value = index
+    }
+    
+    func getEmojiPickerFrame() -> CGRect {
+        presentationController?.presentedView?.frame ?? .zero
+    }
+    
+    func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) {
+        viewModel.selectedEmoji.value = viewModel.updateEmojiSkinTone(
+            skinToneRawValue,
+            in: indexPath
+        )
+    }
+    
+    func feedbackImpactOccurred() {
+        generator?.impactOccurred()
+    }
+    
+    func didChoiceEmoji(_ emoji: MCEmoji?) {
+        viewModel.selectedEmoji.value = emoji
     }
 }
 

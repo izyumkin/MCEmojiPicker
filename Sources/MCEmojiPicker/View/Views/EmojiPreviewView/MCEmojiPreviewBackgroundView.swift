@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ final class MCEmojiPreviewBackgroundView: UIView {
     
     // MARK: - Private Properties
     
-    private var senderFrame: CGRect = .zero
+    private var senderFrame: CGRect
     
     private var backgroundPath: CGPath? {
         didSet {
@@ -64,7 +64,10 @@ final class MCEmojiPreviewBackgroundView: UIView {
     
     // MARK: - Initializers
     
-    init(frame: CGRect, senderFrame: CGRect) {
+    init(
+        frame: CGRect,
+        senderFrame: CGRect
+    ) {
         self.senderFrame = senderFrame
         super.init(frame: frame)
         backgroundColor = .clear

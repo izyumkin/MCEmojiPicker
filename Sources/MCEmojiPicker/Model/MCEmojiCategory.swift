@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +21,39 @@
 
 import Foundation
 
-/// Enum with emoji categories.
-public enum MCEmojiCategoryType: Int {
-    case people = 0
-    case nature = 1
-    case foodAndDrink = 2
-    case activity = 3
-    case travelAndPlaces = 4
-    case objects = 5
-    case symbols = 6
-    case flags = 7
-}
-
 public struct MCEmojiCategory {
     var categoryName: String
-    var emojis: [[Int]]
+    var emojis: [MCEmoji]
+}
+
+public enum MCEmojiCategoryType: Int {
+    case people
+    case nature
+    case foodAndDrink
+    case activity
+    case travelAndPlaces
+    case objects
+    case symbols
+    case flags
+    
+    var localizeKey: String {
+        switch self {
+        case .people:
+            return "emotionsAndPeople"
+        case .nature:
+            return "animalsAndNature"
+        case .foodAndDrink:
+            return "foodAndDrinks"
+        case .activity:
+            return "activities"
+        case .travelAndPlaces:
+            return "travellingAndPlaces"
+        case .objects:
+            return "items"
+        case .symbols:
+            return "symbols"
+        case .flags:
+            return "flags"
+        }
+    }
 }

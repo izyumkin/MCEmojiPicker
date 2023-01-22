@@ -26,7 +26,7 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
     
-    public var selectedEmoji = Observable<String>(value: "")
+    public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     
     // MARK: - Private Properties
@@ -50,11 +50,16 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
         return emojiCategories[section].emojis.count
     }
     
-    public func emoji(at indexPath: IndexPath) -> String {
-        return emojiCategories[indexPath.section].emojis[indexPath.row].emoji()
+    public func emoji(at indexPath: IndexPath) -> MCEmoji {
+        return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
     
     public func sectionHeaderViewModel(for section: Int) -> String {
         return emojiCategories[section].categoryName
+    }
+    
+    public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
+        emojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
+        return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
 }

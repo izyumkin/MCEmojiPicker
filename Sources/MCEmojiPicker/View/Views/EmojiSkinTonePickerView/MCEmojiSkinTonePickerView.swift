@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ import UIKit
 
 protocol MCEmojiSkinTonePickerViewDelegate: AnyObject {
     func didSelectEmojiTone(_ emojiToneIndex: Int?)
+    func feedbackImpactOccurred()
 }
 
 final class MCEmojiSkinTonePickerView: UIView {
@@ -53,8 +54,9 @@ final class MCEmojiSkinTonePickerView: UIView {
     }()
     private var selectedSkinTone: Int?
     
-    private var sender: UIView = UIView()
-    private var sourceView: UIView = UIView()
+    private var emoji: MCEmoji?
+    private var sender: UIView
+    private var sourceView: UIView
     private var emojiPickerFrame: CGRect
     
     private weak var delegate: MCEmojiSkinTonePickerViewDelegate?
@@ -63,12 +65,13 @@ final class MCEmojiSkinTonePickerView: UIView {
     
     init(
         delegate: MCEmojiSkinTonePickerViewDelegate,
-        emoji: String?,
+        emoji: MCEmoji?,
         sender: UIView,
         sourceView: UIView,
         emojiPickerFrame: CGRect
     ) {
         self.delegate = delegate
+        self.emoji = emoji
         self.sender = sender
         self.sourceView = sourceView
         self.emojiPickerFrame = emojiPickerFrame
@@ -94,13 +97,13 @@ final class MCEmojiSkinTonePickerView: UIView {
         updateCurrentSelectedSkinToneIndex(with: touches, state: .changed)
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         delegate?.didSelectEmojiTone(selectedSkinTone)
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
         delegate?.didSelectEmojiTone(selectedSkinTone)
     }
     
@@ -112,7 +115,7 @@ final class MCEmojiSkinTonePickerView: UIView {
     ) {
         guard
             let location = touches.first?.location(in: contentStackView),
-            let currentIndex = emojiLabels.firstIndex(where: {
+            let newSelectedIndex = emojiLabels.firstIndex(where: {
                 return $0.frame.contains(
                     .init(
                         x: location.x,
@@ -120,11 +123,15 @@ final class MCEmojiSkinTonePickerView: UIView {
                     )
                 )
             }),
-            !(state == .began && !contentStackView.frame.contains(location))
+            !(state == .began && !contentStackView.frame.contains(location)),
+            selectedSkinTone != newSelectedIndex
         else { return }
-        selectedSkinTone = currentIndex
+        selectedSkinTone = newSelectedIndex
+        if state != .began {
+            delegate?.feedbackImpactOccurred()
+        }
         for (index, emojiLabel) in emojiLabels.enumerated() {
-            let isCurrentLabel = index == currentIndex
+            let isCurrentLabel = index == newSelectedIndex
             emojiLabel.backgroundColor = isCurrentLabel ? .systemBlue : .clear
         }
     }
@@ -157,8 +164,6 @@ final class MCEmojiSkinTonePickerView: UIView {
     }
     
     private func setupContent() {
-        let emoji = [0x1F919]
-        
         let itemHeight = sender.convert(sender.bounds, to: sourceView).size.height
         let separatorSpacing = Constants.separatorInset * 2 + Constants.separatorWidth
         let itemsSpacing = Constants.stackViewSpacing * Double(MCEmojiSkinTone.allCases.count - 2)
@@ -173,7 +178,14 @@ final class MCEmojiSkinTonePickerView: UIView {
             label.clipsToBounds = true
             label.layer.cornerRadius = itemHeight * 0.12
             label.font = UIFont.systemFont(ofSize: 29)
-            label.text = (emoji + [$0.skinKey]).emoji()
+            var emojiKey = emoji?.emojiKeys ?? []
+            if let skinToneKey = $0.skinKey {
+                emojiKey.insert(skinToneKey, at: 1)
+            }
+            if emoji?.skinTone == $0 {
+                label.backgroundColor = .systemBlue
+            }
+            label.text = emojiKey.emoji()
             label.textAlignment = .center
             return label
         })

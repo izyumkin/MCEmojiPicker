@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,13 +37,17 @@ final class MCEmojiPreviewView: UIView {
         senderFrame: sender.convert(sender.bounds, to: self)
     )
     
-    private var sender: UIView = UIView()
-    private var sourceView: UIView = UIView()
+    private var sender: UIView
+    private var sourceView: UIView
     
     // MARK: - Initializers
     
-    init(emoji: String?, sender: UIView, sourceView: UIView) {
-        self.emojiLabel.text = emoji
+    init(
+        emoji: MCEmoji?,
+        sender: UIView,
+        sourceView: UIView
+    ) {
+        self.emojiLabel.text = emoji?.string
         self.sender = sender
         self.sourceView = sourceView
         super.init(frame: .zero)

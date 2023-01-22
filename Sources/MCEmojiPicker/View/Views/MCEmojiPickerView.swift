@@ -29,13 +29,31 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
      - Parameter index: index of the selected category.
      */
     func didChoiceEmojiCategory(at index: Int)
+    func numberOfSections() -> Int
+    func numberOfItems(in section: Int) -> Int
+    func emoji(at indexPath: IndexPath) -> MCEmoji
+    func sectionHeaderViewModel(for section: Int) -> String
+    func getCurrentSelectedEmojiCategoryIndex() -> Int
+    func updateCurrentSelectedEmojiCategoryIndex(with index: Int)
+    func getEmojiPickerFrame() -> CGRect
+    func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath)
+    func feedbackImpactOccurred()
+    func didChoiceEmoji(_ emoji: MCEmoji?)
 }
 
 final class MCEmojiPickerView: UIView {
     
     // MARK: - Public Properties
     
-    public let collectionView: UICollectionView = {
+    public weak var delegate: MCEmojiPickerViewDelegate?
+    
+    public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
+    
+    // MARK: - Private Properties
+    
+    var container = UIView()
+    
+    private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -54,12 +72,6 @@ final class MCEmojiPickerView: UIView {
         )
         return collectionView
     }()
-    
-    public weak var delegate: MCEmojiPickerViewDelegate?
-    
-    public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
-    
-    // MARK: - Private Properties
     
     private let categoriesStackView: UIStackView = {
         let stackView = UIStackView()
@@ -83,11 +95,14 @@ final class MCEmojiPickerView: UIView {
         super.init(frame: .zero)
         setupBackground()
         setupCategoryViews()
+        setupDelegates()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Life Cycle
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -113,6 +128,11 @@ final class MCEmojiPickerView: UIView {
     
     private func setupBackground() {
         backgroundColor = .popoverBackgroundColor
+    }
+    
+    private func setupDelegates() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     private func setupCollectionViewBottomInsets() {
@@ -183,11 +203,180 @@ final class MCEmojiPickerView: UIView {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
+extension MCEmojiPickerView: UICollectionViewDataSource {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return delegate?.numberOfSections() ?? 0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return delegate?.numberOfItems(in: section) ?? 0
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MCEmojiCollectionViewCell.identifier,
+                for: indexPath
+              ) as? MCEmojiCollectionViewCell
+        else { return UICollectionViewCell() }
+        cell.configure(
+            emoji: delegate?.emoji(at: indexPath),
+            delegate: self
+        )
+        return cell
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader,
+              let sectionHeader = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: MCEmojiSectionHeader.identifier,
+                for: indexPath
+              ) as? MCEmojiSectionHeader else { return UICollectionReusableView() }
+        sectionHeader.categoryName = delegate?.sectionHeaderViewModel(for: indexPath.section) ?? ""
+        return sectionHeader
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MCEmojiPickerView: UICollectionViewDelegateFlowLayout {
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForHeaderInSection section: Int
+    ) -> CGSize {
+        return CGSize(
+            width: collectionView.frame.width,
+            height: 40
+        )
+    }
+
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
+        let contentSize = collectionView.bounds.width - sideInsets
+        return CGSize(
+            width: contentSize / 8,
+            height: contentSize / 8
+        )
+    }
+    
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 0
+    }
+    
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 0
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension MCEmojiPickerView: UIScrollViewDelegate {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Updating the selected category during scrolling
+        let indexPathsForVisibleHeaders = collectionView.indexPathsForVisibleSupplementaryElements(
+            ofKind: UICollectionView.elementKindSectionHeader
+        ).sorted(by: { $0.section < $1.section })
+        if let selectedEmojiCategoryIndex = indexPathsForVisibleHeaders.first?.section,
+           delegate?.getCurrentSelectedEmojiCategoryIndex() != selectedEmojiCategoryIndex {
+            delegate?.updateCurrentSelectedEmojiCategoryIndex(with: selectedEmojiCategoryIndex)
+        }
+    }
+}
+
+// MARK: - MCEmojiCollectionViewCellDelegate
+
+extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
+    func preview(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
+        guard let sourceView = window else { return }
+        
+        collectionView.isScrollEnabled = false
+        
+        container.removeFromSuperview()
+        container = MCEmojiPreviewView(
+            emoji: emoji,
+            sender: cell.emojiLabel,
+            sourceView: sourceView
+        )
+        
+        sourceView.addSubview(container)
+    }
+    
+    func choiceSkinTone(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
+        guard let sourceView = window else { return }
+        
+        collectionView.isScrollEnabled = false
+        
+        delegate?.feedbackImpactOccurred()
+        
+        container.removeFromSuperview()
+        container = MCEmojiSkinTonePickerContainerView(
+            delegate: self,
+            frame: sourceView.frame,
+            emoji: emoji,
+            cell: cell,
+            sourceView: sourceView,
+            emojiPickerFrame: delegate?.getEmojiPickerFrame() ?? .zero
+        )
+        
+        sourceView.addSubview(container)
+    }
+    
+    func didSelect(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
+        if container is MCEmojiPreviewView {
+            
+            collectionView.isScrollEnabled = true
+            
+            container.removeFromSuperview()
+        }
+        delegate?.didChoiceEmoji(emoji)
+    }
+}
+
+
 // MARK: - EmojiCategoryViewDelegate
 
 extension MCEmojiPickerView: MCEmojiCategoryViewDelegate {
     func didChoiceCategory(at index: Int) {
         scrollToHeader(for: index)
+        delegate?.feedbackImpactOccurred()
         delegate?.didChoiceEmojiCategory(at: index)
+    }
+}
+
+// MARK: - MCEmojiSkinTonePickerDelegate
+
+extension MCEmojiPickerView: MCEmojiSkinTonePickerDelegate {
+    func updateSkinTone(
+        _ skinToneRawValue: Int,
+        in cell: MCEmojiCollectionViewCell
+    ) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        delegate?.updateEmojiSkinTone(skinToneRawValue, in: indexPath)
+        UIView.performWithoutAnimation {
+            collectionView.reloadItems(at: [indexPath])
+        }
+    }
+    
+    func feedbackImpactOccurred() {
+        delegate?.feedbackImpactOccurred()
+    }
+    
+    func didEmojiSkinTonePickerDismissed() {
+        collectionView.isScrollEnabled = true
     }
 }

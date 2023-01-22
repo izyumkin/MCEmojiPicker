@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,26 @@
 
 import UIKit
 
+protocol MCEmojiSkinTonePickerDelegate: AnyObject {
+    func updateSkinTone(
+        _ skinToneRawValue: Int,
+        in cell: MCEmojiCollectionViewCell
+    )
+    func feedbackImpactOccurred()
+    func didEmojiSkinTonePickerDismissed()
+}
+
 final class MCEmojiSkinTonePickerContainerView: UIView {
     
     // MARK: - Private Properties
     
-    private var sender: UIView = UIView()
-    private var sourceView: UIView = UIView()
+    private var sender: UIView
+    private var sourceView: UIView
     private var emojiPickerFrame: CGRect
-    private var emoji: String?
+    private var cell: MCEmojiCollectionViewCell
+    private var emoji: MCEmoji?
+    
+    private weak var delegate: MCEmojiSkinTonePickerDelegate?
     
     private lazy var skinTonePicker = MCEmojiSkinTonePickerView(
         delegate: self,
@@ -41,30 +53,23 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
     // MARK: - Initializers
     
     init(
+        delegate: MCEmojiSkinTonePickerDelegate,
         frame: CGRect,
-        emoji: String?,
-        sender: UIView,
+        emoji: MCEmoji?,
+        cell: MCEmojiCollectionViewCell,
         sourceView: UIView,
         emojiPickerFrame: CGRect
     ) {
+        self.delegate = delegate
         self.emoji = emoji
-        self.sender = sender
+        self.cell = cell
+        self.sender = cell.emojiLabel
         self.sourceView = sourceView
         self.emojiPickerFrame = emojiPickerFrame
         super.init(frame: frame)
         setupSkinTonePicker()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(orientationChanged),
-            name: UIDevice.orientationDidChangeNotification,
-            object: nil
-        )
-        addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self,
-                action: #selector(backgroundTapAction)
-            )
-        )
+        setupNotifications()
+        setupGestures()
     }
     
     required init?(coder: NSCoder) {
@@ -83,10 +88,12 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
     
     @objc private func orientationChanged() {
         removeFromSuperview()
+        delegate?.didEmojiSkinTonePickerDismissed()
     }
     
     @objc private func backgroundTapAction() {
         removeFromSuperview()
+        delegate?.didEmojiSkinTonePickerDismissed()
     }
     
     // MARK: - Private Methods
@@ -95,6 +102,23 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
         addSubview(skinTonePicker)
     }
     
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(orientationChanged),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
+    }
+    
+    private func setupGestures() {
+        addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(backgroundTapAction)
+            )
+        )
+    }
 }
 
 // MARK: - MCEmojiSkinTonePickerViewDelegate
@@ -102,8 +126,12 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
 extension MCEmojiSkinTonePickerContainerView: MCEmojiSkinTonePickerViewDelegate {
     func didSelectEmojiTone(_ emojiToneIndex: Int?) {
         removeFromSuperview()
-        guard let emojiToneIndex = emojiToneIndex,
-              let emojiTone = MCEmojiSkinTone(rawValue: emojiToneIndex) else { return }
-        print("Selected tone:", emojiTone)
+        delegate?.didEmojiSkinTonePickerDismissed()
+        guard let emojiToneIndex = emojiToneIndex else { return }
+        delegate?.updateSkinTone(emojiToneIndex + 1, in: cell)
+    }
+    
+    func feedbackImpactOccurred() {
+        delegate?.feedbackImpactOccurred()
     }
 }
