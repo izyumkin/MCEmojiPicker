@@ -45,8 +45,6 @@ final class MCEmojiPickerView: UIView {
     
     // MARK: - Public Properties
     
-    public weak var delegate: MCEmojiPickerViewDelegate?
-    
     public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
     
     // MARK: - Constants
@@ -98,9 +96,11 @@ final class MCEmojiPickerView: UIView {
         return bounds.width * 0.13
     }
     
+    private weak var delegate: MCEmojiPickerViewDelegate?
+    
     // MARK: - Initializers
     
-    init() {
+    init(delegate: MCEmojiPickerViewDelegate) {
         super.init(frame: .zero)
         setupBackground()
         setupCategoryViews()

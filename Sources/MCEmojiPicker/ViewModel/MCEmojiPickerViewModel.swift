@@ -21,7 +21,25 @@
 
 import Foundation
 
-/// ViewModel which using in EmojiPickerViewController.
+/// Protocol for the ViewModel which using in `EmojiPickerViewController`.
+protocol MCEmojiPickerViewModelProtocol {
+    /// The observed variable that is responsible for the choice of emoji.
+    var selectedEmoji: Observable<MCEmoji?> { get set }
+    /// The observed variable that is responsible for the choice of emoji category.
+    var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// The method returns the number of categories with emojis.
+    func numberOfSections() -> Int
+    /// The method returns the number of emojis in the target section.
+    func numberOfItems(in section: Int) -> Int
+    /// This method is responsible for getting the emoji for the target indexPath.
+    func emoji(at indexPath: IndexPath) -> MCEmoji
+    /// The method is responsible for getting the localized name of the emoji section.
+    func sectionHeaderViewModel(for section: Int) -> String
+    /// The method updates the emoji skin tone and returns the updated `MCEmoji`.
+    func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji
+}
+
+/// ViewModel which using in `EmojiPickerViewController`.
 final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties

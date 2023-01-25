@@ -22,11 +22,18 @@
 import Foundation
 import UIKit.UIDevice
 
+/// The protocol is necessary to hide unnecessary methods with Unicode categories in UnicodeManager.
+protocol MCUnicodeManagerProtocol {
+    /// - Returns: Categories with filtered emoji arrays that are available in the current version of iOS.
+    func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory]
+}
+
 /// The class is responsible for getting a relevant set of emojis for iOS version.
 final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     // MARK: - Private Properties
     
+    /// - Returns: The maximum available Unicode version for the current iOS version.
     private let maxCurrentAvailableUnicodeVersion: Double = {
         let currentIOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
         switch currentIOSVersion {
@@ -46,20 +53,6 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     }()
     
     // MARK: - Public Methods
-    
-    /**
-     The method returns a localized name for the emoji category.
-     
-     - Parameter type: Emoji category type.
-     */
-    public func getEmojiCategoryTitle(for type: MCEmojiCategoryType) -> String {
-        return NSLocalizedString(
-            type.localizeKey,
-            tableName: "MCEmojiPickerLocalizable",
-            bundle: .module,
-            comment: ""
-        )
-    }
     
     public func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory] {
         return [
@@ -11324,5 +11317,17 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 ].filter({ $0.unicodeVersion <= maxCurrentAvailableUnicodeVersion })
             )
         ]
+    }
+    
+    // MARK: - Private Methods
+    
+    /// - Returns: Localized name for the emoji category.
+    private func getEmojiCategoryTitle(for type: MCEmojiCategoryType) -> String {
+        return NSLocalizedString(
+            type.localizeKey,
+            tableName: "MCEmojiPickerLocalizable",
+            bundle: .module,
+            comment: ""
+        )
     }
 }

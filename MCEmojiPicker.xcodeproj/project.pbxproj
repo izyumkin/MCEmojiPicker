@@ -19,8 +19,6 @@
 		C46490932958A7A100556DF4 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46490922958A7A100556DF4 /* Bundle+Extension.swift */; };
 		OBJ_55 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Observable.swift */; };
 		OBJ_57 /* MCPickerArrowDirectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* MCPickerArrowDirectionMode.swift */; };
-		OBJ_58 /* MCEmojiPickerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MCEmojiPickerViewModelProtocol.swift */; };
-		OBJ_59 /* MCUnicodeManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* MCUnicodeManagerProtocol.swift */; };
 		OBJ_60 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Array+Extension.swift */; };
 		OBJ_61 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* UIColor+Extension.swift */; };
 		OBJ_62 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* UIView+Extension.swift */; };
@@ -47,8 +45,6 @@
 		C46490922958A7A100556DF4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		OBJ_13 /* MCPickerArrowDirectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPickerArrowDirectionMode.swift; sourceTree = "<group>"; };
-		OBJ_15 /* MCEmojiPickerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiPickerViewModelProtocol.swift; sourceTree = "<group>"; };
-		OBJ_16 /* MCUnicodeManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCUnicodeManagerProtocol.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_20 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_21 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -103,15 +99,6 @@
 				OBJ_13 /* MCPickerArrowDirectionMode.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		OBJ_14 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_15 /* MCEmojiPickerViewModelProtocol.swift */,
-				OBJ_16 /* MCUnicodeManagerProtocol.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		OBJ_17 /* Commons */ = {
@@ -205,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* Bindings */,
-				OBJ_14 /* Protocols */,
 				OBJ_11 /* Model */,
 				OBJ_31 /* View */,
 				OBJ_42 /* ViewModel */,
@@ -278,9 +264,7 @@
 				OBJ_55 /* Observable.swift in Sources */,
 				C417A029297D02ED00005A04 /* MCUnicodeManager.swift in Sources */,
 				OBJ_57 /* MCPickerArrowDirectionMode.swift in Sources */,
-				OBJ_58 /* MCEmojiPickerViewModelProtocol.swift in Sources */,
 				C44CF23C297651C700D5262A /* Double+Extension.swift in Sources */,
-				OBJ_59 /* MCUnicodeManagerProtocol.swift in Sources */,
 				C44CF23A297651A400D5262A /* MCEmojiPreviewBackgroundView.swift in Sources */,
 				C417A02D297D031700005A04 /* MCEmojiCategory.swift in Sources */,
 				OBJ_60 /* Array+Extension.swift in Sources */,

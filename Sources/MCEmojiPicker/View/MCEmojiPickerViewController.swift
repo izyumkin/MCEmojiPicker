@@ -105,7 +105,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let emojiPickerView = MCEmojiPickerView()
+    private lazy var emojiPickerView = MCEmojiPickerView(delegate: self)
     
     private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
     private var viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()
@@ -153,7 +153,6 @@ public final class MCEmojiPickerViewController: UIViewController {
     }
     
     private func setupDelegates() {
-        emojiPickerView.delegate = self
         presentationController?.delegate = self
     }
     
