@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2023 Ivan Izyumkin
+// Copyright © 2022 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import UIKit
 
-extension Double {
-    static let leftAngle: CGFloat = Double.pi
-    static let upAngle: CGFloat = 1.5 * Double.pi
-    static let downAngle: CGFloat = Double.pi / 2
-    static let rightAngle: CGFloat = 0.0
+extension UIView {
+    /// Converts the class name to a string.
+    static var identifier: String {
+        return String(describing: self)
+    }
 }

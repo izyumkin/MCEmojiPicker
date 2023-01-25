@@ -75,7 +75,7 @@ final class MCEmojiCategoryIconView: UIView {
         case .standard:
             currentIconTintColor = .systemGray
         case .highlighted:
-            currentIconTintColor = currentIconTintColor.adjust(by: 40)
+            currentIconTintColor = adjust(color: currentIconTintColor)
         case .selected:
             currentIconTintColor = selectedIconTintColor
         }
@@ -83,6 +83,22 @@ final class MCEmojiCategoryIconView: UIView {
     }
     
     // MARK: - Private Methods
+    
+    /// Increases brightness or decreases saturation.
+    private func adjust(color: UIColor, by percentage: CGFloat = 40.0) -> UIColor {
+        var hue: CGFloat = 0, saturation: CGFloat = 0, brightness: CGFloat = 0, alpha: CGFloat = 0
+        if color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
+            switch brightness < 1.0 {
+            case true:
+                let newB: CGFloat = max(min(brightness + (percentage / 100.0) * brightness, 1.0), 0.0)
+                return UIColor(hue: hue, saturation: saturation, brightness: newB, alpha: alpha)
+            case false:
+                let newS: CGFloat = min(max(saturation - (percentage / 100.0) * saturation, 0.0), 1.0)
+                return UIColor(hue: hue, saturation: newS, brightness: brightness, alpha: alpha)
+            }
+        }
+        return color
+    }
     
     private func setupBackground() {
         translatesAutoresizingMaskIntoConstraints = false

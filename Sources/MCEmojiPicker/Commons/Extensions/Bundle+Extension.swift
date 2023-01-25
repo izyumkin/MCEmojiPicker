@@ -21,13 +21,19 @@
 
 import Foundation
 
-extension Array where Element == Int {
-    func emoji() -> String {
-        var emoji = ""
-        for hexValue in self {
-            guard let unicode = UnicodeScalar(hexValue) else { break }
-            emoji.append(String(unicode))
-        }
-        return emoji
+/// In SPM, the parameter `Bundle.module` is used to access resources, but in CocoaPods this is done differently.
+/// In order for the library to support both dependency managers, it is necessary to add a similar parameter to the CocoaPods version.
+///
+/// To do this, a check has been added before the extension.
+#if !SWIFT_PACKAGE
+extension Bundle {
+    /// Resources bundle.
+    static var module: Bundle {
+        let path = Bundle(for: MCUnicodeManager.self).path(
+            forResource: "MCEmojiPicker",
+            ofType: "bundle"
+        ) ?? ""
+        return Bundle(path: path) ?? Bundle.main
     }
 }
+#endif

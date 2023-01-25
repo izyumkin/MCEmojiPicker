@@ -34,23 +34,38 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     public let emojiLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 29)
+        label.font = UIFont.systemFont(ofSize: Constants.emojiLabelFontSize)
         label.textAlignment = .center
         return label
     }()
     
-    public let containerView: UIView = {
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let emojiLabelFontSize = 29.0
+        static let emojiLabelInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: -2)
+        
+        static let containerCornerRadius = 8.0
+        
+        static let selectCellBackgroundAnimationDuration = 0.3
+        static let selectedCellBackgroundViewColor = UIColor(
+            light: UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
+            dark: UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0)
+        )
+    }
+    
+    // MARK: - Private Properties
+    
+    private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         if #available(iOS 13.0, *) {
             view.layer.cornerCurve = .continuous
         }
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = Constants.containerCornerRadius
         return view
     }()
-    
-    // MARK: - Private Properties
     
     private weak var delegate: MCEmojiCollectionViewCellDelegate?
     
@@ -74,7 +89,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard !isFirstChoiceSkinTone() else { return }
-        self.containerView.backgroundColor = .selectedCellBackgroundViewColor
+        containerView.backgroundColor = Constants.selectedCellBackgroundViewColor
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,14 +97,14 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
         guard let emoji = emoji,
               !(emoji.isCurrentEmojiHaveDifferentSkins && !emoji.isSkinBeenSelectedBefore) else { return }
         delegate?.didSelect(emoji, in: self)
-        UIView.animate(withDuration: 0.3, delay: 0) {
+        UIView.animate(withDuration: Constants.selectCellBackgroundAnimationDuration, delay: 0) {
             self.containerView.backgroundColor = .clear
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        self.containerView.backgroundColor = .clear
+        containerView.backgroundColor = .clear
     }
     
     // MARK: - Public Methods
@@ -160,8 +175,14 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            emojiLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2.0),
-            emojiLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2.0),
+            emojiLabel.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor,
+                constant: Constants.emojiLabelInsets.left
+            ),
+            emojiLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: Constants.emojiLabelInsets.right
+            ),
             emojiLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             emojiLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])

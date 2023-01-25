@@ -1,5 +1,5 @@
 // The MIT License (MIT)
-// Copyright © 2022 Ivan Izyumkin
+// Copyright © 2023 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,13 @@
 
 import Foundation
 
-#if !SWIFT_PACKAGE
-extension Bundle {
-    /// Localization bundle.
-    static var module: Bundle {
-        let path = Bundle(for: MCUnicodeManager.self).path(
-            forResource: "MCEmojiPicker",
-            ofType: "bundle"
-        ) ?? ""
-        return Bundle(path: path) ?? Bundle.main
-    }
+extension Double {
+    /// Angle `270°` in radians.
+    static let upAngle: CGFloat = 1.5 * Double.pi
+    /// Angle `180°` in radians.
+    static let leftAngle: CGFloat = Double.pi
+    /// Angle `90°` in radians.
+    static let downAngle: CGFloat = Double.pi / 2
+    /// Angle `0°` in radians.
+    static let rightAngle: CGFloat = 0.0
 }
-#endif

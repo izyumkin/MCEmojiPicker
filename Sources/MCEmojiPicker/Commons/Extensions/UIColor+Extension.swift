@@ -22,36 +22,28 @@
 import UIKit
 
 extension UIColor {
-    /// Color for EmojiPicker background - `.systemGroupedBackground`.
+    /**
+     Background color for `MCEmojiPickerView`.
+     
+     - Note: This is a standard color from UIKit - `.systemGroupedBackground`.
+     */
     static let popoverBackgroundColor = UIColor(
         light:  UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.0),
         dark: UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
     )
-    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - `.opaqueSeparator`.
-    static let selectedCellBackgroundViewColor = UIColor(
-        light: UIColor(red: 0.78, green: 0.78, blue: 0.8, alpha: 1.0),
-        dark: UIColor(red: 0.28, green: 0.28, blue: 0.29, alpha: 1.0)
-    )
-    /// Color for selectedBackgroundView background in EmojiCollectionViewCell - `.systemGray3`.
-    static let separatorColor = UIColor(
-        light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
-        dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)
-    )
-    /// Color for preview and skinTone background view.
+    /**
+     Background color for `MCEmojiSkinTonePickerBackgroundView` and `MCEmojiPreviewView`.
+     
+     - Note: The colors were taken from similar iOS elements.
+     */
     static let previewAndSkinToneBackgroundViewColor = UIColor(
         light: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         dark: UIColor(red: 0.45, green: 0.45, blue: 0.46, alpha: 1.0)
     )
-    /// Default color - `.label`.
-    static let labelColor = UIColor(
-        light: UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0),
-        dark: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    )
 }
 
-
 extension UIColor {
-    /// Support for dark and light color versions.
+    /// The initializer add support for dark and light interface style modes.
     convenience init(light: UIColor, dark: UIColor) {
         if #available(iOS 13.0, *) {
             self.init(dynamicProvider: { trait in
@@ -60,19 +52,5 @@ extension UIColor {
         } else {
             self.init(cgColor: light.cgColor)
         }
-    }
-    /// Increases brightness or decreases saturation.
-    func adjust(by percentage: CGFloat = 30.0) -> UIColor {
-        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-            if b < 1.0 {
-                let newB: CGFloat = max(min(b + (percentage/100.0)*b, 1.0), 0.0)
-                return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
-            } else {
-                let newS: CGFloat = min(max(s - (percentage/100.0)*s, 0.0), 1.0)
-                return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
-            }
-        }
-        return self
     }
 }

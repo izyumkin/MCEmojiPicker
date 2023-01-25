@@ -19,10 +19,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import UIKit
+import Foundation
 
-extension UIView {
-    static var identifier: String {
-        return String(describing: self)
+extension Array where Element == Int {
+    /**
+     The method converts hex values into emoji.
+     
+     This example shows that one emoji can consist of either one hex value or several.
+     ```
+     print([0x1F600].emoji()) // "😀"
+     print([0x1F635, 0x200D, 0x1F4AB].emoji()) // "😵‍💫"
+     ```
+     But if you put hex values not related to one emoji in one array. You will get a string of several emojis.
+     ```
+     print([0x1F600, 0x1F635, 0x200D, 0x1F4AB].emoji()) // "😀😵‍💫"
+     */
+    func emoji() -> String {
+        return self
+            .map({ UnicodeScalar($0) })
+            .compactMap({ $0 })
+            .map({ String($0) })
+            .joined()
     }
 }

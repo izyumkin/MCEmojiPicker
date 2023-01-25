@@ -36,7 +36,10 @@ final class MCEmojiSkinTonePickerView: UIView {
         static let stackViewSpacing = 4.0
         static let separatorInset = 12.0
         static let separatorWidth = 0.3
-        static let separatorColor: UIColor = .labelColor.withAlphaComponent(0.2)
+        static let separatorColor: UIColor = UIColor(
+            light: UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2),
+            dark: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
+        )
     }
     
     // MARK: - Private Properties

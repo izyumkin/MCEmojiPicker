@@ -49,9 +49,16 @@ final class MCEmojiPickerView: UIView {
     
     public var selectedEmojiCategoryTintColor: UIColor = .systemBlue
     
-    // MARK: - Private Properties
+    // MARK: - Constants
     
-    var container = UIView()
+    private enum Constants {
+        static let separatorColor = UIColor(
+            light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
+            dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)
+        )
+    }
+    
+    // MARK: - Private Properties
     
     private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -80,6 +87,8 @@ final class MCEmojiPickerView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
+    
+    private var previewContainerView = UIView()
     
     private var categoryViews = [MCTouchableEmojiCategoryView]()
     
@@ -153,7 +162,7 @@ final class MCEmojiPickerView: UIView {
     private func setupCategoriesControlLayout() {
         let separatorView = UIView()
         separatorView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.backgroundColor = .separatorColor
+        separatorView.backgroundColor = Constants.separatorColor
         
         addSubview(categoriesStackView)
         addSubview(separatorView)
@@ -182,6 +191,14 @@ final class MCEmojiPickerView: UIView {
             categoryViews.append(categoryView)
             categoriesStackView.addArrangedSubview(categoryView)
         }
+    }
+    
+    private func turnOnScroll() {
+        collectionView.isScrollEnabled = true
+    }
+    
+    private func turnOffScroll() {
+        collectionView.isScrollEnabled = false
     }
     
     /**
@@ -303,28 +320,25 @@ extension MCEmojiPickerView: UIScrollViewDelegate {
 extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
     func preview(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
         guard let sourceView = window else { return }
+        turnOffScroll()
         
-        collectionView.isScrollEnabled = false
-        
-        container.removeFromSuperview()
-        container = MCEmojiPreviewView(
+        previewContainerView.removeFromSuperview()
+        previewContainerView = MCEmojiPreviewView(
             emoji: emoji,
             sender: cell.emojiLabel,
             sourceView: sourceView
         )
         
-        sourceView.addSubview(container)
+        sourceView.addSubview(previewContainerView)
     }
     
     func choiceSkinTone(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
         guard let sourceView = window else { return }
-        
-        collectionView.isScrollEnabled = false
-        
+        turnOffScroll()
         delegate?.feedbackImpactOccurred()
         
-        container.removeFromSuperview()
-        container = MCEmojiSkinTonePickerContainerView(
+        previewContainerView.removeFromSuperview()
+        previewContainerView = MCEmojiSkinTonePickerContainerView(
             delegate: self,
             frame: sourceView.frame,
             emoji: emoji,
@@ -333,15 +347,13 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
             emojiPickerFrame: delegate?.getEmojiPickerFrame() ?? .zero
         )
         
-        sourceView.addSubview(container)
+        sourceView.addSubview(previewContainerView)
     }
     
     func didSelect(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
-        if container is MCEmojiPreviewView {
-            
-            collectionView.isScrollEnabled = true
-            
-            container.removeFromSuperview()
+        if previewContainerView is MCEmojiPreviewView {
+            turnOnScroll()
+            previewContainerView.removeFromSuperview()
         }
         delegate?.didChoiceEmoji(emoji)
     }
@@ -377,6 +389,6 @@ extension MCEmojiPickerView: MCEmojiSkinTonePickerDelegate {
     }
     
     func didEmojiSkinTonePickerDismissed() {
-        collectionView.isScrollEnabled = true
+        turnOnScroll()
     }
 }

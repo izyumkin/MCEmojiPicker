@@ -114,22 +114,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		OBJ_17 /* Resource */ = {
+		OBJ_17 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_18 /* Extensions */,
 			);
-			path = Resource;
+			path = Commons;
 			sourceTree = "<group>";
 		};
 		OBJ_18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_19 /* Array+Extension.swift */,
+				C46490922958A7A100556DF4 /* Bundle+Extension.swift */,
 				C44CF23B297651C700D5262A /* Double+Extension.swift */,
 				OBJ_20 /* UIColor+Extension.swift */,
 				OBJ_21 /* UIView+Extension.swift */,
-				C46490922958A7A100556DF4 /* Bundle+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -210,7 +210,7 @@
 				OBJ_31 /* View */,
 				OBJ_42 /* ViewModel */,
 				OBJ_29 /* Services */,
-				OBJ_17 /* Resource */,
+				OBJ_17 /* Commons */,
 			);
 			name = MCEmojiPicker;
 			path = Sources/MCEmojiPicker;
