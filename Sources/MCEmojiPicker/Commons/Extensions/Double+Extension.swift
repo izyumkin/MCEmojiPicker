@@ -23,11 +23,11 @@ import Foundation
 
 extension Double {
     /// Angle `270°` in radians.
-    static let upAngle: CGFloat = 1.5 * Double.pi
+    static let downAngle: CGFloat = 1.5 * Double.pi
     /// Angle `180°` in radians.
     static let leftAngle: CGFloat = Double.pi
     /// Angle `90°` in radians.
-    static let downAngle: CGFloat = Double.pi / 2
+    static let upAngle: CGFloat = Double.pi / 2
     /// Angle `0°` in radians.
     static let rightAngle: CGFloat = 0.0
 }

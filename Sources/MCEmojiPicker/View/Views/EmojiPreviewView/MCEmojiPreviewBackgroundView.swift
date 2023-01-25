@@ -133,7 +133,7 @@ extension MCEmojiPreviewBackgroundView {
                 y: bottomRectangleFrame.maxY - Constants.bottomCornerRadius
             ),
             radius: Constants.bottomCornerRadius,
-            startAngle: Double.downAngle,
+            startAngle: Double.upAngle,
             endAngle: Double.leftAngle,
             clockwise: true
         )
@@ -164,7 +164,7 @@ extension MCEmojiPreviewBackgroundView {
             ),
             radius: Constants.mainCornerRadius,
             startAngle: Double.leftAngle,
-            endAngle: Double.upAngle,
+            endAngle: Double.downAngle,
             clockwise: true
         )
         path.addArc(
@@ -173,7 +173,7 @@ extension MCEmojiPreviewBackgroundView {
                 y: topRectangleFrame.minY + Constants.mainCornerRadius
             ),
             radius: Constants.mainCornerRadius,
-            startAngle: Double.upAngle,
+            startAngle: Double.downAngle,
             endAngle: Double.rightAngle,
             clockwise: true
         )
@@ -204,7 +204,7 @@ extension MCEmojiPreviewBackgroundView {
             ),
             radius: Constants.bottomCornerRadius,
             startAngle: Double.rightAngle,
-            endAngle: Double.downAngle,
+            endAngle: Double.upAngle,
             clockwise: true
         )
         path.close()

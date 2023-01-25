@@ -137,7 +137,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
             ),
             radius: Constants.mainCornerRadius,
             startAngle: Double.leftAngle,
-            endAngle: Double.upAngle,
+            endAngle: Double.downAngle,
             clockwise: true
         )
         path.addArc(
@@ -146,7 +146,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
                 y: topRectangleFrame.minY + Constants.mainCornerRadius
             ),
             radius: Constants.mainCornerRadius,
-            startAngle: Double.upAngle,
+            startAngle: Double.downAngle,
             endAngle: Double.rightAngle,
             clockwise: true
         )
@@ -157,7 +157,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
             ),
             radius: Constants.mainCornerRadius,
             startAngle: Double.rightAngle,
-            endAngle: Double.downAngle,
+            endAngle: Double.upAngle,
             clockwise: true
         )
         path.addArc(
@@ -166,7 +166,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
                 y: bottomRectangleFrame.minY + Constants.mainCornerRadius
             ),
             radius: Constants.mainCornerRadius,
-            startAngle: Double.upAngle,
+            startAngle: Double.downAngle,
             endAngle: Double.leftAngle,
             clockwise: false
         )
@@ -177,7 +177,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
             ),
             radius: Constants.bottomCornerRadius,
             startAngle: Double.rightAngle,
-            endAngle: Double.downAngle,
+            endAngle: Double.upAngle,
             clockwise: true
         )
         path.addArc(
@@ -186,7 +186,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
                 y: bottomRectangleFrame.maxY - Constants.bottomCornerRadius
             ),
             radius: Constants.bottomCornerRadius,
-            startAngle: Double.downAngle,
+            startAngle: Double.upAngle,
             endAngle: Double.leftAngle,
             clockwise: true
         )
@@ -197,7 +197,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
             ),
             radius: Constants.mainCornerRadius,
             startAngle: Double.rightAngle,
-            endAngle: Double.upAngle,
+            endAngle: Double.downAngle,
             clockwise: false
         )
         path.addArc(
@@ -206,7 +206,7 @@ extension MCEmojiSkinTonePickerBackgroundView {
                 y: topRectangleFrame.maxY - Constants.mainCornerRadius
             ),
             radius: Constants.mainCornerRadius,
-            startAngle: Double.downAngle,
+            startAngle: Double.upAngle,
             endAngle: Double.leftAngle,
             clockwise: true
         )
