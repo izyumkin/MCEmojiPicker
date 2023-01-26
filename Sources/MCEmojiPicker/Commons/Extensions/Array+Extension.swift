@@ -23,14 +23,14 @@ import Foundation
 
 extension Array where Element == Int {
     /**
-     The method converts hex values into emoji.
+     The method converts unicode scalar values into emoji.
      
-     This example shows that one emoji can consist of either one hex value or several.
+     This example shows that one emoji can consist of either one unicode scalar value or several.
      ```
      print([0x1F600].emoji()) // "😀"
      print([0x1F635, 0x200D, 0x1F4AB].emoji()) // "😵‍💫"
      ```
-     But if you put hex values not related to one emoji in one array. You will get a string of several emojis.
+     But if you put unicode scalar values not related to one emoji in one array. You will get a string of several emojis.
      ```
      print([0x1F600, 0x1F635, 0x200D, 0x1F4AB].emoji()) // "😀😵‍💫"
      */

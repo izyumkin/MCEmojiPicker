@@ -126,6 +126,7 @@ extension MCEmojiPreviewBackgroundView {
     
     private func drawBackground() {
         UIColor.previewAndSkinToneBackgroundViewColor.setFill()
+        
         let path = UIBezierPath()
         path.addArc(
             withCenter: .init(

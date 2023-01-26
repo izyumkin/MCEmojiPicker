@@ -86,5 +86,4 @@ final class MCEmojiPreviewView: UIView {
         emojiLabel.frame = backgroundView.contentFrame
         addSubview(emojiLabel)
     }
-    
 }

@@ -21,21 +21,38 @@
 
 import Foundation
 
+/// Simple implementation of the observer pattern.
 final class Observable<T> {
-    typealias Listener = (T) -> Void
     
+    // MARK: - Public Properties
+    
+    public typealias Listener = (T) -> Void
+    
+    /**
+     Holds the current value of the observable.
+     
+     The `didSet` block ensures that the `Listener` closure is called whenever the value changes.
+     */
     public var value: T {
         didSet {
             listener?(value)
         }
     }
     
+    // MARK: - Private Properties
+    
+    /// Holds a closure that will be called whenever the value changes.
     private var listener: Listener?
+    
+    // MARK: - Initializers
     
     init(value: T) {
         self.value = value
     }
     
+    // MARK: - Public Methods
+    
+    /// Allows you to set the `Listener` closure.
     public func bind(_ listener: @escaping Listener) {
         self.listener = listener
     }

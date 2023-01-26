@@ -215,5 +215,4 @@ final class MCEmojiSkinTonePickerView: UIView {
         contentStackView.setCustomSpacing(Constants.separatorInset, after: arrangedSubviews[0])
         addSubview(contentStackView)
     }
-    
 }
