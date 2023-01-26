@@ -39,7 +39,7 @@ public final class MCEmojiPickerViewController: UIViewController {
      
      The default value of this property is .up.
      */
-    public var arrowDirection: MCPickerArrowDirectionMode = .up
+    public var arrowDirection: MCPickerArrowDirection = .up
     
     /**
      Custom height for EmojiPicker.
@@ -208,8 +208,8 @@ extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
         viewModel.emoji(at: indexPath)
     }
     
-    func sectionHeaderViewModel(for section: Int) -> String {
-        viewModel.sectionHeaderViewModel(for: section)
+    func sectionHeaderName(for section: Int) -> String {
+        viewModel.sectionHeaderName(for: section)
     }
     
     func getCurrentSelectedEmojiCategoryIndex() -> Int {

@@ -21,25 +21,25 @@
 
 import Foundation
 
-/// Protocol for the ViewModel which using in `EmojiPickerViewController`.
+/// Protocol for the `MCEmojiPickerViewModel`.
 protocol MCEmojiPickerViewModelProtocol {
     /// The observed variable that is responsible for the choice of emoji.
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
     var selectedEmojiCategoryIndex: Observable<Int> { get set }
-    /// The method returns the number of categories with emojis.
+    /// Returns the number of categories with emojis.
     func numberOfSections() -> Int
-    /// The method returns the number of emojis in the target section.
+    /// Returns the number of emojis in the target section.
     func numberOfItems(in section: Int) -> Int
-    /// This method is responsible for getting the emoji for the target indexPath.
+    /// Returns the `MCEmoji` for the target `IndexPath`.
     func emoji(at indexPath: IndexPath) -> MCEmoji
-    /// The method is responsible for getting the localized name of the emoji section.
-    func sectionHeaderViewModel(for section: Int) -> String
-    /// The method updates the emoji skin tone and returns the updated `MCEmoji`.
+    /// Returns the localized section name for the target section.
+    func sectionHeaderName(for section: Int) -> String
+    /// Updates the emoji skin tone and returns the updated `MCEmoji`.
     func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji
 }
 
-/// ViewModel which using in `EmojiPickerViewController`.
+/// View model which using in `MCEmojiPickerViewController`.
 final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
@@ -72,7 +72,7 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
         return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
     
-    public func sectionHeaderViewModel(for section: Int) -> String {
+    public func sectionHeaderName(for section: Int) -> String {
         return emojiCategories[section].categoryName
     }
     

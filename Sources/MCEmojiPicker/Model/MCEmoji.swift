@@ -21,11 +21,95 @@
 
 import Foundation
 
-enum MCEmojiType {
-    case single
-    case choiceOfSkin
+/// The main model for interacting with emojis.
+struct MCEmoji {
+    
+    // MARK: - Public Properties
+    
+    /// The string representation of the emoji.
+    public var string: String = ""
+    /// A boolean indicating whether the skin for this emoji has been selected before.
+    public var isSkinBeenSelectedBefore: Bool {
+        return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
+    }
+    /// A boolean indicating whether this emoji has different skin tones available.
+    public var isCurrentEmojiHaveDifferentSkins: Bool {
+        return emojiType == .choiceOfSkin
+    }
+    /// The current skin tone for this emoji, if one has been selected.
+    public var skinTone: MCEmojiSkinTone? {
+        return MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(
+            forKey: emojiKeys.emoji()
+        ))
+    }
+    
+    /// The keys used to represent the emoji.
+    public var emojiKeys: [Int]
+    /// The type of the emoji.
+    public var emojiType: MCEmojiType
+    /// The search key for the emoji.
+    public var searchKey: String
+    /// The `Unicode` version of this emoji.
+    public var unicodeVersion: Double
+    
+    // MARK: - Initializers
+    
+    /**
+     Initializes a new instance of the `MCEmoji` struct.
+     
+     - Parameters:
+       - emojiKeys: The keys used to represent the emoji.
+       - emojiType: The type of the emoji.
+       - searchKey: The search key for the emoji.
+       - unicodeVersion: The `Unicode` version of the emoji.
+     */
+    public init(
+        emojiKeys: [Int],
+        emojiType: MCEmojiType,
+        searchKey: String,
+        unicodeVersion: Double
+    ) {
+        self.emojiKeys = emojiKeys
+        self.emojiType = emojiType
+        self.searchKey = searchKey
+        self.unicodeVersion = unicodeVersion
+        
+        string = getEmoji()
+    }
+    
+    // MARK: - Public Methods
+
+    /**
+     Sets the skin tone of the emoji.
+     
+     - Parameters:
+       - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
+     */
+    public mutating func set(skinToneRawValue: Int) {
+        UserDefaults.standard.set(skinToneRawValue, forKey: emojiKeys.emoji())
+        string = getEmoji()
+    }
+    
+    // MARK: - Private Methods
+    
+    /// Returns the string representation of this smiley. Considering the skin tone, if it has been selected.
+    private func getEmoji() -> String {
+        switch emojiType {
+        case .single:
+            return emojiKeys.emoji()
+        case .choiceOfSkin:
+            guard let skinTone = skinTone,
+                  let skinToneKey = skinTone.skinKey else {
+                return emojiKeys.emoji()
+            }
+            var bufferEmojiKeys = emojiKeys
+            bufferEmojiKeys.insert(skinToneKey, at: 1)
+            return bufferEmojiKeys.emoji()
+        }
+    }
 }
 
+/// This enumeration allows you to determine which skin tones can be set for `MCEmoji`.
 enum MCEmojiSkinTone: Int, CaseIterable {
     case none = 1
     case light = 2
@@ -34,6 +118,7 @@ enum MCEmojiSkinTone: Int, CaseIterable {
     case mediumDark = 5
     case dark = 6
     
+    /// Unicode scalar value for the skin tone.
     var skinKey: Int? {
         switch self {
         case .none:
@@ -52,65 +137,8 @@ enum MCEmojiSkinTone: Int, CaseIterable {
     }
 }
 
-struct MCEmoji {
-    
-    // MARK: - Public Properties
-    
-    public var string: String = ""
-    public var isSkinBeenSelectedBefore: Bool {
-        return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
-    }
-    public var isCurrentEmojiHaveDifferentSkins: Bool {
-        return emojiType == .choiceOfSkin
-    }
-    public var skinTone: MCEmojiSkinTone? {
-        return MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(
-            forKey: emojiKeys.emoji()
-        ))
-    }
-    
-    public var searchKey: String
-    public var emojiType: MCEmojiType = .single
-    public var emojiKeys: [Int]
-    public var unicodeVersion: Double
-    
-    // MARK: - Initializers
-    
-    public init(
-        emojiKeys: [Int],
-        emojiType: MCEmojiType,
-        searchKey: String,
-        unicodeVersion: Double
-    ) {
-        self.emojiKeys = emojiKeys
-        self.emojiType = emojiType
-        self.searchKey = searchKey
-        self.unicodeVersion = unicodeVersion
-        
-        string = getEmoji()
-    }
-    
-    // MARK: - Public Methods
-
-    public mutating func set(skinToneRawValue: Int) {
-        UserDefaults.standard.set(skinToneRawValue, forKey: emojiKeys.emoji())
-        string = getEmoji()
-    }
-    
-    // MARK: - Private Methods
-    
-    private func getEmoji() -> String {
-        switch emojiType {
-        case .single:
-            return emojiKeys.emoji()
-        case .choiceOfSkin:
-            guard let skinTone = skinTone,
-                  let skinToneKey = skinTone.skinKey else {
-                return emojiKeys.emoji()
-            }
-            var bufferEmojiKeys = emojiKeys
-            bufferEmojiKeys.insert(skinToneKey, at: 1)
-            return bufferEmojiKeys.emoji()
-        }
-    }
+/// This enumeration allows you to determine whether it is possible to specify a skin tone for `MCEmoji`.
+enum MCEmojiType {
+    case single
+    case choiceOfSkin
 }

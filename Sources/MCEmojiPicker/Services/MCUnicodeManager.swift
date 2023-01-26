@@ -22,9 +22,9 @@
 import Foundation
 import UIKit.UIDevice
 
-/// The protocol is necessary to hide unnecessary methods with Unicode categories in UnicodeManager.
+/// Protocol for the `MCUnicodeManager`.
 protocol MCUnicodeManagerProtocol {
-    /// - Returns: Categories with filtered emoji arrays that are available in the current version of iOS.
+    /// Returns categories with filtered emoji arrays that are available in the current version of iOS.
     func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory]
 }
 
@@ -33,7 +33,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     // MARK: - Private Properties
     
-    /// - Returns: The maximum available Unicode version for the current iOS version.
+    /// The maximum available Unicode version for the current iOS version.
     private let maxCurrentAvailableUnicodeVersion: Double = {
         let currentIOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
         switch currentIOSVersion {
@@ -11321,7 +11321,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     // MARK: - Private Methods
     
-    /// - Returns: Localized name for the emoji category.
+    /// Returns localized name for the emoji category.
     private func getEmojiCategoryTitle(for type: MCEmojiCategoryType) -> String {
         return NSLocalizedString(
             type.localizeKey,

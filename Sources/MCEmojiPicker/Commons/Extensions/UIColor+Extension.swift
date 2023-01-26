@@ -43,7 +43,7 @@ extension UIColor {
 }
 
 extension UIColor {
-    /// The initializer add support for dark and light interface style modes.
+    /// Adds support for dark and light interface style modes.
     convenience init(light: UIColor, dark: UIColor) {
         if #available(iOS 13.0, *) {
             self.init(dynamicProvider: { trait in

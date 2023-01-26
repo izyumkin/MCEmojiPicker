@@ -32,7 +32,7 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
     func numberOfSections() -> Int
     func numberOfItems(in section: Int) -> Int
     func emoji(at indexPath: IndexPath) -> MCEmoji
-    func sectionHeaderViewModel(for section: Int) -> String
+    func sectionHeaderName(for section: Int) -> String
     func getCurrentSelectedEmojiCategoryIndex() -> Int
     func updateCurrentSelectedEmojiCategoryIndex(with index: Int)
     func getEmojiPickerFrame() -> CGRect
@@ -250,8 +250,9 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
                 ofKind: kind,
                 withReuseIdentifier: MCEmojiSectionHeader.identifier,
                 for: indexPath
-              ) as? MCEmojiSectionHeader else { return UICollectionReusableView() }
-        sectionHeader.categoryName = delegate?.sectionHeaderViewModel(for: indexPath.section) ?? ""
+              ) as? MCEmojiSectionHeader
+        else { return UICollectionReusableView() }
+        sectionHeader.categoryName = delegate?.sectionHeaderName(for: indexPath.section) ?? ""
         return sectionHeader
     }
 }

@@ -23,7 +23,7 @@ import Foundation
 
 extension Array where Element == Int {
     /**
-     The method converts unicode scalar values into emoji.
+     Converts unicode scalar values into emoji.
      
      This example shows that one emoji can consist of either one unicode scalar value or several.
      ```

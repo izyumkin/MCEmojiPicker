@@ -21,12 +21,14 @@
 
 import Foundation
 
-public struct MCEmojiCategory {
+/// The main model that is used to configure the main collection.
+struct MCEmojiCategory {
     var categoryName: String
     var emojis: [MCEmoji]
 }
 
-public enum MCEmojiCategoryType: Int {
+/// This enumeration shows a list of categories that are contained in the main collection.
+enum MCEmojiCategoryType: Int {
     case people
     case nature
     case foodAndDrink
@@ -36,6 +38,7 @@ public enum MCEmojiCategoryType: Int {
     case symbols
     case flags
     
+    /// A constant key for accessing name localization resources for each category.
     var localizeKey: String {
         switch self {
         case .people:

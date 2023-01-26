@@ -21,7 +21,8 @@
 
 import Foundation
 
-public enum MCPickerArrowDirectionMode: UInt {
+/// This is a temporary enumeration that duplicates two cases from `UIPopoverArrowDirection'.
+public enum MCPickerArrowDirection: UInt {
     case up = 1
     case down = 2
 }

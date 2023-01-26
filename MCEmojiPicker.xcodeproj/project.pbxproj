@@ -18,7 +18,7 @@
 		C44CF2412976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */; };
 		C46490932958A7A100556DF4 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46490922958A7A100556DF4 /* Bundle+Extension.swift */; };
 		OBJ_55 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Observable.swift */; };
-		OBJ_57 /* MCPickerArrowDirectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* MCPickerArrowDirectionMode.swift */; };
+		OBJ_57 /* MCPickerArrowDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* MCPickerArrowDirection.swift */; };
 		OBJ_60 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Array+Extension.swift */; };
 		OBJ_61 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* UIColor+Extension.swift */; };
 		OBJ_62 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* UIView+Extension.swift */; };
@@ -44,7 +44,7 @@
 		C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerBackgroundView.swift; sourceTree = "<group>"; };
 		C46490922958A7A100556DF4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_10 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		OBJ_13 /* MCPickerArrowDirectionMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPickerArrowDirectionMode.swift; sourceTree = "<group>"; };
+		OBJ_13 /* MCPickerArrowDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPickerArrowDirection.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_20 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		OBJ_21 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 			children = (
 				C417A02E297D080400005A04 /* MCEmoji.swift */,
 				C417A02C297D031700005A04 /* MCEmojiCategory.swift */,
-				OBJ_13 /* MCPickerArrowDirectionMode.swift */,
+				OBJ_13 /* MCPickerArrowDirection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 				C44CF2412976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift in Sources */,
 				OBJ_55 /* Observable.swift in Sources */,
 				C417A029297D02ED00005A04 /* MCUnicodeManager.swift in Sources */,
-				OBJ_57 /* MCPickerArrowDirectionMode.swift in Sources */,
+				OBJ_57 /* MCPickerArrowDirection.swift in Sources */,
 				C44CF23C297651C700D5262A /* Double+Extension.swift in Sources */,
 				C44CF23A297651A400D5262A /* MCEmojiPreviewBackgroundView.swift in Sources */,
 				C417A02D297D031700005A04 /* MCEmojiCategory.swift in Sources */,
