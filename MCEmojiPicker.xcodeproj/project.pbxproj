@@ -43,6 +43,9 @@
 		C44CF23E2976527000D5262A /* MCEmojiSkinTonePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerView.swift; sourceTree = "<group>"; };
 		C44CF2402976528200D5262A /* MCEmojiSkinTonePickerBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmojiSkinTonePickerBackgroundView.swift; sourceTree = "<group>"; };
 		C46490922958A7A100556DF4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		C4F668B72982954F003DB457 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MCEmojiPickerLocalizable.strings; sourceTree = "<group>"; };
+		C4F668B82982954F003DB457 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MCEmojiPickerLocalizable.strings; sourceTree = "<group>"; };
+		C4F668B92982954F003DB457 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MCEmojiPickerLocalizable.strings; sourceTree = "<group>"; };
 		OBJ_10 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		OBJ_13 /* MCPickerArrowDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPickerArrowDirection.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -91,6 +94,14 @@
 			path = EmojiSkinTonePickerView;
 			sourceTree = "<group>";
 		};
+		C4F668B52982954F003DB457 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				C4F668B62982954F003DB457 /* MCEmojiPickerLocalizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		OBJ_11 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +115,7 @@
 		OBJ_17 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				C4F668B52982954F003DB457 /* Localization */,
 				OBJ_18 /* Extensions */,
 			);
 			path = Commons;
@@ -244,6 +256,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				uk,
+				ru,
 			);
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_5;
@@ -286,6 +300,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C4F668B62982954F003DB457 /* MCEmojiPickerLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C4F668B72982954F003DB457 /* en */,
+				C4F668B82982954F003DB457 /* uk */,
+				C4F668B92982954F003DB457 /* ru */,
+			);
+			name = MCEmojiPickerLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		OBJ_3 /* Debug */ = {

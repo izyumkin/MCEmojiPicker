@@ -1285,7 +1285,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                     ),
                     MCEmoji(
                         emojiKeys: [0x1F91D],
-                        emojiType: .choiceOfSkin,
+                        emojiType: .single,
                         searchKey: "handshake",
                         unicodeVersion: 3.0
                     ),
