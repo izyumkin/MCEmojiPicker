@@ -110,6 +110,7 @@ final class MCEmojiPickerView: UIView {
     // MARK: - Initializers
     
     init(delegate: MCEmojiPickerViewDelegate) {
+        self.delegate = delegate
         super.init(frame: .zero)
         setupBackgroundColor()
         setupCategoryViews()
