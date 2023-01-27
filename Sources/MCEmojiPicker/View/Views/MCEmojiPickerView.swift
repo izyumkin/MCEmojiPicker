@@ -375,9 +375,9 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
         previewContainerView.removeFromSuperview()
         previewContainerView = MCEmojiSkinTonePickerContainerView(
             delegate: self,
-            frame: sourceView.frame,
-            emoji: emoji,
             cell: cell,
+            emoji: emoji,
+            frame: sourceView.frame,
             sourceView: sourceView,
             emojiPickerFrame: delegate?.getEmojiPickerFrame() ?? .zero
         )
