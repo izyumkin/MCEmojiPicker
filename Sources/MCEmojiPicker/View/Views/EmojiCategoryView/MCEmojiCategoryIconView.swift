@@ -21,7 +21,7 @@
 
 import UIKit
 
-/// States for MCEmojiCategoryIconView.
+/// States for `MCEmojiCategoryIconView`.
 public enum MCEmojiCategoryIconViewState {
     case standard
     case highlighted
@@ -35,13 +35,10 @@ final class MCEmojiCategoryIconView: UIView {
     
     /// Target icon type.
     private var type: MCEmojiCategoryType
-    
     /// Current tint color for the icon.
     private var currentIconTintColor: UIColor = .systemGray
-    
     /// Selected tint color for the icon.
     private var selectedIconTintColor: UIColor
-    
     /// Current icon state.
     private var state: MCEmojiCategoryIconViewState = .standard
     

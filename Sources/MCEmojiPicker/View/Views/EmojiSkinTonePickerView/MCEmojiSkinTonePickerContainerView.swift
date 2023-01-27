@@ -54,22 +54,22 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
     
     init(
         delegate: MCEmojiSkinTonePickerDelegate,
-        frame: CGRect,
-        emoji: MCEmoji?,
         cell: MCEmojiCollectionViewCell,
+        emoji: MCEmoji?,
+        frame: CGRect,
         sourceView: UIView,
         emojiPickerFrame: CGRect
     ) {
         self.delegate = delegate
-        self.emoji = emoji
         self.cell = cell
+        self.emoji = emoji
         self.sender = cell.emojiLabel
         self.sourceView = sourceView
         self.emojiPickerFrame = emojiPickerFrame
         super.init(frame: frame)
         setupSkinTonePicker()
         setupNotifications()
-        setupGestures()
+        setupGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -111,7 +111,7 @@ final class MCEmojiSkinTonePickerContainerView: UIView {
         )
     }
     
-    private func setupGestures() {
+    private func setupGestureRecognizers() {
         addGestureRecognizer(
             UITapGestureRecognizer(
                 target: self,

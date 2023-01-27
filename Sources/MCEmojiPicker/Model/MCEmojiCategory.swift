@@ -28,7 +28,7 @@ struct MCEmojiCategory {
 }
 
 /// This enumeration shows a list of categories that are contained in the main collection.
-enum MCEmojiCategoryType: Int {
+enum MCEmojiCategoryType: Int, CaseIterable {
     case people
     case nature
     case foodAndDrink

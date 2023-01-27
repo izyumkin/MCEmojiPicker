@@ -21,6 +21,7 @@
 
 import UIKit
 
+/// The class where the background is drawn for `MCEmojiPreviewView`.
 final class MCEmojiPreviewBackgroundView: UIView {
     
     // MARK: - Public Properties
@@ -50,8 +51,6 @@ final class MCEmojiPreviewBackgroundView: UIView {
     
     // MARK: - Private Properties
     
-    private var senderFrame: CGRect
-    
     private var backgroundPath: CGPath? {
         didSet {
             setupShadow()
@@ -59,6 +58,7 @@ final class MCEmojiPreviewBackgroundView: UIView {
         }
     }
     
+    private var senderFrame: CGRect
     private var topRectangleFrame: CGRect = .zero
     private var bottomRectangleFrame: CGRect = .zero
     
@@ -88,11 +88,12 @@ final class MCEmojiPreviewBackgroundView: UIView {
             height: senderFrame.height * 1.25
         )
         topRectangleFrame = .init(
-            x: 0,
-            y: 0,
-            width: frame.width,
-            height: frame.height - (
-                bottomRectangleFrame.height
+            origin: .zero,
+            size: .init(
+                width: frame.width,
+                height: frame.height - (
+                    bottomRectangleFrame.height
+                )
             )
         )
     }

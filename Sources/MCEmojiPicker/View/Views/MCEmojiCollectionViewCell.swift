@@ -67,17 +67,17 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private weak var delegate: MCEmojiCollectionViewCellDelegate?
-    
     private var emoji: MCEmoji?
     private var isSkinTonePickerShown = false
+    
+    private weak var delegate: MCEmojiCollectionViewCellDelegate?
     
     // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
-        setupGestures()
+        setupGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
@@ -188,7 +188,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    private func setupGestures() {
+    private func setupGestureRecognizers() {
         let previewLongPressGesture = UILongPressGestureRecognizer(
             target: self,
             action: #selector(previewLongPressGestureAction)

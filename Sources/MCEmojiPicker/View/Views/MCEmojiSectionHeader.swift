@@ -23,20 +23,22 @@ import UIKit
 
 final class MCEmojiSectionHeader: UICollectionReusableView {
     
-    // MARK: - Public Methods
+    // MARK: - Constants
     
-    public var categoryName: String = "" {
-        didSet {
-            headerLabel.text = categoryName
-        }
+    private enum Constants {
+        static let backgroundColor = UIColor.popoverBackgroundColor
+        
+        static let headerLabelColor = UIColor.systemGray
+        static let headerLabelFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+        static let headerLabelInsets = UIEdgeInsets(top: 0, left: 7, bottom: -4, right: -16)
     }
     
     // MARK: - Private Properties
     
     private let headerLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = Constants.headerLabelColor
+        label.font = Constants.headerLabelFont
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,26 +47,42 @@ final class MCEmojiSectionHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupBackground()
-        setupLayout()
+        setupBackgroundColor()
+        setupHeaderLabelLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private Methods
+    // MARK: - Public Methods
     
-    private func setupBackground() {
-        backgroundColor = .popoverBackgroundColor
+    public func configure(with categoryName: String) {
+        headerLabel.text = categoryName
     }
     
-    private func setupLayout() {
+    // MARK: - Private Methods
+    
+    private func setupBackgroundColor() {
+        backgroundColor = Constants.backgroundColor
+    }
+    
+    private func setupHeaderLabelLayout() {
         addSubview(headerLabel)
+        
         NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 7),
-            headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
+            headerLabel.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Constants.headerLabelInsets.left
+            ),
+            headerLabel.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: Constants.headerLabelInsets.right
+            ),
+            headerLabel.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: Constants.headerLabelInsets.bottom
+            )
         ])
     }
 }

@@ -48,16 +48,17 @@ final class MCEmojiSkinTonePickerView: UIView {
         frame: bounds,
         senderFrame: sender.convert(sender.bounds, to: self)
     )
-    
-    private var contentStackView = UIStackView()
     private lazy var emojiLabels: [UIView] = {
         var arrangedSubviews = contentStackView.arrangedSubviews
         arrangedSubviews.remove(at: 1)
         return arrangedSubviews
     }()
-    private var selectedSkinTone: Int?
     
     private var emoji: MCEmoji?
+    private var selectedSkinTone: Int?
+    
+    private var contentStackView = UIStackView()
+    
     private var sender: UIView
     private var sourceView: UIView
     private var emojiPickerFrame: CGRect

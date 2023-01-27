@@ -21,6 +21,7 @@
 
 import UIKit
 
+/// The class where the background is drawn for `MCEmojiSkinTonePickerView`.
 final class MCEmojiSkinTonePickerBackgroundView: UIView {
     
     // MARK: - Public Properties

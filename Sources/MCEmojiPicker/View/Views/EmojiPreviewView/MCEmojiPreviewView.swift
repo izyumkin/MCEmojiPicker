@@ -51,7 +51,6 @@ final class MCEmojiPreviewView: UIView {
         self.sender = sender
         self.sourceView = sourceView
         super.init(frame: .zero)
-        isUserInteractionEnabled = false
         setupLayout()
         setupBackground()
         setupEmojiLabelLayout()

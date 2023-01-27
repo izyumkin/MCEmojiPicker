@@ -115,8 +115,8 @@
 		OBJ_17 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				C4F668B52982954F003DB457 /* Localization */,
 				OBJ_18 /* Extensions */,
+				C4F668B52982954F003DB457 /* Localization */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
