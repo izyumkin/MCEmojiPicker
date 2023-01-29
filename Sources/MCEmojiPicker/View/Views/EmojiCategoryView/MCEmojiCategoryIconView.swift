@@ -23,7 +23,7 @@
 import UIKit
 
 /// States for `MCEmojiCategoryIconView`.
-public enum MCEmojiCategoryIconViewState {
+enum MCEmojiCategoryIconViewState {
     case standard
     case highlighted
     case selected
