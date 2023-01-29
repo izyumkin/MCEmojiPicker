@@ -19,11 +19,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-"emotionsAndPeople" = "СМАЙЛИКИ Й ЛЮДИ";
-"animalsAndNature" = "ФЛОРА І ФАУНА";
-"foodAndDrinks" = "ЇЖА І НАПОЇ";
-"activities" = "АКТИВНІСТЬ";
-"travellingAndPlaces" = "ПОДОРОЖІ Й МІСЦЯ";
-"objects" = "ОБ'ЄКТИ";
-"symbols" = "СИМВОЛИ";
-"flags" = "ПРАПОРИ";
+"frequentlyUsed" = "FREQUENTLY USED";
+"emotionsAndPeople" = "SMILEYS & PEOPLE";
+"animalsAndNature" = "ANIMALS & NATURE";
+"foodAndDrinks" = "FOOD & DRINK";
+"activities" = "ACTIVITY";
+"travellingAndPlaces" = "TRAVEL & PLACES";
+"items" = "OBJECTS";
+"symbols" = "SYMBOLS";
+"flags" = "FLAGS";
