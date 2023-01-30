@@ -87,10 +87,8 @@ class ViewController: UIViewController {
     
     private func showInformativeAlertIfNeeded() {
         let firstLaunchKey = "firstLaunch"
-        guard !UserDefaults.standard.bool(forKey: firstLaunchKey) else {
-            UserDefaults.standard.set(true, forKey: firstLaunchKey)
-            return
-        }
+        guard !UserDefaults.standard.bool(forKey: firstLaunchKey) else { return }
+        UserDefaults.standard.set(true, forKey: firstLaunchKey)
         let alert = UIAlertController(
             title: NSLocalizedString("hintAlertTitle", comment: ""),
             message: NSLocalizedString("hintAlertMessage", comment: ""),
