@@ -60,7 +60,7 @@ final class MCEmojiPickerView: UIView {
         
         static let categoriesStackViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
-        static let separatorHeight = 0.3
+        static let separatorHeight = 0.8
         static let separatorColor = UIColor(
             light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
             dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)

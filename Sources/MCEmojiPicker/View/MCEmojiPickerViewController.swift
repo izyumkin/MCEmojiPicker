@@ -134,6 +134,10 @@ public final class MCEmojiPickerViewController: UIViewController {
         super.viewDidLoad()
         setupPreferredContentSize()
         setupArrowDirections()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupHorizontalInset()
     }
     
@@ -183,7 +187,7 @@ public final class MCEmojiPickerViewController: UIViewController {
         guard let sourceView = sourceView else { return }
         popoverPresentationController?.sourceRect = CGRect(
             x: 0,
-            y: popoverPresentationController?.permittedArrowDirections == .up ? horizontalInset : -horizontalInset,
+            y: popoverPresentationController?.arrowDirection == .up ? horizontalInset : -horizontalInset,
             width: sourceView.frame.width,
             height: sourceView.frame.height
         )
