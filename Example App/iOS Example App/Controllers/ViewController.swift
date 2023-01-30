@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showInformativeAlertIfNeeded()
+        showHintAlertIfNeeded()
     }
     
     // MARK: - Actions
@@ -85,17 +85,17 @@ class ViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func showInformativeAlertIfNeeded() {
+    private func showHintAlertIfNeeded() {
         let firstLaunchKey = "firstLaunch"
         guard !UserDefaults.standard.bool(forKey: firstLaunchKey) else { return }
         UserDefaults.standard.set(true, forKey: firstLaunchKey)
-        let alert = UIAlertController(
+        let hintAlert = UIAlertController(
             title: NSLocalizedString("hintAlertTitle", comment: ""),
             message: NSLocalizedString("hintAlertMessage", comment: ""),
             preferredStyle: .alert
         )
-        alert.addAction(.init(title: "OK", style: .default))
-        present(alert, animated: true)
+        hintAlert.addAction(.init(title: "OK", style: .default))
+        present(hintAlert, animated: true)
     }
     
     private func setupBackgroundColor() {
