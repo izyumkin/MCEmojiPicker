@@ -46,8 +46,8 @@ struct MCEmoji {
     public var isSkinToneSupport: Bool
     /// The search key for the emoji.
     public var searchKey: String
-    /// The `Unicode` version of this emoji.
-    public var unicodeVersion: Double
+    /// The emoji version.
+    public var version: Double
     
     // MARK: - Initializers
     
@@ -56,20 +56,20 @@ struct MCEmoji {
      
      - Parameters:
        - emojiKeys: The keys used to represent the emoji.
-       - emojiType: The type of the emoji.
+       - isSkinToneSupport: A boolean indicating whether this emoji has different skin tones available.
        - searchKey: The search key for the emoji.
-       - unicodeVersion: The `Unicode` version of the emoji.
+       - version: The emoji version.
      */
     public init(
         emojiKeys: [Int],
         isSkinToneSupport: Bool,
         searchKey: String,
-        unicodeVersion: Double
+        version: Double
     ) {
         self.emojiKeys = emojiKeys
         self.isSkinToneSupport = isSkinToneSupport
         self.searchKey = searchKey
-        self.unicodeVersion = unicodeVersion
+        self.version = version
         
         string = getEmoji()
     }
