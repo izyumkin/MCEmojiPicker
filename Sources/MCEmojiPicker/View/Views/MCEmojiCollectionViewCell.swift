@@ -96,7 +96,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         guard let emoji = emoji,
-              !(emoji.isCurrentEmojiHaveDifferentSkins && !emoji.isSkinBeenSelectedBefore) else { return }
+              !(emoji.isSkinToneSupport && !emoji.isSkinBeenSelectedBefore) else { return }
         delegate?.didSelect(emoji, in: self)
         UIView.animate(withDuration: Constants.selectCellBackgroundAnimationDuration, delay: 0) {
             self.containerView.backgroundColor = .clear
@@ -141,10 +141,10 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     ) {
         guard let emoji = emoji else { return }
         switch gestureRecognizer.state {
-        case .began where emoji.isCurrentEmojiHaveDifferentSkins && emoji.isSkinBeenSelectedBefore:
+        case .began where emoji.isSkinToneSupport && emoji.isSkinBeenSelectedBefore:
             isSkinTonePickerShown = true
             delegate?.choiceSkinTone(emoji, in: self)
-        case .ended where !emoji.isCurrentEmojiHaveDifferentSkins:
+        case .ended where !emoji.isSkinToneSupport:
             delegate?.didSelect(emoji, in: self)
         default:
             break
@@ -156,7 +156,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     private func isFirstChoiceSkinTone() -> Bool {
         guard let emoji = emoji else { return true }
         isSkinTonePickerShown = false
-        switch emoji.isCurrentEmojiHaveDifferentSkins && !emoji.isSkinBeenSelectedBefore && !isSkinTonePickerShown {
+        switch emoji.isSkinToneSupport && !emoji.isSkinBeenSelectedBefore && !isSkinTonePickerShown {
         case true:
             isSkinTonePickerShown = true
             delegate?.choiceSkinTone(emoji, in: self)

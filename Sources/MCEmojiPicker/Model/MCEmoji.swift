@@ -33,10 +33,6 @@ struct MCEmoji {
     public var isSkinBeenSelectedBefore: Bool {
         return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
     }
-    /// A boolean indicating whether this emoji has different skin tones available.
-    public var isCurrentEmojiHaveDifferentSkins: Bool {
-        return emojiType == .choiceOfSkin
-    }
     /// The current skin tone for this emoji, if one has been selected.
     public var skinTone: MCEmojiSkinTone? {
         return MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(
@@ -46,8 +42,8 @@ struct MCEmoji {
     
     /// The keys used to represent the emoji.
     public var emojiKeys: [Int]
-    /// The type of the emoji.
-    public var emojiType: MCEmojiType
+    /// A boolean indicating whether this emoji has different skin tones available.
+    public var isSkinToneSupport: Bool
     /// The search key for the emoji.
     public var searchKey: String
     /// The `Unicode` version of this emoji.
@@ -66,12 +62,12 @@ struct MCEmoji {
      */
     public init(
         emojiKeys: [Int],
-        emojiType: MCEmojiType,
+        isSkinToneSupport: Bool,
         searchKey: String,
         unicodeVersion: Double
     ) {
         self.emojiKeys = emojiKeys
-        self.emojiType = emojiType
+        self.isSkinToneSupport = isSkinToneSupport
         self.searchKey = searchKey
         self.unicodeVersion = unicodeVersion
         
@@ -95,10 +91,10 @@ struct MCEmoji {
     
     /// Returns the string representation of this smiley. Considering the skin tone, if it has been selected.
     private func getEmoji() -> String {
-        switch emojiType {
-        case .single:
+        switch isSkinToneSupport {
+        case true:
             return emojiKeys.emoji()
-        case .choiceOfSkin:
+        case false:
             guard let skinTone = skinTone,
                   let skinToneKey = skinTone.skinKey else {
                 return emojiKeys.emoji()
@@ -119,7 +115,7 @@ enum MCEmojiSkinTone: Int, CaseIterable {
     case mediumDark = 5
     case dark = 6
     
-    /// Unicode scalar value for the skin tone.
+    /// Hex value for the skin tone.
     var skinKey: Int? {
         switch self {
         case .none:
@@ -136,10 +132,4 @@ enum MCEmojiSkinTone: Int, CaseIterable {
             return 0x1F3FF
         }
     }
-}
-
-/// This enumeration allows you to determine whether it is possible to specify a skin tone for `MCEmoji`.
-enum MCEmojiType {
-    case single
-    case choiceOfSkin
 }
