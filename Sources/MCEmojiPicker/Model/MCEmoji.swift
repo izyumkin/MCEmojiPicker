@@ -27,8 +27,6 @@ struct MCEmoji {
     
     // MARK: - Public Properties
     
-    /// The string representation of the emoji.
-    public var string: String = ""
     /// A boolean indicating whether the skin for this emoji has been selected before.
     public var isSkinBeenSelectedBefore: Bool {
         return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
@@ -40,14 +38,16 @@ struct MCEmoji {
         ))
     }
     
+    /// The string representation of the emoji.
+    private(set) public var string: String = ""
     /// The keys used to represent the emoji.
-    public var emojiKeys: [Int]
+    private(set) public var emojiKeys: [Int]
     /// A boolean indicating whether this emoji has different skin tones available.
-    public var isSkinToneSupport: Bool
+    private(set) public var isSkinToneSupport: Bool
     /// The search key for the emoji.
-    public var searchKey: String
+    private(set) public var searchKey: String
     /// The emoji version.
-    public var version: Double
+    private(set) public var version: Double
     
     // MARK: - Initializers
     
@@ -91,18 +91,14 @@ struct MCEmoji {
     
     /// Returns the string representation of this smiley. Considering the skin tone, if it has been selected.
     private func getEmoji() -> String {
-        switch isSkinToneSupport {
-        case true:
+        guard isSkinToneSupport,
+              let skinTone = skinTone,
+              let skinToneKey = skinTone.skinKey else {
             return emojiKeys.emoji()
-        case false:
-            guard let skinTone = skinTone,
-                  let skinToneKey = skinTone.skinKey else {
-                return emojiKeys.emoji()
-            }
-            var bufferEmojiKeys = emojiKeys
-            bufferEmojiKeys.insert(skinToneKey, at: 1)
-            return bufferEmojiKeys.emoji()
         }
+        var bufferEmojiKeys = emojiKeys
+        bufferEmojiKeys.insert(skinToneKey, at: 1)
+        return bufferEmojiKeys.emoji()
     }
 }
 

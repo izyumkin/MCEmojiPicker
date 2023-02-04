@@ -79,12 +79,12 @@ final class MCEmojiPickerView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
             MCEmojiCollectionViewCell.self,
-            forCellWithReuseIdentifier: MCEmojiCollectionViewCell.identifier
+            forCellWithReuseIdentifier: MCEmojiCollectionViewCell.reuseIdentifier
         )
         collectionView.register(
             MCEmojiSectionHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: MCEmojiSectionHeader.identifier
+            withReuseIdentifier: MCEmojiSectionHeader.reuseIdentifier
         )
         return collectionView
     }()
@@ -261,7 +261,7 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MCEmojiCollectionViewCell.identifier,
+                withReuseIdentifier: MCEmojiCollectionViewCell.reuseIdentifier,
                 for: indexPath
               ) as? MCEmojiCollectionViewCell
         else { return UICollectionViewCell() }
@@ -280,7 +280,7 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
         guard kind == UICollectionView.elementKindSectionHeader,
               let sectionHeader = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
-                withReuseIdentifier: MCEmojiSectionHeader.identifier,
+                withReuseIdentifier: MCEmojiSectionHeader.reuseIdentifier,
                 for: indexPath
               ) as? MCEmojiSectionHeader
         else { return UICollectionReusableView() }

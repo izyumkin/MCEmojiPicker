@@ -22,9 +22,9 @@
 
 import UIKit
 
-extension UIView {
+extension UICollectionReusableView {
     /// Converts the class name to a string.
-    static var identifier: String {
+    static var reuseIdentifier: String {
         return String(describing: self)
     }
 }
