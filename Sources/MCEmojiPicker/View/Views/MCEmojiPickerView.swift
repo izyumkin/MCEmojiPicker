@@ -23,11 +23,9 @@
 import UIKit
 
 protocol MCEmojiPickerViewDelegate: AnyObject {
-    /**
-     Processes an event by category selection.
-     
-     - Parameter index: index of the selected category.
-     */
+    /// Processes an event by category selection.
+    ///
+    /// - Parameter index: index of the selected category.
     func didChoiceEmojiCategory(at index: Int)
     func didChoiceEmoji(_ emoji: MCEmoji?)
     func numberOfSections() -> Int
@@ -133,11 +131,9 @@ final class MCEmojiPickerView: UIView {
     
     // MARK: - Public Methods
     
-    /**
-     Passes the index of the selected category to all categoryViews to update the state.
-     
-     - Parameter categoryIndex: Selected category index.
-     */
+    /// Passes the index of the selected category to all categoryViews to update the state.
+    ///
+    /// - Parameter categoryIndex: Selected category index.
     public func updateSelectedCategoryIcon(with categoryIndex: Int) {
         categoryViews.forEach({
             $0.updateCategoryViewState(selectedCategoryIndex: categoryIndex)
@@ -220,11 +216,9 @@ final class MCEmojiPickerView: UIView {
         collectionView.isScrollEnabled = isEnabled
     }
     
-    /**
-     Scroll collectionView to header for selected category.
-     
-     - Parameter section: Selected category index.
-     */
+    /// Scroll collectionView to header for selected category.
+    ///
+    /// - Parameter section: Selected category index.
     private func scrollToHeader(for section: Int) {
         guard let cellFrame = collectionView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 0, section: section))?.frame,
               let headerFrame = collectionView.collectionViewLayout.layoutAttributesForSupplementaryView(

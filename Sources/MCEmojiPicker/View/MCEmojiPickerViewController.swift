@@ -30,49 +30,35 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    /**
-     Delegate for selecting an emoji object.
-     */
+    /// Delegate for selecting an emoji object.
     public weak var delegate: MCEmojiPickerDelegate?
     
-    /**
-     The direction of the arrow for EmojiPicker.
-     
-     The default value of this property is .up.
-     */
+    /// The direction of the arrow for EmojiPicker.
+    ///
+    /// The default value of this property is `.up`.
     public var arrowDirection: MCPickerArrowDirection = .up
     
-    /**
-     Custom height for EmojiPicker.
-     But it will be limited by the distance from sourceView.origin.y to the upper or lower bound(depends on permittedArrowDirections).
-     
-     The default value of this property is nil.
-     */
+    /// Custom height for EmojiPicker.
+    /// But it will be limited by the distance from sourceView.origin.y to the upper or lower bound(depends on permittedArrowDirections).
+    ///
+    /// The default value of this property is `nil`.
     public var customHeight: CGFloat? = nil
     
-    /**
-     Inset from the sourceView border.
-     
-     The default value of this property is 0.
-     */
+    /// Inset from the sourceView border.
+    ///
+    /// The default value of this property is `0`.
     public var horizontalInset: CGFloat = 0
     
-    /**
-     A boolean value that determines whether the screen will be hidden after the emoji is selected.
-        
-     If this property’s value is true, the EmojiPicker will be dismissed after the emoji is selected.
-     
-     If you want EmojiPicker not to dismissed after emoji selection, you must set this property to false.
-     
-     The default value of this property is true.
-     */
+    /// A boolean value that determines whether the screen will be hidden after the emoji is selected.
+    ///
+    /// If this property’s value is `true`, the EmojiPicker will be dismissed after the emoji is selected.
+    /// If you want EmojiPicker not to dismissed after emoji selection, you must set this property to `false`.
+    /// The default value of this property is `true`.
     public var isDismissAfterChoosing: Bool = true
     
-    /**
-     Color for the selected emoji category.
-     
-     The default value of this property is .systemBlue.
-     */
+    /// Color for the selected emoji category.
+    ///
+    /// The default value of this property is `.systemBlue`.
     public var selectedEmojiCategoryTintColor: UIColor? {
         didSet {
             guard let selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor else { return }
@@ -80,20 +66,16 @@ public final class MCEmojiPickerViewController: UIViewController {
         }
     }
     
-    /**
-     The view containing the anchor rectangle for the popover..
-     */
+    /// The view containing the anchor rectangle for the popover.
     public var sourceView: UIView? {
         didSet {
             popoverPresentationController?.sourceView = sourceView
         }
     }
     
-    /**
-     Feedback generator style. To turn off, set nil to this parameter..
-     
-     The default value of this property is .light.
-     */
+    /// Feedback generator style. To turn off, set `nil` to this parameter.
+    ///
+    /// The default value of this property is `.light`.
     public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = .light {
         didSet {
             guard let feedBackGeneratorStyle = feedBackGeneratorStyle else {

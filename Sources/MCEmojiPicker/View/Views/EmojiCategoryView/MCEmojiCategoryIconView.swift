@@ -61,11 +61,9 @@ final class MCEmojiCategoryIconView: UIView {
     
     // MARK: - Public Methods
     
-    /**
-     New centered rect based on bounds width to prevent stretching of the icon.
-     
-     - Parameter state: Target icon state. Based on this state, the target color will be selected.
-     */
+    /// New centered rect based on bounds width to prevent stretching of the icon.
+    ///
+    /// - Parameter state: Target icon state. Based on this state, the target color will be selected.
     public func updateIconTintColor(for state: MCEmojiCategoryIconViewState) {
         guard self.state != state else { return }
         self.state = state

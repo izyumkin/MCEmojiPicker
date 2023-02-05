@@ -29,11 +29,9 @@ final class Observable<T> {
     
     public typealias Listener = (T) -> Void
     
-    /**
-     Holds the current value of the observable.
-     
-     The `didSet` block ensures that the `Listener` closure is called whenever the value changes.
-     */
+    /// Holds the current value of the observable.
+    ///
+    /// The `didSet` block ensures that the `Listener` closure is called whenever the value changes.
     public var value: T {
         didSet {
             listener?(value)

@@ -23,18 +23,17 @@
 import Foundation
 
 extension Array where Element == Int {
-    /**
-     Converts hex values into emoji.
-     
-     This example shows that one emoji can consist of either one hex value or several.
-     ```
-     print([0x1F600].emoji()) // "😀"
-     print([0x1F635, 0x200D, 0x1F4AB].emoji()) // "😵‍💫"
-     ```
-     But if you put hex values not related to one emoji in one array. You will get a string of several emojis.
-     ```
-     print([0x1F600, 0x1F635, 0x200D, 0x1F4AB].emoji()) // "😀😵‍💫"
-     */
+    /// Converts hex values into emoji.
+    ///
+    /// This example shows that one emoji can consist of either one hex value or several.
+    /// ```
+    /// print([0x1F600].emoji()) // "😀"
+    /// print([0x1F635, 0x200D, 0x1F4AB].emoji()) // "😵‍💫"
+    /// ```
+    /// But if you put hex values not related to one emoji in one array. You will get a string of several emojis.
+    /// ```
+    /// print([0x1F600, 0x1F635, 0x200D, 0x1F4AB].emoji()) // "😀😵‍💫"
+    /// ```
     func emoji() -> String {
         return self
             // Converting hex value into a 32-bit integer representation of emoji in the Unicode table.

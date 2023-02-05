@@ -51,15 +51,13 @@ struct MCEmoji {
     
     // MARK: - Initializers
     
-    /**
-     Initializes a new instance of the `MCEmoji` struct.
-     
-     - Parameters:
-       - emojiKeys: The keys used to represent the emoji.
-       - isSkinToneSupport: A boolean indicating whether this emoji has different skin tones available.
-       - searchKey: The search key for the emoji.
-       - version: The emoji version.
-     */
+    /// Initializes a new instance of the `MCEmoji` struct.
+    
+    /// - Parameters:
+    ///   - emojiKeys: The keys used to represent the emoji.
+    ///   - isSkinToneSupport: A boolean indicating whether this emoji has different skin tones available.
+    ///   - searchKey: The search key for the emoji.
+    ///   - version: The emoji version.
     public init(
         emojiKeys: [Int],
         isSkinToneSupport: Bool,
@@ -76,12 +74,10 @@ struct MCEmoji {
     
     // MARK: - Public Methods
 
-    /**
-     Sets the skin tone of the emoji.
-     
-     - Parameters:
-       - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
-     */
+    /// Sets the skin tone of the emoji.
+    
+    /// - Parameters:
+    ///   - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
     public mutating func set(skinToneRawValue: Int) {
         UserDefaults.standard.set(skinToneRawValue, forKey: emojiKeys.emoji())
         string = getEmoji()

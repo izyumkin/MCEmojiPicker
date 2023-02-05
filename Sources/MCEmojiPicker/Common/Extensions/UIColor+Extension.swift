@@ -23,20 +23,16 @@
 import UIKit
 
 extension UIColor {
-    /**
-     Background color for `MCEmojiPickerView`.
-     
-     This is a standard color from UIKit - `.systemGroupedBackground`.
-     */
+    /// Background color for `MCEmojiPickerView`.
+    ///
+    /// This is a standard color from UIKit - `.systemGroupedBackground`.
     static let popoverBackgroundColor = UIColor(
         light:  UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.0),
         dark: UIColor(red: 0.11, green: 0.11, blue: 0.12, alpha: 1.0)
     )
-    /**
-     Background color for `MCEmojiSkinTonePickerBackgroundView` and `MCEmojiPreviewView`.
-     
-     The colors were taken from similar iOS elements.
-     */
+    /// Background color for `MCEmojiSkinTonePickerBackgroundView` and `MCEmojiPreviewView`.
+    ///
+    /// The colors were taken from similar iOS elements.
     static let previewAndSkinToneBackgroundViewColor = UIColor(
         light: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         dark: UIColor(red: 0.45, green: 0.45, blue: 0.46, alpha: 1.0)
