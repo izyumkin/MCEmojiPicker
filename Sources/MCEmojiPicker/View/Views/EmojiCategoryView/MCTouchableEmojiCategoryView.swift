@@ -1,4 +1,5 @@
 // The MIT License (MIT)
+//
 // Copyright © 2022 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -38,11 +39,11 @@ final class MCTouchableEmojiCategoryView: UIView {
     
     private var categoryIconView: MCEmojiCategoryIconView
     /// Insets for categoryIconView.
-    private var categoryIconViewInsets: UIEdgeInsets {
+    private lazy var categoryIconViewInsets: UIEdgeInsets = {
         // The number 0.23 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         let inset = bounds.width * 0.23
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-    }
+    }()
     /// Target category index.
     private var categoryIndex: Int
     
@@ -72,10 +73,8 @@ final class MCTouchableEmojiCategoryView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupLayout()
+        setupCategoryIconViewLayout()
     }
-    
-    // MARK: - Events Handling
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -103,7 +102,7 @@ final class MCTouchableEmojiCategoryView: UIView {
     
     // MARK: - Private Methods
     
-    private func setupLayout() {
+    private func setupCategoryIconViewLayout() {
         guard !categoryIconView.isDescendant(of: self) else { return }
         addSubview(categoryIconView)
         NSLayoutConstraint.activate([

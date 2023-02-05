@@ -11,5 +11,4 @@ Pod::Spec.new do |s|
   s.resource_bundle = { "MCEmojiPicker" => ["Sources/MCEmojiPicker/**/*.lproj/*.strings"] }
   s.swift_version = '4.2'
   s.platform = :ios, '11.1'
-
 end

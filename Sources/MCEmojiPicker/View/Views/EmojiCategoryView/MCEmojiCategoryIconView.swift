@@ -1,4 +1,5 @@
 // The MIT License (MIT)
+//
 // Copyright © 2022 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,8 +22,8 @@
 
 import UIKit
 
-/// States for MCEmojiCategoryIconView.
-public enum MCEmojiCategoryIconViewState {
+/// States for `MCEmojiCategoryIconView`.
+enum MCEmojiCategoryIconViewState {
     case standard
     case highlighted
     case selected
@@ -35,13 +36,10 @@ final class MCEmojiCategoryIconView: UIView {
     
     /// Target icon type.
     private var type: MCEmojiCategoryType
-    
     /// Current tint color for the icon.
     private var currentIconTintColor: UIColor = .systemGray
-    
     /// Selected tint color for the icon.
     private var selectedIconTintColor: UIColor
-    
     /// Current icon state.
     private var state: MCEmojiCategoryIconViewState = .standard
     
@@ -63,11 +61,9 @@ final class MCEmojiCategoryIconView: UIView {
     
     // MARK: - Public Methods
     
-    /**
-     New centered rect based on bounds width to prevent stretching of the icon.
-     
-     - Parameter state: Target icon state. Based on this state, the target color will be selected.
-     */
+    /// New centered rect based on bounds width to prevent stretching of the icon.
+    ///
+    /// - Parameter state: Target icon state. Based on this state, the target color will be selected.
     public func updateIconTintColor(for state: MCEmojiCategoryIconViewState) {
         guard self.state != state else { return }
         self.state = state
@@ -75,7 +71,7 @@ final class MCEmojiCategoryIconView: UIView {
         case .standard:
             currentIconTintColor = .systemGray
         case .highlighted:
-            currentIconTintColor = currentIconTintColor.adjust(by: 40)
+            currentIconTintColor = adjust(color: currentIconTintColor)
         case .selected:
             currentIconTintColor = selectedIconTintColor
         }
@@ -83,6 +79,22 @@ final class MCEmojiCategoryIconView: UIView {
     }
     
     // MARK: - Private Methods
+    
+    /// Increases brightness or decreases saturation.
+    private func adjust(color: UIColor, by percentage: CGFloat = 40.0) -> UIColor {
+        var hue: CGFloat = 0, saturation: CGFloat = 0, brightness: CGFloat = 0, alpha: CGFloat = 0
+        if color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
+            switch brightness < 1.0 {
+            case true:
+                let newB: CGFloat = max(min(brightness + (percentage / 100.0) * brightness, 1.0), 0.0)
+                return UIColor(hue: hue, saturation: saturation, brightness: newB, alpha: alpha)
+            case false:
+                let newS: CGFloat = min(max(saturation - (percentage / 100.0) * saturation, 0.0), 1.0)
+                return UIColor(hue: hue, saturation: newS, brightness: brightness, alpha: alpha)
+            }
+        }
+        return color
+    }
     
     private func setupBackground() {
         translatesAutoresizingMaskIntoConstraints = false

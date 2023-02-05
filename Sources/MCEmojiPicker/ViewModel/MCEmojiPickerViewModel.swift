@@ -1,4 +1,5 @@
 // The MIT License (MIT)
+//
 // Copyright © 2022 Ivan Izyumkin
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,12 +22,30 @@
 
 import Foundation
 
-/// ViewModel which using in EmojiPickerViewController.
+/// Protocol for the `MCEmojiPickerViewModel`.
+protocol MCEmojiPickerViewModelProtocol {
+    /// The observed variable that is responsible for the choice of emoji.
+    var selectedEmoji: Observable<MCEmoji?> { get set }
+    /// The observed variable that is responsible for the choice of emoji category.
+    var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// Returns the number of categories with emojis.
+    func numberOfSections() -> Int
+    /// Returns the number of emojis in the target section.
+    func numberOfItems(in section: Int) -> Int
+    /// Returns the `MCEmoji` for the target `IndexPath`.
+    func emoji(at indexPath: IndexPath) -> MCEmoji
+    /// Returns the localized section name for the target section.
+    func sectionHeaderName(for section: Int) -> String
+    /// Updates the emoji skin tone and returns the updated `MCEmoji`.
+    func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji
+}
+
+/// View model which using in `MCEmojiPickerViewController`.
 final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     // MARK: - Public Properties
     
-    public var selectedEmoji = Observable<String>(value: "")
+    public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     
     // MARK: - Private Properties
@@ -50,11 +69,16 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
         return emojiCategories[section].emojis.count
     }
     
-    public func emoji(at indexPath: IndexPath) -> String {
-        return emojiCategories[indexPath.section].emojis[indexPath.row].emoji()
+    public func emoji(at indexPath: IndexPath) -> MCEmoji {
+        return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
     
-    public func sectionHeaderViewModel(for section: Int) -> String {
+    public func sectionHeaderName(for section: Int) -> String {
         return emojiCategories[section].categoryName
+    }
+    
+    public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
+        emojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
+        return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
 }
