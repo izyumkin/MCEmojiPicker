@@ -5,11 +5,29 @@
 [![Platform](https://img.shields.io/cocoapods/p/MCEmojiPicker.svg?style=flat)](https://cocoapods.org/pods/MCEmojiPicker)
 
 <p float="left">
-<img src="https://user-images.githubusercontent.com/50948518/172110164-b0dec76f-495d-4112-ad00-2708ffdda54a.gif" width="230">
-<img src="https://user-images.githubusercontent.com/50948518/171909950-ebf388f3-83a1-4b63-ad54-f58ba947e3bb.png" width="230">
+<img src="https://user-images.githubusercontent.com/50948518/216799717-25b3e4ed-b4c5-4166-91a2-72374b0564f9.gif" width="280">
 </p>
 
+
 I share the module out of my [application](https://apps.apple.com/ru/app/id1500111859) and make my own version of the emoji picker adaptation like on Mac.
+
+## Navigation
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+    - [CocoaPods](#cocoapods)
+    - [Swift Package Manager](#swift-package-manager)
+    - [Manually](#manually)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+    - [Selected emoji category tint color](#selected-emoji-category-tint-color)
+    - [Arrow direction](#arrow-direction)
+    - [Horizontal inset](#horizontal-inset)
+    - [Is dismiss after choosing](#is-dismiss-after-choosing)
+    - [Custom height](#custom-height)
+    - [Feedback generator style](#feedback-generator-style)
+- [Localization](#localization)
+- [TODO](#todo)
 
 ## Requirements
 
@@ -34,6 +52,10 @@ To integrate `MCEmojiPicker` into your Xcode project using Xcode 11, specify it 
 ```ogdl
 https://github.com/izyumkin/MCEmojiPicker
 ```
+
+### Manually
+
+If you prefer not to use any of the aforementioned dependency managers, you can integrate `MCEmojiPicker` into your project manually. Put `Source/MCEmojiPicker` folder in your Xcode project. Make sure to enable `Copy items if needed` and `Create groups`.
 
 ## Quick Start
 Create `UIButton` and add selector as action:
@@ -99,17 +121,15 @@ Feedback generator style. To turn off, set `nil` to this parameter. The default 
 viewController.feedBackGeneratorStyle = .soft
 ```
 
-## Features
+## Localization
+🌍 This library supports all existing localizations
+
+## TODO
 
 -   [x] The main functionality for choosing emojis
 -   [x] Dark mode
 -   [x] Segmented control for jumping an emoji section
 -   [x] Automatic adjustment of the relevant set of emoji for the iOS version
--   [ ] Select skin tones from popup
+-   [x] Select skin tones from popup
 -   [ ] Search bar and search results
 -   [ ] Recently used
-
-## Localizations
-* English 🇺🇸
-* Russian 🇷🇺
-* Ukraine 🇺🇦
