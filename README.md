@@ -8,8 +8,12 @@
 <img src="https://user-images.githubusercontent.com/50948518/216799717-25b3e4ed-b4c5-4166-91a2-72374b0564f9.gif" width="280">
 </p>
 
+## About
 
-I share the module out of my [application](https://apps.apple.com/ru/app/id1500111859) and make my own version of the emoji picker adaptation like on Mac.
+<b>It is a customizable library implementing macOS style emoji picker popover.</b>
+<br><br>
+If you are interested in how I developed it and what difficulties I encountered in the process, you can read an article on [Medium](https://medium.com/@izzyumkin/an-emoji-selection-element-aka-emojipicker-for-ios-like-in-macos-e2fa022b80af) about it.
+And if you like the project, don't forget to `put star ★`.
 
 ## Navigation
 
