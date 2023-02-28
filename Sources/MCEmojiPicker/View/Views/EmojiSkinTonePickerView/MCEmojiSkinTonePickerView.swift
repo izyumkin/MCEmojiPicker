@@ -173,7 +173,8 @@ final class MCEmojiSkinTonePickerView: UIView {
         let separatorSpacing = Constants.separatorInset * 2 + Constants.separatorWidth
         let itemsSpacing = Constants.stackViewSpacing * Double(MCEmojiSkinTone.allCases.count - 2)
         let allSpacings = separatorSpacing + itemsSpacing + Constants.horizontalAmountInset
-        let itemWidth = (backgroundView.contentFrame.width - allSpacings) / Double(MCEmojiSkinTone.allCases.count)
+        let itemWidth = round((backgroundView.contentFrame.width - allSpacings) / Double(MCEmojiSkinTone.allCases.count))
+        let stackViewWidth = (Constants.stackViewSpacing * 4) + (itemWidth * Double(MCEmojiSkinTone.allCases.count)) + separatorSpacing
         
         var arrangedSubviews: [UIView] = MCEmojiSkinTone.allCases.map({
             let label = UILabel()
@@ -208,9 +209,9 @@ final class MCEmojiSkinTonePickerView: UIView {
         contentStackView.alignment = .center
         contentStackView.spacing = Constants.stackViewSpacing
         contentStackView.frame = .init(
-            x: Constants.horizontalAmountInset / 2,
+            x: (backgroundView.bounds.size.width - stackViewWidth) / 2,
             y: Constants.topInset,
-            width: backgroundView.contentFrame.width - Constants.horizontalAmountInset,
+            width: stackViewWidth,
             height: itemHeight
         )
         contentStackView.setCustomSpacing(Constants.separatorInset, after: separatorView)
