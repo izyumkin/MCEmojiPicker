@@ -15,6 +15,14 @@
 If you are interested in how I developed it and what difficulties I encountered in the process, you can read an article on [Medium](https://medium.com/@izzyumkin/an-emoji-selection-element-aka-emojipicker-for-ios-like-in-macos-e2fa022b80af), [Habr](https://habr.com/ru/post/716194/) about it.
 And if you like the project, don't forget to `put star ★`.
 
+## Apps Using
+
+<p float="left">
+    <a href="https://apps.apple.com/app/id1500111859"><img src="http://izyumkin.ru/MCEmojiPicker/AppsUsing/id1500111859.png" height="65"></a>
+</p>
+
+If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more information you can see [contribution guide](https://github.com/izyumkin/MCEmojiPicker/blob/main/CONTRIBUTING.md).
+
 ## Navigation
 
 - [Requirements](#requirements)
