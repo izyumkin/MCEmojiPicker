@@ -215,7 +215,7 @@ extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
     }
     
     func getEmojiPickerFrame() -> CGRect {
-        presentationController?.presentedView?.frame ?? .zero
+        presentationController?.presentedView?.frame ?? view.frame
     }
     
     func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) {
