@@ -6,7 +6,7 @@ Here provided info about contribution process and recommendations.
 
 I try to follow the [Ray Wenderlich](https://github.com/RedMadRobot/RMR-swift-style-guide) code style. Please observe it too in this repository.
 
-## AppsUsing section
+## Apps Using section
 
 To add your application to this list, just add this line of code to [README.md](https://github.com/izyumkin/MCEmojiPicker/blob/main/README.md) file by replacing only the application identifiers with yours.
 
