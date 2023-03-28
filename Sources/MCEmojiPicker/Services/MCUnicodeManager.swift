@@ -46,8 +46,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
             return 13.0
         case 14.5...15.3:
             return 13.1
-        case 15.4...:
+        case 15.4...16.3:
             return 14.0
+        case 16.4...:
+            return 15.0
         default:
             return 5.0
         }
