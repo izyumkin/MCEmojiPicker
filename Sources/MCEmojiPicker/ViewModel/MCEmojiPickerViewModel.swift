@@ -32,6 +32,8 @@ protocol MCEmojiPickerViewModelProtocol {
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
     var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// Clears the selected emoji, setting to `nil`.
+    func clearSelectedEmoji()
     /// Returns the number of categories with emojis.
     func numberOfSections() -> Int
     /// Returns the number of emojis in the target section.
@@ -73,6 +75,10 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     }
     
     // MARK: - Public Methods
+    
+    public func clearSelectedEmoji() {
+        selectedEmoji.value = nil
+    }
     
     public func numberOfSections() -> Int {
         return emojiCategories.count
