@@ -88,10 +88,12 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var emojiPickerView = MCEmojiPickerView(delegate: self)
-    
     private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
     private var viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()
+    private lazy var emojiPickerView: MCEmojiPickerView = {
+        let categories = viewModel.emojiCategories.map { $0.type }
+        return MCEmojiPickerView(categoryTypes: categories, delegate: self)
+    }()
     
     // MARK: - Initializers
     
