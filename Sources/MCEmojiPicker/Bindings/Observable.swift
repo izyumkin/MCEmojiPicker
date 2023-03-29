@@ -34,14 +34,14 @@ final class Observable<T> {
     /// The `didSet` block ensures that the `Listener` closure is called whenever the value changes.
     public var value: T {
         didSet {
-            listener?(value)
+            listeners.forEach { $0(value) }
         }
     }
     
     // MARK: - Private Properties
     
     /// Holds a closure that will be called whenever the value changes.
-    private var listener: Listener?
+    private var listeners = [Listener]()
     
     // MARK: - Initializers
     
@@ -53,6 +53,6 @@ final class Observable<T> {
     
     /// Allows you to set the `Listener` closure.
     public func bind(_ listener: @escaping Listener) {
-        self.listener = listener
+        self.listeners.append(listener)
     }
 }
