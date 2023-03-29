@@ -65,6 +65,11 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager()) {
         allEmojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
+        
+        // Increment usage of each emoji upon selection
+        selectedEmoji.bind { emoji in
+            emoji?.incrementUsageCount()
+        }
     }
     
     // MARK: - Public Methods
@@ -86,7 +91,9 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     }
     
     public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
-        allEmojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
-        return emojiCategories[indexPath.section].emojis[indexPath.row]
+        let categoryType: MCEmojiCategoryType = emojiCategories[indexPath.section].type
+        let allCategoriesIndex: Int = allEmojiCategories.firstIndex { $0.type == categoryType } ?? 0
+        allEmojiCategories[allCategoriesIndex].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
+        return allEmojiCategories[allCategoriesIndex].emojis[indexPath.row]
     }
 }

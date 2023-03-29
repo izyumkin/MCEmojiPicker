@@ -390,7 +390,6 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
             toggleCollectionScrollAbility(isEnabled: true)
             previewContainerView.removeFromSuperview()
         }
-        emoji?.incrementUsageCount()
         delegate?.didSelectEmoji(emoji)
     }
 }
@@ -416,7 +415,7 @@ extension MCEmojiPickerView: MCEmojiSkinTonePickerDelegate {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         delegate?.updateEmojiSkinTone(skinToneRawValue, in: indexPath)
         UIView.performWithoutAnimation {
-            collectionView.reloadItems(at: [indexPath])
+            collectionView.reloadData()
         }
     }
     
