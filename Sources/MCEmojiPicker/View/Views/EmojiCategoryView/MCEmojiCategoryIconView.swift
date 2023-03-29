@@ -119,6 +119,8 @@ extension MCEmojiCategoryIconView {
             )
         )
         switch type {
+        case .frequentlyUsed:
+            CategoryIconsDrawKit.drawFrequentyUsedCategory(frame: rect, tintColor: currentIconTintColor)
         case .people:
             CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: currentIconTintColor)
         case .nature:
@@ -184,6 +186,47 @@ extension MCEmojiCategoryIconView {
         }
 
         // MARK: - People Category
+        
+        public class func drawFrequentyUsedCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+            guard let context = UIGraphicsGetCurrentContext() else { return }
+            
+            context.saveGState()
+            let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 400, height: 400), target: targetFrame)
+            context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+            context.scaleBy(x: resizedFrame.width / 400, y: resizedFrame.height / 400)
+            
+            let shape = UIBezierPath()
+            shape.move(to: CGPoint(x: 89.74, y: 215.05))
+            shape.addLine(to: CGPoint(x: 195.75, y: 215.05))
+            shape.addCurve(to: CGPoint(x: 206.58, y: 204.28), controlPoint1: CGPoint(x: 201.8, y: 215.05), controlPoint2: CGPoint(x: 206.58, y: 210.46))
+            shape.addLine(to: CGPoint(x: 206.58, y: 67.37))
+            shape.addCurve(to: CGPoint(x: 195.75, y: 56.86), controlPoint1: CGPoint(x: 206.58, y: 61.39), controlPoint2: CGPoint(x: 201.8, y: 56.86))
+            shape.addCurve(to: CGPoint(x: 185.24, y: 67.37), controlPoint1: CGPoint(x: 189.89, y: 56.86), controlPoint2: CGPoint(x: 185.24, y: 61.39))
+            shape.addLine(to: CGPoint(x: 185.24, y: 193.77))
+            shape.addLine(to: CGPoint(x: 89.74, y: 193.77))
+            shape.addCurve(to: CGPoint(x: 79.04, y: 204.28), controlPoint1: CGPoint(x: 83.57, y: 193.77), controlPoint2: CGPoint(x: 79.04, y: 198.36))
+            shape.addCurve(to: CGPoint(x: 89.74, y: 215.05), controlPoint1: CGPoint(x: 79.04, y: 210.46), controlPoint2: CGPoint(x: 83.57, y: 215.05))
+            shape.close()
+            shape.move(to: CGPoint(x: 195.89, y: 391.78))
+            shape.addCurve(to: CGPoint(x: 391.84, y: 195.89), controlPoint1: CGPoint(x: 303.3, y: 391.78), controlPoint2: CGPoint(x: 391.84, y: 303.1))
+            shape.addCurve(to: CGPoint(x: 195.75, y: 0), controlPoint1: CGPoint(x: 391.84, y: 88.54), controlPoint2: CGPoint(x: 303.16, y: 0))
+            shape.addCurve(to: CGPoint(x: 0, y: 195.89), controlPoint1: CGPoint(x: 88.54, y: 0), controlPoint2: CGPoint(x: 0, y: 88.54))
+            shape.addCurve(to: CGPoint(x: 195.89, y: 391.78), controlPoint1: CGPoint(x: 0, y: 303.1), controlPoint2: CGPoint(x: 88.67, y: 391.78))
+            shape.close()
+            shape.move(to: CGPoint(x: 195.89, y: 366.45))
+            shape.addCurve(to: CGPoint(x: 25.47, y: 195.89), controlPoint1: CGPoint(x: 101.4, y: 366.45), controlPoint2: CGPoint(x: 25.47, y: 290.38))
+            shape.addCurve(to: CGPoint(x: 195.75, y: 25.27), controlPoint1: CGPoint(x: 25.47, y: 101.4), controlPoint2: CGPoint(x: 101.27, y: 25.27))
+            shape.addCurve(to: CGPoint(x: 366.51, y: 195.89), controlPoint1: CGPoint(x: 290.24, y: 25.27), controlPoint2: CGPoint(x: 366.51, y: 101.4))
+            shape.addCurve(to: CGPoint(x: 195.89, y: 366.45), controlPoint1: CGPoint(x: 366.51, y: 290.38), controlPoint2: CGPoint(x: 290.38, y: 366.45))
+            shape.close()
+
+
+            tintColor.setFill()
+            shape.lineWidth = 20
+            shape.fill()
+            
+            context.restoreGState()
+        }
 
         public class func drawPeopleCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
