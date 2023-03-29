@@ -29,13 +29,21 @@ struct MCEmoji {
     
     /// A boolean indicating whether the skin for this emoji has been selected before.
     public var isSkinBeenSelectedBefore: Bool {
-        return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
+        UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key) != 0
     }
     /// The current skin tone for this emoji, if one has been selected.
     public var skinTone: MCEmojiSkinTone? {
-        return MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(
-            forKey: emojiKeys.emoji()
-        ))
+        MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key))
+    }
+    /// The number of times this emoji has been selected.
+    public var usageCount: Int {
+        usage.count
+    }
+    public var usage: [TimeInterval] {
+        (UserDefaults.standard.array(forKey: StorageKeys.usageTimestamps(self).key) as? [TimeInterval]) ?? []
+    }
+    public var lastUsage: TimeInterval {
+        usage.first ?? .nan
     }
     
     /// The string representation of the emoji.
@@ -83,6 +91,12 @@ struct MCEmoji {
         string = getEmoji()
     }
     
+    /// Increments the usage count for this emoji.
+    public func incrementUsageCount() {
+        let nowTimestamp = Date().timeIntervalSince1970
+        UserDefaults.standard.set([nowTimestamp] + usage, forKey: StorageKeys.usageTimestamps(self).key)
+    }
+    
     // MARK: - Private Methods
     
     /// Returns the string representation of this smiley. Considering the skin tone, if it has been selected.
@@ -96,6 +110,25 @@ struct MCEmoji {
         bufferEmojiKeys.insert(skinToneKey, at: 1)
         return bufferEmojiKeys.emoji()
     }
+}
+
+fileprivate extension MCEmoji {
+    
+    // Keys for storage in UserDefaults
+    private enum StorageKeys {
+        case skinTone(_ emoji: MCEmoji)
+        case usageTimestamps(_ emoji: MCEmoji)
+
+        var key: String {
+            switch self {
+            case .skinTone(let emoji):
+                return emoji.emojiKeys.emoji()
+            case .usageTimestamps(let emoji):
+                return StorageKeys.skinTone(emoji).key + "-usage-timestamps"
+            }
+        }
+    }
+    
 }
 
 /// This enumeration allows you to determine which skin tones can be set for `MCEmoji`.

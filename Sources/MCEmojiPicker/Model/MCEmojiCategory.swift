@@ -30,6 +30,7 @@ struct MCEmojiCategory {
 
 /// This enumeration shows a list of categories that are contained in the main collection.
 enum MCEmojiCategoryType: Int, CaseIterable {
+    case frequentlyUsed
     case people
     case nature
     case foodAndDrink
@@ -42,6 +43,8 @@ enum MCEmojiCategoryType: Int, CaseIterable {
     /// A constant key for accessing name localization resources for each category.
     var localizeKey: String {
         switch self {
+        case .frequentlyUsed:
+            return "frequentlyUsed"
         case .people:
             return "emotionsAndPeople"
         case .nature:
