@@ -24,6 +24,10 @@ import Foundation
 
 /// Protocol for the `MCEmojiPickerViewModel`.
 protocol MCEmojiPickerViewModelProtocol {
+    /// Whether the picker shows empty categories. Default false.
+    var showEmptyEmojiCategories: Bool { get set }
+    /// The emoji categories being used
+    var emojiCategories: [MCEmojiCategory] { get }
     /// The observed variable that is responsible for the choice of emoji.
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
@@ -48,14 +52,14 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     public var showEmptyEmojiCategories = false
+    public var emojiCategories: [MCEmojiCategory] {
+        allEmojiCategories.filter { showEmptyEmojiCategories || $0.emojis.count > 0 }
+    }
     
     // MARK: - Private Properties
     
     /// All emoji categories.
     private var allEmojiCategories = [MCEmojiCategory]()
-    private var emojiCategories: [MCEmojiCategory] {
-        allEmojiCategories.filter { showEmptyEmojiCategories || $0.emojis.count > 0 }
-    }
     
     // MARK: - Initializers
     

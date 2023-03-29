@@ -67,6 +67,8 @@ final class MCEmojiPickerView: UIView {
     
     // MARK: - Private Properties
     
+    private let emojiCategoryTypes: [MCEmojiCategoryType]
+    
     private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -108,8 +110,9 @@ final class MCEmojiPickerView: UIView {
     
     // MARK: - Initializers
     
-    init(delegate: MCEmojiPickerViewDelegate) {
+    init(categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases, delegate: MCEmojiPickerViewDelegate) {
         self.delegate = delegate
+        self.emojiCategoryTypes = categoryTypes
         super.init(frame: .zero)
         setupBackgroundColor()
         setupCategoryViews()
@@ -199,10 +202,11 @@ final class MCEmojiPickerView: UIView {
     }
     
     private func setupCategoryViews() {
-        for categoryIndex in 0...MCEmojiCategoryType.allCases.count - 1 {
+        for categoryIndex in 0...emojiCategoryTypes.count - 1 {
             let categoryView = MCTouchableEmojiCategoryView(
                 delegate: self,
                 categoryIndex: categoryIndex,
+                categoryType: emojiCategoryTypes[categoryIndex],
                 selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor
             )
             // Installing selected state for first category.

@@ -45,6 +45,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     /// Returns all emojis available for the current device's iOS version.
     func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory] {
         let frequentlyUsedEmojis: MCEmojiCategory = .init(
+            type: .frequentlyUsed,
             categoryName: MCEmojiCategoryType.frequentlyUsed.emojiCategoryTitle,
             emojis: getFrequentlyUsedEmojis()
         )
@@ -122,6 +123,7 @@ fileprivate extension MCUnicodeManager {
     ]
     
     private static let peopleEmojis: MCEmojiCategory = .init(
+        type: .people,
         categoryName: MCEmojiCategoryType.people.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -3302,6 +3304,7 @@ fileprivate extension MCUnicodeManager {
     )
             
     private static let natureEmojis: MCEmojiCategory = .init(
+        type: .nature,
         categoryName: MCEmojiCategoryType.nature.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -4220,6 +4223,7 @@ fileprivate extension MCUnicodeManager {
     )
     
     private static let foodAndDrinkEmojis: MCEmojiCategory = .init(
+        type: .foodAndDrink,
         categoryName: MCEmojiCategoryType.foodAndDrink.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -5024,6 +5028,7 @@ fileprivate extension MCUnicodeManager {
     )
             
     private static let activityEmojis: MCEmojiCategory = .init(
+        type: .activity,
         categoryName: MCEmojiCategoryType.activity.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -5540,6 +5545,7 @@ fileprivate extension MCUnicodeManager {
     )
     
     private static let travelAndPlacesEmojis: MCEmojiCategory = .init(
+        type: .travelAndPlaces,
         categoryName: MCEmojiCategoryType.travelAndPlaces.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -6854,6 +6860,7 @@ fileprivate extension MCUnicodeManager {
     )
     
     private static let objectEmojis: MCEmojiCategory = .init(
+        type: .objects,
         categoryName: MCEmojiCategoryType.objects.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -8426,6 +8433,7 @@ fileprivate extension MCUnicodeManager {
     )
     
     private static let symbolEmojis: MCEmojiCategory = .init(
+        type: .symbols,
         categoryName: MCEmojiCategoryType.symbols.emojiCategoryTitle,
         emojis: [
             MCEmoji(
@@ -9770,6 +9778,7 @@ fileprivate extension MCUnicodeManager {
     )
     
     private static let flagEmojis: MCEmojiCategory = .init(
+        type: .flags,
         categoryName: MCEmojiCategoryType.flags.emojiCategoryTitle,
         emojis: [
             MCEmoji(

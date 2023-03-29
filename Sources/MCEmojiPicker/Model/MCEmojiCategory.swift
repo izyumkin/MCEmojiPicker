@@ -24,6 +24,7 @@ import Foundation
 
 /// The main model that is used to configure the main collection.
 struct MCEmojiCategory {
+    var type: MCEmojiCategoryType
     var categoryName: String
     var emojis: [MCEmoji]
 }

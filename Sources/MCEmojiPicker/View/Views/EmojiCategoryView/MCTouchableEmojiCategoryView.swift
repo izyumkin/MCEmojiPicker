@@ -54,12 +54,13 @@ final class MCTouchableEmojiCategoryView: UIView {
     init(
         delegate: MCEmojiCategoryViewDelegate,
         categoryIndex: Int,
+        categoryType: MCEmojiCategoryType,
         selectedEmojiCategoryTintColor: UIColor
     ) {
         self.delegate = delegate
         self.categoryIndex = categoryIndex
         self.categoryIconView = MCEmojiCategoryIconView(
-            type: MCEmojiCategoryType(rawValue: categoryIndex) ?? .people,
+            type: categoryType,
             selectedIconTintColor: selectedEmojiCategoryTintColor
         )
         super.init(frame: .zero)
