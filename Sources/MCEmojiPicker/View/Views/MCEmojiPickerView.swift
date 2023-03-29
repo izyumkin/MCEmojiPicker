@@ -26,8 +26,8 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
     /// Processes an event by category selection.
     ///
     /// - Parameter index: index of the selected category.
-    func didChoiceEmojiCategory(at index: Int)
-    func didChoiceEmoji(_ emoji: MCEmoji?)
+    func didSelectEmojiCategory(at index: Int)
+    func didSelectEmoji(_ emoji: MCEmoji?)
     func numberOfSections() -> Int
     func numberOfItems(in section: Int) -> Int
     func emoji(at indexPath: IndexPath) -> MCEmoji
@@ -391,7 +391,7 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
             previewContainerView.removeFromSuperview()
         }
         emoji?.incrementUsageCount()
-        delegate?.didChoiceEmoji(emoji)
+        delegate?.didSelectEmoji(emoji)
     }
 }
 
@@ -402,7 +402,7 @@ extension MCEmojiPickerView: MCEmojiCategoryViewDelegate {
     func didChoiceCategory(at index: Int) {
         scrollToHeader(for: index)
         delegate?.feedbackImpactOccurred()
-        delegate?.didChoiceEmojiCategory(at: index)
+        delegate?.didSelectEmojiCategory(at: index)
     }
 }
 

@@ -188,7 +188,7 @@ public final class MCEmojiPickerViewController: UIViewController {
 // MARK: - EmojiPickerViewDelegate
 
 extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
-    func didChoiceEmojiCategory(at index: Int) {
+    func didSelectEmojiCategory(at index: Int) {
         updateCurrentSelectedEmojiCategoryIndex(with: index)
     }
     
@@ -231,7 +231,7 @@ extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
         generator?.impactOccurred()
     }
     
-    func didChoiceEmoji(_ emoji: MCEmoji?) {
+    func didSelectEmoji(_ emoji: MCEmoji?) {
         viewModel.selectedEmoji.value = emoji
     }
 }
