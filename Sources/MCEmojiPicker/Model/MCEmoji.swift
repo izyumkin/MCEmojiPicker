@@ -29,11 +29,12 @@ struct MCEmoji {
     
     /// A boolean indicating whether the skin for this emoji has been selected before.
     public var isSkinBeenSelectedBefore: Bool {
-        UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key) != 0
+        skinTone != nil
     }
     /// The current skin tone for this emoji, if one has been selected.
     public var skinTone: MCEmojiSkinTone? {
-        MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key))
+        let skinToneRawValue = UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key)
+        return MCEmojiSkinTone(rawValue: skinToneRawValue)
     }
     /// The number of times this emoji has been selected.
     public var usageCount: Int {
@@ -43,7 +44,7 @@ struct MCEmoji {
         (UserDefaults.standard.array(forKey: StorageKeys.usageTimestamps(self).key) as? [TimeInterval]) ?? []
     }
     public var lastUsage: TimeInterval {
-        usage.first ?? .nan
+        usage.first ?? .zero
     }
     
     /// The string representation of the emoji.
@@ -87,7 +88,7 @@ struct MCEmoji {
     /// - Parameters:
     ///   - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
     public mutating func set(skinToneRawValue: Int) {
-        UserDefaults.standard.set(skinToneRawValue, forKey: emojiKeys.emoji())
+        UserDefaults.standard.set(skinToneRawValue, forKey: StorageKeys.skinTone(self).key)
         string = getEmoji()
     }
     
