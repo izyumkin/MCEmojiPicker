@@ -47,16 +47,20 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
+    public var showEmptyEmojiCategories = false
     
     // MARK: - Private Properties
     
     /// All emoji categories.
-    private var emojiCategories = [MCEmojiCategory]()
+    private var allEmojiCategories = [MCEmojiCategory]()
+    private var emojiCategories: [MCEmojiCategory] {
+        allEmojiCategories.filter { showEmptyEmojiCategories || $0.emojis.count > 0 }
+    }
     
     // MARK: - Initializers
     
     init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager()) {
-        emojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
+        allEmojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
     }
     
     // MARK: - Public Methods
@@ -78,7 +82,7 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     }
     
     public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
-        emojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
+        allEmojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
         return emojiCategories[indexPath.section].emojis[indexPath.row]
     }
 }

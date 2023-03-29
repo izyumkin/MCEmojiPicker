@@ -386,6 +386,7 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
             toggleCollectionScrollAbility(isEnabled: true)
             previewContainerView.removeFromSuperview()
         }
+        emoji?.incrementUsageCount()
         delegate?.didChoiceEmoji(emoji)
     }
 }
