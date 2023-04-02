@@ -183,7 +183,7 @@ final class MCEmojiSkinTonePickerView: UIView {
             label.heightAnchor.constraint(equalToConstant: itemHeight).isActive = true
             label.clipsToBounds = true
             label.layer.cornerRadius = itemHeight * 0.12
-            label.font = UIFont.systemFont(ofSize: 29)
+            label.font = UIFont.systemFont(ofSize: 29.fit(isOnlyToIncrease: false))
             var emojiKey = emoji?.emojiKeys ?? []
             if let skinToneKey = $0.skinKey {
                 emojiKey.insert(skinToneKey, at: 1)

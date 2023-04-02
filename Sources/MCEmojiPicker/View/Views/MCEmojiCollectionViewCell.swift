@@ -43,7 +43,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
     
     private enum Constants {
-        static let emojiLabelFontSize = 29.0
+        static let emojiLabelFontSize = 29.0.fit()
         static let emojiLabelInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: -2)
         
         static let containerCornerRadius = 8.0

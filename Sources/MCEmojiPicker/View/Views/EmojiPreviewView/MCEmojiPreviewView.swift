@@ -28,7 +28,7 @@ final class MCEmojiPreviewView: UIView {
     
     private let emojiLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30)
+        label.font = UIFont.systemFont(ofSize: 30.fit())
         label.textAlignment = .center
         return label
     }()
