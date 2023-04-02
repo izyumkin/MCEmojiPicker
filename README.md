@@ -15,6 +15,13 @@
 If you are interested in how I developed it and what difficulties I encountered in the process, you can read an article on [Medium](https://medium.com/@izzyumkin/an-emoji-selection-element-aka-emojipicker-for-ios-like-in-macos-e2fa022b80af), [Habr](https://habr.com/ru/post/716194/) about it.
 And if you like the project, don't forget to `put star ★`.
 
+#### Limitations
+- Does not support two part emojis. For example:
+  - [x] Supported: 🤝🏻 🤝🏿
+  - [ ] Not supported: 🫱🏿‍🫲🏻 🫱🏼‍🫲🏿
+  
+If you know how to fix it - welcome to the [discussion](https://github.com/izyumkin/MCEmojiPicker/discussions/10).
+
 ## Apps Using
 
 <p float="left">
@@ -144,4 +151,12 @@ viewController.feedBackGeneratorStyle = .soft
 -   [x] Automatic adjustment of the relevant set of emoji for the iOS version
 -   [x] Select skin tones from popup
 -   [ ] Search bar and search results
--   [ ] Recently used
+-   [ ] Frequently used
+
+
+
+
+
+
+
+
