@@ -200,7 +200,7 @@ final class MCEmojiCollectionViewCell: UICollectionViewCell {
         )
         choiceSkinToneLongPressGesture.delegate = self
         previewLongPressGesture.delegate = self
-        previewLongPressGesture.minimumPressDuration = 0.15
+        previewLongPressGesture.minimumPressDuration = 0.3
         containerView.addGestureRecognizer(previewLongPressGesture)
         containerView.addGestureRecognizer(choiceSkinToneLongPressGesture)
     }
