@@ -29,15 +29,27 @@ protocol MCUnicodeManagerProtocol {
     func getEmojisForCurrentIOSVersion() -> [MCEmojiCategory]
 }
 
+fileprivate extension MCEmojiCategoryType {
+    var emojiCategoryTitle: String {
+        NSLocalizedString(
+            self.localizeKey,
+            tableName: "MCEmojiPickerLocalizable",
+            bundle: .module,
+            comment: ""
+        )
+    }
+}
+
 /// The class is responsible for getting a relevant set of emojis for iOS version.
 final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     /// The maximum number of frequently used emojis to include in the `frequentlyUsed` category.
-    public let maxFrequentlyUsedEmojis: Int
+    public let maxFrequentlyUsedEmojisCount: Int
     
     // MARK: - Initializers
-    public init(maxFrequentlyUsedEmojis: Int = 16) {
-        self.maxFrequentlyUsedEmojis = maxFrequentlyUsedEmojis
+    
+    public init(maxFrequentlyUsedEmojis: Int = 30) {
+        self.maxFrequentlyUsedEmojisCount = maxFrequentlyUsedEmojis
     }
     
     // MARK: - Public Methods
@@ -58,17 +70,17 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     private func getFrequentlyUsedEmojis() -> [MCEmoji] {
         Array(
             defaultEmojis
-                .flatMap { $0.emojis }
-                .filter { $0.usageCount > 0 }
-                .sorted { a, b in
-                    let (aUsage, bUsage) = (a.usage, b.usage)
+                .flatMap({ $0.emojis })
+                .filter({ $0.usageCount > 0 })
+                .sorted(by: { lhs, rhs in
+                    let (aUsage, bUsage) = (lhs.usage, rhs.usage)
                     guard aUsage.count != bUsage.count else {
                         // Break ties with most recent usage
-                        return a.lastUsage > b.lastUsage
+                        return lhs.lastUsage > rhs.lastUsage
                     }
                     return aUsage.count > bUsage.count
-                }
-                .prefix(maxFrequentlyUsedEmojis)
+                })
+                .prefix(maxFrequentlyUsedEmojisCount)
         )
     }
 
@@ -11383,18 +11395,5 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
             )
         ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
     )
-    
-}
-
-fileprivate extension MCEmojiCategoryType {
-    
-    var emojiCategoryTitle: String {
-        NSLocalizedString(
-            self.localizeKey,
-            tableName: "MCEmojiPickerLocalizable",
-            bundle: .module,
-            comment: ""
-        )
-    }
     
 }
