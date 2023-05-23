@@ -150,8 +150,8 @@ viewController.feedBackGeneratorStyle = .soft
 -   [x] Segmented control for jumping an emoji section
 -   [x] Automatic adjustment of the relevant set of emoji for the iOS version
 -   [x] Select skin tones from popup
+-   [x] Frequently used
 -   [ ] Search bar and search results
--   [ ] Frequently used
 
 
 
