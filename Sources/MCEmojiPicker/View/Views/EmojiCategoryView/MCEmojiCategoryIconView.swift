@@ -120,7 +120,7 @@ extension MCEmojiCategoryIconView {
         )
         switch type {
         case .frequentlyUsed:
-            CategoryIconsDrawKit.drawFrequentyUsedCategory(frame: rect, tintColor: currentIconTintColor)
+            CategoryIconsDrawKit.drawFrequentlyUsedCategory(frame: rect, tintColor: currentIconTintColor)
         case .people:
             CategoryIconsDrawKit.drawPeopleCategory(frame: rect, tintColor: currentIconTintColor)
         case .nature:
@@ -187,7 +187,7 @@ extension MCEmojiCategoryIconView {
 
         // MARK: - People Category
         
-        public class func drawFrequentyUsedCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
+        public class func drawFrequentlyUsedCategory(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 400, height: 400), resizing: ResizingBehavior = .aspectFit, tintColor: UIColor) {
             guard let context = UIGraphicsGetCurrentContext() else { return }
             
             context.saveGState()
@@ -219,10 +219,7 @@ extension MCEmojiCategoryIconView {
             shape.addCurve(to: CGPoint(x: 366.51, y: 195.89), controlPoint1: CGPoint(x: 290.24, y: 25.27), controlPoint2: CGPoint(x: 366.51, y: 101.4))
             shape.addCurve(to: CGPoint(x: 195.89, y: 366.45), controlPoint1: CGPoint(x: 366.51, y: 290.38), controlPoint2: CGPoint(x: 290.38, y: 366.45))
             shape.close()
-
-
             tintColor.setFill()
-            shape.lineWidth = 20
             shape.fill()
             
             context.restoreGState()
