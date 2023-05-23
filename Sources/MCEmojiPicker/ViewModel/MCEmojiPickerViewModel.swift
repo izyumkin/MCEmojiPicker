@@ -24,10 +24,16 @@ import Foundation
 
 /// Protocol for the `MCEmojiPickerViewModel`.
 protocol MCEmojiPickerViewModelProtocol {
+    /// Whether the picker shows empty categories. Default false.
+    var showEmptyEmojiCategories: Bool { get set }
+    /// The emoji categories being used
+    var emojiCategories: [MCEmojiCategory] { get }
     /// The observed variable that is responsible for the choice of emoji.
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
     var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// Clears the selected emoji, setting to `nil`.
+    func clearSelectedEmoji()
     /// Returns the number of categories with emojis.
     func numberOfSections() -> Int
     /// Returns the number of emojis in the target section.
@@ -47,19 +53,31 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
+    public var showEmptyEmojiCategories = false
+    public var emojiCategories: [MCEmojiCategory] {
+        allEmojiCategories.filter({ showEmptyEmojiCategories || $0.emojis.count > 0 })
+    }
     
     // MARK: - Private Properties
     
     /// All emoji categories.
-    private var emojiCategories = [MCEmojiCategory]()
+    private var allEmojiCategories = [MCEmojiCategory]()
     
     // MARK: - Initializers
     
     init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager()) {
-        emojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
+        allEmojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
+        // Increment usage of each emoji upon selection
+        selectedEmoji.bind { emoji in
+            emoji?.incrementUsageCount()
+        }
     }
     
     // MARK: - Public Methods
+    
+    public func clearSelectedEmoji() {
+        selectedEmoji.value = nil
+    }
     
     public func numberOfSections() -> Int {
         return emojiCategories.count
@@ -78,7 +96,9 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     }
     
     public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
-        emojiCategories[indexPath.section].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
-        return emojiCategories[indexPath.section].emojis[indexPath.row]
+        let categoryType: MCEmojiCategoryType = emojiCategories[indexPath.section].type
+        let allCategoriesIndex: Int = allEmojiCategories.firstIndex { $0.type == categoryType } ?? 0
+        allEmojiCategories[allCategoriesIndex].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
+        return allEmojiCategories[allCategoriesIndex].emojis[indexPath.row]
     }
 }

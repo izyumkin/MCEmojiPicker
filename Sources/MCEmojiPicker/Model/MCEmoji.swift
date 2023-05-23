@@ -25,17 +25,45 @@ import Foundation
 /// The main model for interacting with emojis.
 struct MCEmoji {
     
+    // MARK: - Types
+    
+    /// Keys for storage in UserDefaults.
+    private enum StorageKeys {
+        case skinTone(_ emoji: MCEmoji)
+        case usageTimestamps(_ emoji: MCEmoji)
+
+        var key: String {
+            switch self {
+            case .skinTone(let emoji):
+                return emoji.emojiKeys.emoji()
+            case .usageTimestamps(let emoji):
+                return StorageKeys.skinTone(emoji).key + "-usage-timestamps"
+            }
+        }
+    }
+    
     // MARK: - Public Properties
     
     /// A boolean indicating whether the skin for this emoji has been selected before.
     public var isSkinBeenSelectedBefore: Bool {
-        return UserDefaults.standard.integer(forKey: emojiKeys.emoji()) != 0
+        skinTone != nil
     }
     /// The current skin tone for this emoji, if one has been selected.
     public var skinTone: MCEmojiSkinTone? {
-        return MCEmojiSkinTone(rawValue: UserDefaults.standard.integer(
-            forKey: emojiKeys.emoji()
-        ))
+        let skinToneRawValue = UserDefaults.standard.integer(forKey: StorageKeys.skinTone(self).key)
+        return MCEmojiSkinTone(rawValue: skinToneRawValue)
+    }
+    /// All times when the emoji has been selected.
+    public var usage: [TimeInterval] {
+        (UserDefaults.standard.array(forKey: StorageKeys.usageTimestamps(self).key) as? [TimeInterval]) ?? []
+    }
+    /// The number of times this emoji has been selected.
+    public var usageCount: Int {
+        usage.count
+    }
+    /// The last time when this emoji has been selected.
+    public var lastUsage: TimeInterval {
+        usage.first ?? .zero
     }
     
     /// The string representation of the emoji.
@@ -79,8 +107,14 @@ struct MCEmoji {
     /// - Parameters:
     ///   - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
     public mutating func set(skinToneRawValue: Int) {
-        UserDefaults.standard.set(skinToneRawValue, forKey: emojiKeys.emoji())
+        UserDefaults.standard.set(skinToneRawValue, forKey: StorageKeys.skinTone(self).key)
         string = getEmoji()
+    }
+    
+    /// Increments the usage count for this emoji.
+    public func incrementUsageCount() {
+        let nowTimestamp = Date().timeIntervalSince1970
+        UserDefaults.standard.set([nowTimestamp] + usage, forKey: StorageKeys.usageTimestamps(self).key)
     }
     
     // MARK: - Private Methods
