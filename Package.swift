@@ -3,15 +3,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "EmojiPicker",
+    name: "MCEmojiPicker",
     defaultLocalization: "en",
     platforms: [.iOS("11.1")],
-    products: [.library(name: "EmojiPicker", targets: ["EmojiPicker"])],
+    products: [.library(name: "MCEmojiPicker", targets: ["MCEmojiPicker"])],
     dependencies: [],
     targets: [.target(
-        name: "EmojiPicker",
+        name: "MCEmojiPicker",
         dependencies: [],
-        path: "Sources/EmojiPicker"
+        path: "Sources/MCEmojiPicker"
     )],
     swiftLanguageVersions: [.v4_2]
 )
