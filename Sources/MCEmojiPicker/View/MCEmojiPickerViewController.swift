@@ -129,7 +129,6 @@ public final class MCEmojiPickerViewController: UIViewController {
         super.viewDidDisappear(animated)
         NotificationCenter.default.post(name: .MCEmojiPickerDidDisappear, object: nil)
     }
-
     
     // MARK: - Private Methods
     
