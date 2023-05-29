@@ -24,9 +24,38 @@ import SwiftUI
 
 @available(iOS 13, *)
 extension View {
-    @ViewBuilder public func emojiPicker(isPresented: Binding<Bool>) -> some View {
+    /// The method adds a macOS style emoji picker.
+    ///
+    /// - Parameters:
+    ///     - isPresented: Observed value which is responsible for the state of the picker.
+    ///     - selectedEmoji: Observed value which is updated by the selected emoji.
+    ///     - arrowDirection: The direction of the arrow for EmojiPicker.
+    ///     - customHeight: Custom height for EmojiPicker.
+    ///     - horizontalInset: Inset from the sourceView border.
+    ///     - isDismissAfterChoosing: A boolean value that determines whether the screen will be hidden after the emoji is selected.
+    ///     - selectedEmojiCategoryTintColor: Color for the selected emoji category.
+    ///     - feedBackGeneratorStyle: Feedback generator style. To turn off, set `nil` to this parameter.
+    @ViewBuilder public func emojiPicker(
+        isPresented: Binding<Bool>,
+        selectedEmoji: Binding<String>,
+        arrowDirection: MCPickerArrowDirection? = nil,
+        customHeight: CGFloat? = nil,
+        horizontalInset: CGFloat? = nil,
+        isDismissAfterChoosing: Bool? = nil,
+        selectedEmojiCategoryTintColor: UIColor? = nil,
+        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+    ) -> some View {
         self.overlay(
-            MCEmojiPickerRepresentableController(isPresented: isPresented)
+            MCEmojiPickerRepresentableController(
+                isPresented: isPresented,
+                selectedEmoji: selectedEmoji,
+                arrowDirection: arrowDirection,
+                customHeight: customHeight,
+                horizontalInset: horizontalInset,
+                isDismissAfterChoosing: isDismissAfterChoosing,
+                selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor,
+                feedBackGeneratorStyle: feedBackGeneratorStyle
+            )
                 .allowsHitTesting(false)
         )
     }
