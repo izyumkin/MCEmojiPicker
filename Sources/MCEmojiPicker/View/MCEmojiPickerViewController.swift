@@ -125,6 +125,11 @@ public final class MCEmojiPickerViewController: UIViewController {
         setupHorizontalInset()
     }
     
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.post(name: .MCEmojiPickerDidDisappear, object: nil)
+    }
+    
     // MARK: - Private Methods
     
     private func bindViewModel() {
