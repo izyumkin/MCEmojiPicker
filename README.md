@@ -45,12 +45,15 @@ If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more i
     - [Is dismiss after choosing](#is-dismiss-after-choosing)
     - [Custom height](#custom-height)
     - [Feedback generator style](#feedback-generator-style)
+- [SwiftUI](#swiftui)
 - [Localization](#localization)
 - [TODO](#todo)
 
 ## Requirements
 
-Swift `4.2` & `5.0`. Ready for use on iOS 11.1+
+- Swift `4.2` & `5.0`
+- Ready for use on iOS 11.1+
+- SwiftUI is supported from iOS 13.0
 
 ## Installation
 
@@ -140,6 +143,34 @@ Feedback generator style. To turn off, set `nil` to this parameter. The default 
 viewController.feedBackGeneratorStyle = .soft
 ```
 
+## SwiftUI
+
+Use like system popover. All settings are available in the method initializer.
+
+```swift
+Button(selectedEmoji) {
+    isPresented.toggle()
+}.emojiPicker(
+    isPresented: $isPresented,
+    selectedEmoji: $selectedEmoji
+)
+```
+
+or interact directly with the SwiftUI wrapper for the MCEmojiPickerViewController:
+
+```swift
+MCEmojiPickerRepresentableController(
+    isPresented: $isPresented,
+    selectedEmoji: $selectedEmoji,
+    arrowDirection: .up,
+    customHeight: 380.0,
+    horizontalInset: .zero,
+    isDismissAfterChoosing: true,
+    selectedEmojiCategoryTintColor: .systemBlue,
+    feedBackGeneratorStyle: .light
+)
+```
+
 ## Localization
 🌍 This library supports all existing localizations
 
@@ -152,11 +183,3 @@ viewController.feedBackGeneratorStyle = .soft
 -   [x] Select skin tones from popup
 -   [x] Frequently used
 -   [ ] Search bar and search results
-
-
-
-
-
-
-
-
