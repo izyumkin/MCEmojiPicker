@@ -123,7 +123,9 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
             context.coordinator.addPickerDismissingObserver()
             representableController.present(emojiPicker, animated: true)
         case false:
-            representableController.presentedViewController?.dismiss(animated: true)
+            if representableController.presentedViewController is MCEmojiPickerViewController {
+                representableController.presentedViewController?.dismiss(animated: true)
+            }
         }
     }
 }
