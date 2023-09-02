@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'MCEmojiPicker'
-  s.version = '1.2.1'
+  s.version = '1.2.2'
   s.license = 'MIT'
   s.summary = 'Emoji picker for iOS like on MacOS'
   s.homepage = 'https://github.com/izyumkin/MCEmojiPicker'
