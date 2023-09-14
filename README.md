@@ -52,7 +52,7 @@ If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more i
 ## Requirements
 
 - Swift `4.2` & `5.0`
-- Ready for use on iOS 11.1+
+- Ready for use on iOS 12.0+
 - SwiftUI is supported from iOS 13.0
 
 ## Installation
