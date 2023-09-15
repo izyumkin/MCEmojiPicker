@@ -101,6 +101,8 @@ extension ViewController: MCEmojiPickerDelegate {
 
 ## Usage
 
+`sourceView` is the view containing the anchor rectangle for the popover. You can create any `UIView` instance and set it in this property. 
+
 ### Selected emoji category tint color
 Color for the selected emoji category. The default value of this property is `.systemBlue`.
 
