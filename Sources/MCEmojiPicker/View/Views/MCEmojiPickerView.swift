@@ -115,7 +115,6 @@ final class MCEmojiPickerView: UIView {
         self.emojiCategoryTypes = categoryTypes
         super.init(frame: .zero)
         setupBackgroundColor()
-        setupCategoryViews()
         setupDelegates()
     }
     
@@ -127,6 +126,7 @@ final class MCEmojiPickerView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        setupCategoryViews()
         setupCollectionViewLayout()
         setupCollectionViewBottomInsets()
         setupCategoriesControlLayout()
