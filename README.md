@@ -26,6 +26,7 @@ If you know how to fix it - welcome to the [discussion](https://github.com/izyum
 
 <p float="left">
     <a href="https://apps.apple.com/app/id1500111859"><img src="http://izyumkin.ru/MCEmojiPicker/AppsUsing/id1500111859.png" height="65"></a>
+    <a href="https://apps.apple.com/app/id6450279059"><img src="https://izyumkin.ru/MCEmojiPicker/AppsUsing/id6450279059.png" height="65"></a>
 </p>
 
 If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more information you can see [contribution guide](https://github.com/izyumkin/MCEmojiPicker/blob/main/CONTRIBUTING.md).
