@@ -24,6 +24,7 @@ import UIKit
 
 public protocol MCEmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
+    func didClose()
 }
 
 public final class MCEmojiPickerViewController: UIViewController {
@@ -127,6 +128,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        delegate?.didClose()
         NotificationCenter.default.post(name: .MCEmojiPickerDidDisappear, object: nil)
     }
     
