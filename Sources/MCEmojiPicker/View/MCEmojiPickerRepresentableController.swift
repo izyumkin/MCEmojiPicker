@@ -155,6 +155,11 @@ extension MCEmojiPickerRepresentableController {
             representableController.selectedEmoji = emoji
         }
         
+        public func didClose() {
+            NotificationCenter.default.removeObserver(self, name: .MCEmojiPickerDidDisappear, object: nil)
+            representableController.isPresented = false
+        }
+        
         @objc public func pickerDismissingAction() {
             NotificationCenter.default.removeObserver(self, name: .MCEmojiPickerDidDisappear, object: nil)
             representableController.isPresented = false
