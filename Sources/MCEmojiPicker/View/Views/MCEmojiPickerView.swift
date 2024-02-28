@@ -26,6 +26,7 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
     /// Processes an event by category selection.
     ///
     /// - Parameter index: index of the selected category.
+    func isSearching() -> Bool
     func didChoiceEmojiCategory(at index: Int)
     func didChoiceEmoji(_ emoji: MCEmoji?)
     func numberOfSections() -> Int
@@ -37,38 +38,42 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
     func getEmojiPickerFrame() -> CGRect
     func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath)
     func feedbackImpactOccurred()
+    func search(_ searchTerm: String)
+    func clearSearch()
 }
 
 final class MCEmojiPickerView: UIView {
-    
+
     // MARK: - Public Properties
-    
+
     public var selectedEmojiCategoryTintColor = Constants.defaultSelectedEmojiCategoryTintColor
-    
+
     // MARK: - Constants
-    
+
     private enum Constants {
         static let defaultSelectedEmojiCategoryTintColor = UIColor.systemBlue
-        
+
         static let verticalScrollIndicatorTopInset = 8.0
         static let collectionViewContentInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        
+
         static let countOfEmojisInRow = 8.0
         static let collectionViewHeaderHeight = 40.0
-        
+
         static let categoriesStackViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-        
+
         static let separatorHeight = 0.8
         static let separatorColor = UIColor(
             light: UIColor(red: 0.78, green: 0.78, blue: 0.78, alpha: 1.0),
             dark: UIColor(red: 0.22, green: 0.22, blue: 0.23, alpha: 1.0)
         )
     }
-    
+
     // MARK: - Private Properties
-    
+
     private let emojiCategoryTypes: [MCEmojiCategoryType]
-    
+
+    private let enableSearch: Bool
+
     private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -88,7 +93,7 @@ final class MCEmojiPickerView: UIView {
         )
         return collectionView
     }()
-    
+
     private let categoriesStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,44 +101,54 @@ final class MCEmojiPickerView: UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    
+
+    private let searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.backgroundImage = UIImage()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
+    }()
+
     private var previewContainerView = UIView()
     private var categoryViews = [MCTouchableEmojiCategoryView]()
-    
+
     /// Height for categoriesStackView.
     private lazy var categoriesStackViewHeight: CGFloat = {
         // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
         return bounds.width * 0.13
     }()
-    
+
     private weak var delegate: MCEmojiPickerViewDelegate?
-    
+
     // MARK: - Initializers
-    
-    init(categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases, delegate: MCEmojiPickerViewDelegate) {
+
+    init(categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases, enableSearch: Bool, delegate: MCEmojiPickerViewDelegate) {
         self.delegate = delegate
         self.emojiCategoryTypes = categoryTypes
+        self.enableSearch = enableSearch
         super.init(frame: .zero)
         setupBackgroundColor()
         setupDelegates()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Life Cycle
-    
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         setupCategoryViews()
+        setupSearchBar()
+        setupSearchBarLayout()
         setupCollectionViewLayout()
         setupCollectionViewBottomInsets()
         setupCategoriesControlLayout()
     }
-    
+
     // MARK: - Public Methods
-    
+
     /// Passes the index of the selected category to all categoryViews to update the state.
     ///
     /// - Parameter categoryIndex: Selected category index.
@@ -142,41 +157,42 @@ final class MCEmojiPickerView: UIView {
             $0.updateCategoryViewState(selectedCategoryIndex: categoryIndex)
         })
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func setupBackgroundColor() {
         backgroundColor = .popoverBackgroundColor
     }
-    
+
     private func setupDelegates() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
     }
-    
+
     private func setupCollectionViewBottomInsets() {
         collectionView.contentInset.bottom = categoriesStackViewHeight
         collectionView.verticalScrollIndicatorInsets.bottom = categoriesStackViewHeight
     }
-    
+
     private func setupCollectionViewLayout() {
         addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: topAnchor, constant: safeAreaInsets.top),
+            collectionView.topAnchor.constraint(equalTo: enableSearch ? searchBar.bottomAnchor : topAnchor, constant: enableSearch ? 0 : safeAreaInsets.top),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -safeAreaInsets.bottom)
         ])
     }
-    
+
     private func setupCategoriesControlLayout() {
         let separatorView = UIView()
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.backgroundColor = Constants.separatorColor
-        
+
         addSubview(categoriesStackView)
         addSubview(separatorView)
-        
+
         NSLayoutConstraint.activate([
             categoriesStackView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -193,14 +209,56 @@ final class MCEmojiPickerView: UIView {
             categoriesStackView.heightAnchor.constraint(
                 equalToConstant: categoriesStackViewHeight
             ),
-            
+
             separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
             separatorView.topAnchor.constraint(equalTo: categoriesStackView.topAnchor),
             separatorView.heightAnchor.constraint(equalToConstant: Constants.separatorHeight)
         ])
     }
-    
+
+    private func setupSearchBarLayout() {
+        if !enableSearch {
+            return
+        }
+        let separatorView = UIView()
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.backgroundColor = Constants.separatorColor
+        addSubview(separatorView)
+
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(
+                equalTo: topAnchor, constant: safeAreaInsets.top
+            ),
+            searchBar.leadingAnchor.constraint(
+                equalTo: leadingAnchor
+            ),
+            searchBar.trailingAnchor.constraint(
+                equalTo: trailingAnchor
+            ),
+            separatorView.topAnchor.constraint(
+                equalTo: searchBar.bottomAnchor,
+                constant: -Constants.separatorHeight
+            ),
+            separatorView.leadingAnchor.constraint(
+                equalTo: leadingAnchor
+            ),
+            separatorView.trailingAnchor.constraint(
+                equalTo: trailingAnchor
+            ),
+            separatorView.heightAnchor.constraint(
+                equalToConstant: Constants.separatorHeight
+            )
+        ])
+    }
+
+    private func setupSearchBar() {
+        if !enableSearch {
+            return
+        }
+        addSubview(searchBar)
+    }
+
     private func setupCategoryViews() {
         for categoryIndex in 0...emojiCategoryTypes.count - 1 {
             let categoryView = MCTouchableEmojiCategoryView(
@@ -215,11 +273,11 @@ final class MCEmojiPickerView: UIView {
             categoriesStackView.addArrangedSubview(categoryView)
         }
     }
-    
+
     private func toggleCollectionScrollAbility(isEnabled: Bool) {
         collectionView.isScrollEnabled = isEnabled
     }
-    
+
     /// Scroll collectionView to header for selected category.
     ///
     /// - Parameter section: Selected category index.
@@ -240,20 +298,36 @@ final class MCEmojiPickerView: UIView {
     }
 }
 
+// MARK: - UISearchBarDelegate
+
+extension MCEmojiPickerView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            delegate?.clearSearch()
+        } else {
+            delegate?.search(searchText)
+        }
+        UIView.performWithoutAnimation {
+            collectionView.reloadData()
+        }
+        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: 0), animated: false)
+    }
+}
+
 // MARK: - UICollectionViewDataSource
 
 extension MCEmojiPickerView: UICollectionViewDataSource {
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return delegate?.numberOfSections() ?? .zero
     }
-    
+
     public func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
         return delegate?.numberOfItems(in: section) ?? .zero
     }
-    
+
     public func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
@@ -269,7 +343,7 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
         )
         return cell
     }
-    
+
     public func collectionView(
         _ collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
@@ -317,7 +391,7 @@ extension MCEmojiPickerView: UICollectionViewDelegateFlowLayout {
             height: contentSize / Constants.countOfEmojisInRow
         )
     }
-    
+
     public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -325,7 +399,7 @@ extension MCEmojiPickerView: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         return .zero
     }
-    
+
     public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -356,22 +430,22 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
     func preview(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
         guard let sourceView = window else { return }
         toggleCollectionScrollAbility(isEnabled: false)
-        
+
         previewContainerView.removeFromSuperview()
         previewContainerView = MCEmojiPreviewView(
             emoji: emoji,
             sender: cell.emojiLabel,
             sourceView: sourceView
         )
-        
+
         sourceView.addSubview(previewContainerView)
     }
-    
+
     func choiceSkinTone(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
         guard let sourceView = window else { return }
         toggleCollectionScrollAbility(isEnabled: false)
         delegate?.feedbackImpactOccurred()
-        
+
         previewContainerView.removeFromSuperview()
         previewContainerView = MCEmojiSkinTonePickerContainerView(
             delegate: self,
@@ -381,10 +455,10 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
             sourceView: sourceView,
             emojiPickerFrame: delegate?.getEmojiPickerFrame() ?? .zero
         )
-        
+
         sourceView.addSubview(previewContainerView)
     }
-    
+
     func didSelect(_ emoji: MCEmoji?, in cell: MCEmojiCollectionViewCell) {
         if previewContainerView is MCEmojiPreviewView {
             toggleCollectionScrollAbility(isEnabled: true)
@@ -399,6 +473,13 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
 
 extension MCEmojiPickerView: MCEmojiCategoryViewDelegate {
     func didChoiceCategory(at index: Int) {
+        if let searching = delegate?.isSearching(), searching == true {
+            searchBar.text = ""
+            delegate?.clearSearch()
+            UIView.performWithoutAnimation {
+                collectionView.reloadData()
+            }
+        }
         scrollToHeader(for: index)
         delegate?.feedbackImpactOccurred()
         delegate?.didChoiceEmojiCategory(at: index)
@@ -418,11 +499,11 @@ extension MCEmojiPickerView: MCEmojiSkinTonePickerDelegate {
             collectionView.reloadData()
         }
     }
-    
+
     func feedbackImpactOccurred() {
         delegate?.feedbackImpactOccurred()
     }
-    
+
     func didEmojiSkinTonePickerDismissed() {
         toggleCollectionScrollAbility(isEnabled: true)
     }
