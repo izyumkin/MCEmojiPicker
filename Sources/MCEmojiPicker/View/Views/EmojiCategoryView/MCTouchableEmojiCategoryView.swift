@@ -75,7 +75,6 @@ final class MCTouchableEmojiCategoryView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         setupCategoryIconViewLayout()
-        categoryIconView.setNeedsDisplay()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,7 +104,10 @@ final class MCTouchableEmojiCategoryView: UIView {
     // MARK: - Private Methods
     
     private func setupCategoryIconViewLayout() {
-        guard !categoryIconView.isDescendant(of: self) else { return }
+        guard !categoryIconView.isDescendant(of: self) else { 
+            categoryIconView.setNeedsDisplay()
+            return
+        }
         addSubview(categoryIconView)
         NSLayoutConstraint.activate([
             categoryIconView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: categoryIconViewInsets.left),
