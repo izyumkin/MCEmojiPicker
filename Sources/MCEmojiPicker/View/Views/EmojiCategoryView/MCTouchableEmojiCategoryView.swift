@@ -75,6 +75,7 @@ final class MCTouchableEmojiCategoryView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         setupCategoryIconViewLayout()
+        categoryIconView.setNeedsDisplay()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
