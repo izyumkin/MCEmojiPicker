@@ -45,10 +45,12 @@ final class MCEmojiPreviewView: UIView {
     
     init(
         emoji: MCEmoji?,
+        emojiFontSize: Double,
         sender: UIView,
         sourceView: UIView
     ) {
         self.emojiLabel.text = emoji?.string
+        self.emojiLabel.font = UIFont.systemFont(ofSize: emojiFontSize.fit())
         self.sender = sender
         self.sourceView = sourceView
         super.init(frame: .zero)

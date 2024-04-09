@@ -44,6 +44,10 @@ final class MCEmojiPickerView: UIView {
     // MARK: - Public Properties
     
     public var selectedEmojiCategoryTintColor = Constants.defaultSelectedEmojiCategoryTintColor
+    public var countOfEmojisInRow = Constants.countOfEmojisInRow
+    public var emojiLabelFontSize = Constants.emojiLabelFontSize.fit()
+    public var categoryHeaderColor = Constants.categoryHeaderColor
+    public var categoryHeaderFont = Constants.categoryHeaderFont
     
     // MARK: - Constants
     
@@ -55,6 +59,11 @@ final class MCEmojiPickerView: UIView {
         
         static let countOfEmojisInRow = 8.0
         static let collectionViewHeaderHeight = 40.0
+        
+        static let emojiLabelFontSize = 29.0
+        
+        static let categoryHeaderColor = UIColor.systemGray
+        static let categoryHeaderFont = UIFont.systemFont(ofSize: 14.fit(), weight: .regular)
         
         static let categoriesStackViewInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
@@ -263,6 +272,7 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
                 for: indexPath
               ) as? MCEmojiCollectionViewCell
         else { return UICollectionViewCell() }
+        cell.emojiLabel.font = UIFont.systemFont(ofSize: emojiLabelFontSize)
         cell.configure(
             emoji: delegate?.emoji(at: indexPath),
             delegate: self
@@ -282,6 +292,8 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
                 for: indexPath
               ) as? MCEmojiSectionHeader
         else { return UICollectionReusableView() }
+        sectionHeader.headerLabel.textColor = categoryHeaderColor
+        sectionHeader.headerLabel.font = categoryHeaderFont
         sectionHeader.configure(
             with: delegate?.sectionHeaderName(
                 for: indexPath.section
@@ -313,8 +325,8 @@ extension MCEmojiPickerView: UICollectionViewDelegateFlowLayout {
         let sideInsets = collectionView.contentInset.right + collectionView.contentInset.left
         let contentSize = collectionView.bounds.width - sideInsets
         return CGSize(
-            width: contentSize / Constants.countOfEmojisInRow,
-            height: contentSize / Constants.countOfEmojisInRow
+            width: contentSize / countOfEmojisInRow,
+            height: contentSize / countOfEmojisInRow
         )
     }
     
@@ -360,6 +372,7 @@ extension MCEmojiPickerView: MCEmojiCollectionViewCellDelegate {
         previewContainerView.removeFromSuperview()
         previewContainerView = MCEmojiPreviewView(
             emoji: emoji,
+            emojiFontSize: emojiLabelFontSize * 1.5,
             sender: cell.emojiLabel,
             sourceView: sourceView
         )

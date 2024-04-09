@@ -34,9 +34,9 @@ final class MCEmojiSectionHeader: UICollectionReusableView {
         static let headerLabelInsets = UIEdgeInsets(top: 0, left: 7, bottom: -4, right: -16)
     }
     
-    // MARK: - Private Properties
+    // MARK: - Public Properties
     
-    private let headerLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = Constants.headerLabelColor
         label.font = Constants.headerLabelFont
