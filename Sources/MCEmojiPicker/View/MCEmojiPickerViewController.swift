@@ -66,6 +66,46 @@ public final class MCEmojiPickerViewController: UIViewController {
         }
     }
     
+    /// Count of emojis in row.
+    ///
+    /// The default value of this property is `8`.
+    public var countOfEmojisInRow: Double? {
+        didSet {
+            guard let countOfEmojisInRow = countOfEmojisInRow else { return }
+            emojiPickerView.countOfEmojisInRow = countOfEmojisInRow
+        }
+    }
+    
+    /// Emoji font size.
+    ///
+    /// The default value of this property is `29`.
+    public var emojiLabelFontSize: Double? {
+        didSet {
+            guard let emojiLabelFontSize = emojiLabelFontSize else { return }
+            emojiPickerView.emojiLabelFontSize = emojiLabelFontSize
+        }
+    }
+    
+    /// Emoji category font size.
+    ///
+    /// The default value of this property is `14`.
+    public var categoryHeaderFont: UIFont? {
+        didSet {
+            guard let categoryHeaderFont = categoryHeaderFont else { return }
+            emojiPickerView.categoryHeaderFont = categoryHeaderFont
+        }
+    }
+    
+    /// Emoji category font color.
+    ///
+    /// The default value of this property is `.systemGray`.
+    public var categoryHeaderColor: UIColor? {
+        didSet {
+            guard let categoryHeaderColor = categoryHeaderColor else { return }
+            emojiPickerView.categoryHeaderColor = categoryHeaderColor
+        }
+    }
+    
     /// The view containing the anchor rectangle for the popover.
     public var sourceView: UIView? {
         didSet {
