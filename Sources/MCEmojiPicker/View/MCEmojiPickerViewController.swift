@@ -24,7 +24,10 @@ import UIKit
 
 public protocol MCEmojiPickerDelegate: AnyObject {
     func didGetEmoji(emoji: String)
+    func didClose()
 }
+
+public typealias MCEmojiPickerCompletion = (String?) -> Void
 
 public final class MCEmojiPickerViewController: UIViewController {
     
@@ -95,9 +98,12 @@ public final class MCEmojiPickerViewController: UIViewController {
         return MCEmojiPickerView(categoryTypes: categories, delegate: self)
     }()
     
+    private var completion: MCEmojiPickerCompletion?
+    
     // MARK: - Initializers
     
-    public init() {
+    public init(completion: MCEmojiPickerCompletion? = nil) {
+        self.completion = completion
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()
         setupDelegates()
@@ -127,6 +133,8 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        delegate?.didClose()
+        completion?(nil)
         NotificationCenter.default.post(name: .MCEmojiPickerDidDisappear, object: nil)
     }
     
@@ -137,7 +145,11 @@ public final class MCEmojiPickerViewController: UIViewController {
             guard let emoji = emoji else { return }
             feedbackImpactOccurred()
             delegate?.didGetEmoji(emoji: emoji.string)
+            completion?(emoji.string)
+            
             if isDismissAfterChoosing {
+                //clear completion so that it's not called mutltiple times
+                completion = nil
                 dismiss(animated: true, completion: nil)
             }
         }
