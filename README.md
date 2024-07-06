@@ -36,6 +36,7 @@ If you know how to fix it - welcome to the [discussion](https://github.com/izyum
     <a href="https://github.com/honzachalupa/SymptomsTracker"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/836c08c8-7e60-4403-ad0a-fffaed926d15" height="65"></a>
     <a href="https://github.com/savoirfairelinux/jami-client-ios"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/b2e00327-7c13-407b-8c43-3c189504c3c5" height="65"></a>
     <a href="https://github.com/deltachat/deltachat-ios"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/6322e6cf-71d4-4f37-893c-44277b277517" height="65"></a>
+    <a href="https://apps.apple.com/app/id6476229386"><img src="http://izyumkin.ru/MCEmojiPicker/AppsUsing/id6476229386.png" height="65"></a>
 </p>
 
 If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more information you can see [contribution guide](https://github.com/izyumkin/MCEmojiPicker/blob/main/CONTRIBUTING.md).
