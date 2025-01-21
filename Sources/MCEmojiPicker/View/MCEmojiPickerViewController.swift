@@ -55,7 +55,14 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// If you want EmojiPicker not to dismissed after emoji selection, you must set this property to `false`.
     /// The default value of this property is `true`.
     public var isDismissAfterChoosing: Bool = true
-    
+
+    /// The maximum current iOS Version that we should display the Emojis for
+    ///
+    /// Emojis aren't always available. They come and go for iOS Versions. If the receiver of the Emoji receives
+    /// an Emoji its iOS Version doesn't support, it will be replaced by a character that signals this Emoji isn't readable.
+    /// The sender won't know about it though, letting him confused.
+    public var maxCurrentAvailableOsVersion: Float?
+
     /// Color for the selected emoji category.
     ///
     /// The default value of this property is `.systemBlue`.
@@ -89,7 +96,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     // MARK: - Private Properties
     
     private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-    private var viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()
+    private var viewModel: MCEmojiPickerViewModelProtocol
     private lazy var emojiPickerView: MCEmojiPickerView = {
         let categories = viewModel.emojiCategories.map { $0.type }
         return MCEmojiPickerView(categoryTypes: categories, delegate: self)
@@ -98,6 +105,13 @@ public final class MCEmojiPickerViewController: UIViewController {
     // MARK: - Initializers
     
     public init() {
+        viewModel = if let maxCurrentAvailableOsVersion {
+            MCEmojiPickerViewModel(
+                unicodeManager: MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
+            )
+        } else {
+            MCEmojiPickerViewModel()
+        }
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()
         setupDelegates()

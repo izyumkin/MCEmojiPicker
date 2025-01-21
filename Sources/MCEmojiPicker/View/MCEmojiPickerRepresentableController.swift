@@ -68,7 +68,14 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     ///
     /// The default value of this property is `.light`.
     public var feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle?
-    
+
+    /// The maximum current iOS Version that we should display the Emojis for
+    ///
+    /// Emojis aren't always available. They come and go for iOS Versions. If the receiver of the Emoji receives
+    /// an Emoji its iOS Version doesn't support, it will be replaced by a character that signals this Emoji isn't readable.
+    /// The sender won't know about it though, letting him confused.
+    public var maxCurrentAvailableOsVersion: Float?
+
     // MARK: - Initializers
     
     public init(
@@ -79,7 +86,8 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         horizontalInset: CGFloat? = nil,
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
-        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
+        maxCurrentAvailableOsVersion: Float? = nil
     ) {
         self._isPresented = isPresented
         self._selectedEmoji = selectedEmoji
@@ -89,6 +97,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         self.isDismissAfterChoosing = isDismissAfterChoosing
         self.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
         self.feedBackGeneratorStyle = feedBackGeneratorStyle
+        self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
     }
     
     // MARK: - Public Methods
