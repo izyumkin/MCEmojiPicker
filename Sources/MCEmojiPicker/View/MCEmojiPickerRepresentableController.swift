@@ -126,7 +126,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         switch isPresented {
         case true:
             guard representableController.presentedViewController == nil else { return }
-            let emojiPicker = MCEmojiPickerViewController()
+            let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion)
             emojiPicker.delegate = context.coordinator
             emojiPicker.sourceView = representableController.view
             emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader

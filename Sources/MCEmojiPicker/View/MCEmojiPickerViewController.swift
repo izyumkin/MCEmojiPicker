@@ -114,7 +114,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Initializers
     
-    public init() {
+    public init(_ maxCurrentAvailableOsVersion: Float? = nil) {
         viewModel = if let maxCurrentAvailableOsVersion {
             MCEmojiPickerViewModel(
                 unicodeManager: MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
