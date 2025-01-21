@@ -36,6 +36,7 @@ extension View {
     ///     - selectedEmojiCategoryTintColor: Color for the selected emoji category.
     ///     - feedBackGeneratorStyle: Feedback generator style. To turn off, set `nil` to this parameter.
     ///     - maxCurrentAvailableOsVersion: Maximum current iOS Version that we should display the Emojis for.
+    ///     - displayCountOfEmojisInHeader: Wether the Header of the Categories should display how many Emojis are in it.
     @ViewBuilder public func emojiPicker(
         isPresented: Binding<Bool>,
         selectedEmoji: Binding<String>,
@@ -45,7 +46,8 @@ extension View {
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
-        maxCurrentAvailableOsVersion: Float? = nil
+        maxCurrentAvailableOsVersion: Float? = nil,
+        displayCountOfEmojisInHeader: Bool = false
     ) -> some View {
         self.overlay(
             MCEmojiPickerRepresentableController(
@@ -57,9 +59,10 @@ extension View {
                 isDismissAfterChoosing: isDismissAfterChoosing,
                 selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor,
                 feedBackGeneratorStyle: feedBackGeneratorStyle,
-                maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion
+                maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
+                displayCountOfEmojisInHeader: displayCountOfEmojisInHeader
             )
-                .allowsHitTesting(false)
+            .allowsHitTesting(false)
         )
     }
 }

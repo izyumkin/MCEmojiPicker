@@ -76,6 +76,12 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     /// The sender won't know about it though, letting him confused.
     public var maxCurrentAvailableOsVersion: Float?
 
+    /// Wether the Header of the Categories should display how many Emojis are in it.
+    ///
+    /// This can be very useful for example, when displaying the amount of Emojis for a specific iOS Version,
+    /// in combination with `maxCurrentAvailableOsVersion`.
+    public var displayCountOfEmojisInHeader = false
+
     // MARK: - Initializers
     
     public init(
@@ -87,7 +93,8 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
-        maxCurrentAvailableOsVersion: Float? = nil
+        maxCurrentAvailableOsVersion: Float? = nil,
+        displayCountOfEmojisInHeader: Bool = false
     ) {
         self._isPresented = isPresented
         self._selectedEmoji = selectedEmoji
@@ -98,6 +105,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         self.selectedEmojiCategoryTintColor = selectedEmojiCategoryTintColor
         self.feedBackGeneratorStyle = feedBackGeneratorStyle
         self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
+        self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
     }
     
     // MARK: - Public Methods
@@ -121,6 +129,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
             let emojiPicker = MCEmojiPickerViewController()
             emojiPicker.delegate = context.coordinator
             emojiPicker.sourceView = representableController.view
+            emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
             if let arrowDirection { emojiPicker.arrowDirection = arrowDirection }
             if let customHeight { emojiPicker.customHeight = customHeight }
             if let horizontalInset { emojiPicker.horizontalInset = horizontalInset }

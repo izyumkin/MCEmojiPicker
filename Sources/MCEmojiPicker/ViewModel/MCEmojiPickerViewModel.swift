@@ -55,7 +55,7 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     public var showEmptyEmojiCategories = false
     public var emojiCategories: [MCEmojiCategory] {
-        allEmojiCategories.filter({ showEmptyEmojiCategories || $0.emojis.count > 0 })
+        allEmojiCategories.filter { showEmptyEmojiCategories || $0.emojis.count > 0 }
     }
     
     // MARK: - Private Properties

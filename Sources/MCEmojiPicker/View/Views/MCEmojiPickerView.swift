@@ -69,6 +69,8 @@ final class MCEmojiPickerView: UIView {
     
     private let emojiCategoryTypes: [MCEmojiCategoryType]
     
+    private let displayCountOfEmojisInHeader: Bool
+
     private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -110,9 +112,14 @@ final class MCEmojiPickerView: UIView {
     
     // MARK: - Initializers
     
-    init(categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases, delegate: MCEmojiPickerViewDelegate) {
+    init(
+        categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases,
+        delegate: MCEmojiPickerViewDelegate,
+        displayCountOfEmojisInHeader: Bool = false
+    ) {
         self.delegate = delegate
         self.emojiCategoryTypes = categoryTypes
+        self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
         super.init(frame: .zero)
         setupBackgroundColor()
         setupDelegates()
@@ -282,11 +289,14 @@ extension MCEmojiPickerView: UICollectionViewDataSource {
                 for: indexPath
               ) as? MCEmojiSectionHeader
         else { return UICollectionReusableView() }
-        sectionHeader.configure(
-            with: delegate?.sectionHeaderName(
-                for: indexPath.section
-            ) ?? ""
-        )
+        var header = ""
+        if let delegate {
+            header += delegate.sectionHeaderName(for: indexPath.section)
+            if displayCountOfEmojisInHeader {
+                header += " (\(delegate.numberOfItems(in: indexPath.section)))"
+            }
+        }
+        sectionHeader.configure(with: header)
         return sectionHeader
     }
 }

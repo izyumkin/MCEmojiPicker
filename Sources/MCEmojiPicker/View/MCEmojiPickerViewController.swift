@@ -63,6 +63,12 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// The sender won't know about it though, letting him confused.
     public var maxCurrentAvailableOsVersion: Float?
 
+    /// Wether the Header of the Categories should display how many Emojis are in it.
+    ///
+    /// This can be very useful for example, when displaying the amount of Emojis for a specific iOS Version,
+    /// in combination with `maxCurrentAvailableOsVersion`.
+    public var displayCountOfEmojisInHeader = false
+
     /// Color for the selected emoji category.
     ///
     /// The default value of this property is `.systemBlue`.
@@ -99,7 +105,11 @@ public final class MCEmojiPickerViewController: UIViewController {
     private var viewModel: MCEmojiPickerViewModelProtocol
     private lazy var emojiPickerView: MCEmojiPickerView = {
         let categories = viewModel.emojiCategories.map { $0.type }
-        return MCEmojiPickerView(categoryTypes: categories, delegate: self)
+        return MCEmojiPickerView(
+            categoryTypes: categories,
+            delegate: self,
+            displayCountOfEmojisInHeader: displayCountOfEmojisInHeader
+        )
     }()
     
     // MARK: - Initializers
