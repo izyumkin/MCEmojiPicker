@@ -125,6 +125,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
         ]
     }
 
+    private func version(of emoji: MCEmoji) -> Bool {
+        emoji.version <= maxCurrentAvailableEmojiVersion()
+    }
+
     private func peopleEmojis() -> MCEmojiCategory { return MCEmojiCategory(
         type: .people,
         categoryName: MCEmojiCategoryType.people.emojiCategoryTitle,
@@ -3303,7 +3307,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "footprints",
                 version: 0.6
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion() })
+        ].filter { version(of: $0) }
     ) }
 
     private func natureEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -4222,7 +4226,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "mushroom",
                 version: 0.6
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func foodAndDrinkEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -5027,7 +5031,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "amphora",
                 version: 1.0
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func activityEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -5544,7 +5548,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "knot",
                 version: 13.0
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func travelAndPlacesEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -6859,7 +6863,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "waterWave",
                 version: 0.6
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func objectEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -8432,7 +8436,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "identificationCard",
                 version: 14.0
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func symbolEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -9777,7 +9781,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "blackSquareButton",
                 version: 0.6
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
     private func flagEmojis() -> MCEmojiCategory { MCEmojiCategory(
@@ -11398,7 +11402,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "flagWales",
                 version: 5.0
             )
-        ].filter { $0.version <= maxCurrentAvailableEmojiVersion() }
+        ].filter { version(of: $0) }
     ) }
 
 }
