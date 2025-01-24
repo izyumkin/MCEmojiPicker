@@ -46,6 +46,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     /// The maximum number of frequently used emojis to include in the `frequentlyUsed` category.
     public let maxFrequentlyUsedEmojisCount: Int
     private var maxCurrentAvailableOsVersion: Float?
+    public var onlyShowNewEmojisForVersion = false
 
     private func availableOsVersion() -> Float {
         maxCurrentAvailableOsVersion ?? (UIDevice.current.systemVersion as NSString).floatValue
@@ -126,7 +127,11 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     }
 
     private func version(of emoji: MCEmoji) -> Bool {
-        emoji.version <= maxCurrentAvailableEmojiVersion()
+        if onlyShowNewEmojisForVersion {
+            emoji.version == maxCurrentAvailableEmojiVersion()
+        } else {
+            emoji.version <= maxCurrentAvailableEmojiVersion()
+        }
     }
 
     private func peopleEmojis() -> MCEmojiCategory { return MCEmojiCategory(

@@ -56,13 +56,6 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// The default value of this property is `true`.
     public var isDismissAfterChoosing: Bool = true
 
-    /// The maximum current iOS Version that we should display the Emojis for
-    ///
-    /// Emojis aren't always available. They come and go for iOS Versions. If the receiver of the Emoji receives
-    /// an Emoji its iOS Version doesn't support, it will be replaced by a character that signals this Emoji isn't readable.
-    /// The sender won't know about it though, letting him confused.
-    public var maxCurrentAvailableOsVersion: Float?
-
     /// Wether the Header of the Categories should display how many Emojis are in it.
     ///
     /// This can be very useful for example, when displaying the amount of Emojis for a specific iOS Version,
@@ -114,13 +107,14 @@ public final class MCEmojiPickerViewController: UIViewController {
     
     // MARK: - Initializers
     
-    public init(_ maxCurrentAvailableOsVersion: Float? = nil) {
-        viewModel = if let maxCurrentAvailableOsVersion {
-            MCEmojiPickerViewModel(
-                unicodeManager: MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
-            )
+    public init(_ maxCurrentAvailableOsVersion: Float? = nil, onlyShowNewEmojisForVersion: Bool = false) {
+        if let maxCurrentAvailableOsVersion {
+            let unicodeManager = MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
+            unicodeManager.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
+            viewModel = MCEmojiPickerViewModel(unicodeManager: unicodeManager)
+            viewModel.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
         } else {
-            MCEmojiPickerViewModel()
+            viewModel = MCEmojiPickerViewModel()
         }
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()

@@ -82,6 +82,11 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     /// in combination with `maxCurrentAvailableOsVersion`.
     public var displayCountOfEmojisInHeader = false
 
+    /// Wether we will show all the Emojis available until this version of specifically only the new ones
+    ///
+    /// For consistence, when this is `true`, we will ignore `showEmptyEmojiCategories`
+    public var onlyShowNewEmojisForVersion = false
+
     // MARK: - Initializers
     
     public init(
@@ -94,7 +99,8 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         selectedEmojiCategoryTintColor: UIColor? = nil,
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
         maxCurrentAvailableOsVersion: Float? = nil,
-        displayCountOfEmojisInHeader: Bool = false
+        displayCountOfEmojisInHeader: Bool = false,
+        onlyShowNewEmojisForVersion: Bool = false
     ) {
         self._isPresented = isPresented
         self._selectedEmoji = selectedEmoji
@@ -106,6 +112,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         self.feedBackGeneratorStyle = feedBackGeneratorStyle
         self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
         self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+        self.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
     }
     
     // MARK: - Public Methods
@@ -126,7 +133,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         switch isPresented {
         case true:
             guard representableController.presentedViewController == nil else { return }
-            let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion)
+            let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion, onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion)
             emojiPicker.delegate = context.coordinator
             emojiPicker.sourceView = representableController.view
             emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader

@@ -179,7 +179,10 @@ MCEmojiPickerRepresentableController(
     horizontalInset: .zero,
     isDismissAfterChoosing: true,
     selectedEmojiCategoryTintColor: .systemBlue,
-    feedBackGeneratorStyle: .light
+    feedBackGeneratorStyle: .light,
+    maxCurrentAvailableOsVersion: 17,
+    displayCountOfEmojisInHeader: true,
+    onlyShowNewEmojisForVersion: true
 )
 ```
 

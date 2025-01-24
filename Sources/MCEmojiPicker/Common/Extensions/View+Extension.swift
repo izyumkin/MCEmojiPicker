@@ -47,7 +47,8 @@ extension View {
         selectedEmojiCategoryTintColor: UIColor? = nil,
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
         maxCurrentAvailableOsVersion: Float? = nil,
-        displayCountOfEmojisInHeader: Bool = false
+        displayCountOfEmojisInHeader: Bool = false,
+        onlyShowNewEmojisForVersion: Bool = false
     ) -> some View {
         self.overlay(
             MCEmojiPickerRepresentableController(
@@ -60,7 +61,8 @@ extension View {
                 selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor,
                 feedBackGeneratorStyle: feedBackGeneratorStyle,
                 maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
-                displayCountOfEmojisInHeader: displayCountOfEmojisInHeader
+                displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+                onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
             )
             .allowsHitTesting(false)
         )
