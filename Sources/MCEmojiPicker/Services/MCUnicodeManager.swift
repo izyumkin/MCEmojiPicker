@@ -96,6 +96,8 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     /// The maximum available emoji version for the current iOS version.
     private func maxCurrentAvailableEmojiVersion() -> Double {
         switch availableOsVersion() {
+        case 11.1...12.0:
+            return 5.0
         case 12.1...13.1:
             return 11.0
         case 13.2...14.1:
@@ -106,10 +108,12 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
             return 13.1
         case 15.4...16.3:
             return 14.0
-        case 16.4...:
+        case 16.4...17.3:
             return 15.0
+        case 17.4...:
+            return 15.1
         default:
-            return 5.0
+            return 4.0
         }
     }
 
