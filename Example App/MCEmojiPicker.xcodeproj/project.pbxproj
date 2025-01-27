@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C2ED5AD2D3EFE8500128AA3 /* SwiftUI App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftUI App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B58AA29867E13006478D5 /* MCEmojiPicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MCEmojiPicker; path = ..; sourceTree = "<group>"; };
 		C44B58B229867F5E006478D5 /* iOS Example App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B58B429867F5E006478D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				C44B58B229867F5E006478D5 /* iOS Example App.app */,
-				0C2ED5AD2D3EFE8500128AA3 /* SwiftUI App.app */,
+				0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,9 +174,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0C2ED5AC2D3EFE8500128AA3 /* SwiftUI App */ = {
+		0C2ED5AC2D3EFE8500128AA3 /* EmojiUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "SwiftUI App" */;
+			buildConfigurationList = 0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "EmojiUI" */;
 			buildPhases = (
 				0C2ED5A92D3EFE8500128AA3 /* Sources */,
 				0C2ED5AA2D3EFE8500128AA3 /* Frameworks */,
@@ -189,12 +189,12 @@
 			fileSystemSynchronizedGroups = (
 				0C2ED5AE2D3EFE8500128AA3 /* SwiftUI App */,
 			);
-			name = "SwiftUI App";
+			name = EmojiUI;
 			packageProductDependencies = (
 				0C2ED5BB2D3EFF8800128AA3 /* MCEmojiPicker */,
 			);
 			productName = "SwiftUI App";
-			productReference = 0C2ED5AD2D3EFE8500128AA3 /* SwiftUI App.app */;
+			productReference = 0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C44B58B129867F5E006478D5 /* iOS Example App */ = {
@@ -288,7 +288,7 @@
 			projectRoot = "";
 			targets = (
 				C44B58B129867F5E006478D5 /* iOS Example App */,
-				0C2ED5AC2D3EFE8500128AA3 /* SwiftUI App */,
+				0C2ED5AC2D3EFE8500128AA3 /* EmojiUI */,
 			);
 		};
 /* End PBXProject section */
@@ -637,7 +637,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "SwiftUI App" */ = {
+		0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "EmojiUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0C2ED5B92D3EFE8600128AA3 /* Debug */,
