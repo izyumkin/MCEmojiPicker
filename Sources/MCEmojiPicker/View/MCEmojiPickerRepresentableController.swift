@@ -35,7 +35,8 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     
     /// Observed value which is responsible for the state of the picker.
     ///
-    /// `none` and `sheet` are used to present while `view` will display it "as is"
+    /// `none` and `sheet` are used to present while `view` will display it *as is*.
+    ///  Default (not specifying the parameter) is `view`.
     @Binding var presentationMode: PresentationMode
 
     /// Observed value which is updated by the selected emoji.
@@ -95,7 +96,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     // MARK: - Initializers
     
     public init(
-        presentationMode: Binding<PresentationMode>,
+        presentationMode: Binding<PresentationMode> = .constant(.view),
         selectedEmoji: Binding<String>,
         arrowDirection: MCPickerArrowDirection? = nil,
         customHeight: CGFloat? = nil,
