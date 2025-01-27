@@ -44,6 +44,13 @@ struct ContentView: View {
                     ShareLink("", item: selectedEmoji)
                 }
                 .font(.system(size: 65))
+                MCEmojiPickerRepresentableController(
+                    presentationMode: .constant(.view),
+                    selectedEmoji: $selectedEmoji,
+                    maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
+                    displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+                    onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
+                )
                 Spacer()
             }
             .background(.secondary.opacity(0.2))

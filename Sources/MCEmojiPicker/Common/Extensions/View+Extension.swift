@@ -52,7 +52,10 @@ extension View {
     ) -> some View {
         self.overlay(
             MCEmojiPickerRepresentableController(
-                isPresented: isPresented,
+                presentationMode: Binding(
+                    get: { isPresented.wrappedValue ? .sheet : .none },
+                    set: { isPresented.wrappedValue = $0 == .sheet }
+                ),
                 selectedEmoji: selectedEmoji,
                 arrowDirection: arrowDirection,
                 customHeight: customHeight,

@@ -24,15 +24,20 @@ import SwiftUI
 
 @available(iOS 13.0, *)
 public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentable {
-    
+
+    public enum PresentationMode: String {
+        case none
+        case sheet
+        case view
+    }
+
     // MARK: - Public Properties
     
     /// Observed value which is responsible for the state of the picker.
     ///
-    /// If the value of this property is `true`, the EmojiPicker will be presented.
-    /// If the value of this property is `false`, the EmojiPicker will be hidden.
-    @Binding var isPresented: Bool
-    
+    /// `none` and `sheet` are used to present while `view` will display it "as is"
+    @Binding var presentationMode: PresentationMode
+
     /// Observed value which is updated by the selected emoji.
     @Binding var selectedEmoji: String
     
@@ -90,7 +95,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     // MARK: - Initializers
     
     public init(
-        isPresented: Binding<Bool>,
+        presentationMode: Binding<PresentationMode>,
         selectedEmoji: Binding<String>,
         arrowDirection: MCPickerArrowDirection? = nil,
         customHeight: CGFloat? = nil,
@@ -102,7 +107,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         displayCountOfEmojisInHeader: Bool = false,
         onlyShowNewEmojisForVersion: Bool = false
     ) {
-        self._isPresented = isPresented
+        self._presentationMode = presentationMode
         self._selectedEmoji = selectedEmoji
         self.arrowDirection = arrowDirection
         self.customHeight = customHeight
@@ -122,7 +127,11 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     }
     
     public func makeUIViewController(context: Context) -> UIViewController {
-        UIViewController()
+        if presentationMode == .view {
+            emojiPicker(context)
+        } else {
+            UIViewController()
+        }
     }
     
     public func updateUIViewController(_ representableController: UIViewController, context: Context) {
@@ -130,13 +139,11 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
             context.coordinator.isNewEmojiSet.toggle()
             return
         }
-        switch isPresented {
-        case true:
+        if representableController is MCEmojiPickerViewController { return }
+        switch presentationMode {
+        case .sheet, .view:
             guard representableController.presentedViewController == nil else { return }
-            let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion, onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion)
-            emojiPicker.delegate = context.coordinator
-            emojiPicker.sourceView = representableController.view
-            emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+            let emojiPicker = emojiPicker(context, representableController: representableController)
             if let arrowDirection { emojiPicker.arrowDirection = arrowDirection }
             if let customHeight { emojiPicker.customHeight = customHeight }
             if let horizontalInset { emojiPicker.horizontalInset = horizontalInset }
@@ -147,12 +154,20 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
             if let feedBackGeneratorStyle { emojiPicker.feedBackGeneratorStyle = feedBackGeneratorStyle }
             context.coordinator.addPickerDismissingObserver()
             representableController.present(emojiPicker, animated: true)
-        case false:
-            if representableController.presentedViewController is MCEmojiPickerViewController && context.coordinator.isPresented {
+        case .none:
+            if representableController.presentedViewController is MCEmojiPickerViewController && context.coordinator.presentationMode != .none {
                 representableController.presentedViewController?.dismiss(animated: true)
             }
         }
-        context.coordinator.isPresented = isPresented
+        context.coordinator.presentationMode = presentationMode
+    }
+
+    private func emojiPicker(_ context: Context, representableController: UIViewController? = nil) -> MCEmojiPickerViewController {
+        let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion, onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion)
+        emojiPicker.delegate = context.coordinator
+        emojiPicker.sourceView = representableController?.view
+        emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+        return emojiPicker
     }
 }
 
@@ -163,8 +178,8 @@ extension MCEmojiPickerRepresentableController {
     public class Coordinator: NSObject, MCEmojiPickerDelegate {
         
         public var isNewEmojiSet = false
-        public var isPresented = false
-        
+        public var presentationMode = MCEmojiPickerRepresentableController.PresentationMode.none
+
         private var representableController: MCEmojiPickerRepresentableController
         
         init(_ representableController: MCEmojiPickerRepresentableController) {
@@ -182,7 +197,7 @@ extension MCEmojiPickerRepresentableController {
         
         @objc public func pickerDismissingAction() {
             NotificationCenter.default.removeObserver(self, name: .MCEmojiPickerDidDisappear, object: nil)
-            representableController.isPresented = false
+            representableController.presentationMode = .none
         }
     }
 }
