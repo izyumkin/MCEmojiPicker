@@ -18,45 +18,46 @@ struct ContentView: View {
     @State private var onlyShowNewEmojisForVersion = true
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                Slider(value: $maxCurrentAvailableOsVersion, in: 10...18, step: 1)
-                    .padding(.horizontal)
-                HStack(spacing: 40) {
-                    Toggle("Count", isOn: $displayCountOfEmojisInHeader)
-                    Toggle("Only new", isOn: $onlyShowNewEmojisForVersion)
-                }
-                .padding(.horizontal)
-                HStack {
-                    Button(selectedEmoji) {
-                        isPresented.toggle()
-                    }.emojiPicker(
-                        isPresented: $isPresented,
-                        selectedEmoji: $selectedEmoji,
-                        isDismissAfterChoosing: false,
-                        maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
-                        displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
-                        onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
-                    )
-                    .padding(5)
-                    .background(Color.gray.opacity(0.3))
-                    .cornerRadius(10)
-                    ShareLink("", item: selectedEmoji)
-                }
-                .font(.system(size: 65))
-                MCEmojiPickerRepresentableController(
-                    presentationMode: .constant(.view),
+        VStack {
+            HStack {
+                Slider(value: $maxCurrentAvailableOsVersion, in: 10...18, step: 0.1)
+                Text(maxCurrentAvailableOsVersion, format: .number.precision(.fractionLength(1)))
+            }
+            .padding(.horizontal)
+
+            HStack(spacing: 40) {
+                Toggle("Count", isOn: $displayCountOfEmojisInHeader)
+                Toggle("Only new", isOn: $onlyShowNewEmojisForVersion)
+            }
+            .padding(.horizontal)
+            HStack {
+                Button(selectedEmoji) {
+                    isPresented.toggle()
+                }.emojiPicker(
+                    isPresented: $isPresented,
                     selectedEmoji: $selectedEmoji,
+                    isDismissAfterChoosing: false,
                     maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
                     displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
                     onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
                 )
-                Spacer()
+                .padding(5)
+                .background(Color.gray.opacity(0.3))
+                .cornerRadius(10)
+                ShareLink("", item: selectedEmoji)
             }
-            .background(.secondary.opacity(0.2))
-            .navigationTitle("Showing Emojis for iOS \(Int(maxCurrentAvailableOsVersion))")
-            .navigationBarTitleDisplayMode(.inline)
+            MCEmojiPickerRepresentableController(
+                selectedEmoji: $selectedEmoji,
+                maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
+                displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+                onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
+            )
+            .id(maxCurrentAvailableOsVersion)
+            Spacer()
         }
+        .background(.secondary.opacity(0.2))
+        .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
 
