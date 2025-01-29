@@ -56,12 +56,18 @@ struct ContentView: View {
                 selectedEmoji: $selectedEmoji,
                 maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
                 displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
-                onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
+                onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion,
+                nextKeyboard: {
+                    print("NEXT KEYBOARD")
+                },
+                deleteBackward: {
+                    selectedEmoji.removeLast()
+                }
             )
             .id(maxCurrentAvailableOsVersion)
             Spacer()
         }
-        .background(.secondary.opacity(0.2))
+//        .background(.secondary.opacity(0.2))
         .navigationBarTitleDisplayMode(.inline)
         .ignoresSafeArea(.all, edges: .bottom)
     }
