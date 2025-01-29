@@ -70,6 +70,8 @@ final class MCEmojiPickerView: UIView {
     private let emojiCategoryTypes: [MCEmojiCategoryType]
     
     private let displayCountOfEmojisInHeader: Bool
+    private let deleteBackward: (() -> Void)?
+    private let nextKeyboard: (() -> Void)?
 
     private let collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -104,7 +106,7 @@ final class MCEmojiPickerView: UIView {
     
     /// Height for categoriesStackView.
     private lazy var categoriesStackViewHeight: CGFloat = {
-        // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on MacOS.
+        // The number 0.13 was taken based on the proportion of this element to the width of the EmojiPicker on macOS.
         return bounds.width * 0.13
     }()
     
@@ -115,11 +117,15 @@ final class MCEmojiPickerView: UIView {
     init(
         categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases,
         delegate: MCEmojiPickerViewDelegate,
-        displayCountOfEmojisInHeader: Bool = false
+        displayCountOfEmojisInHeader: Bool = false,
+        deleteBackward: (() -> Void)? = nil,
+        nextKeyboard: (() -> Void)? = nil
     ) {
         self.delegate = delegate
         self.emojiCategoryTypes = categoryTypes
         self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+        self.deleteBackward = deleteBackward
+        self.nextKeyboard = nextKeyboard
         super.init(frame: .zero)
         setupBackgroundColor()
         setupDelegates()
@@ -207,9 +213,22 @@ final class MCEmojiPickerView: UIView {
             separatorView.heightAnchor.constraint(equalToConstant: Constants.separatorHeight)
         ])
     }
-    
+
+    @objc private func nextKeyboardAction() {
+        nextKeyboard?()
+    }
+
     private func setupCategoryViews() {
         guard !emojiCategoryTypes.isEmpty else { return }
+        if #available(iOS 13.0, *), let abc = UIImage(systemName: "characters.uppercase"), nextKeyboard != nil {
+            categoriesStackView.addArrangedSubview(
+                UIButton.systemButton(
+                    with: abc,
+                    target: self,
+                    action: #selector(nextKeyboardAction)
+                )
+            )
+        }
         for categoryIndex in 0...emojiCategoryTypes.count - 1 {
             let categoryView = MCTouchableEmojiCategoryView(
                 delegate: self,
@@ -222,8 +241,22 @@ final class MCEmojiPickerView: UIView {
             categoryViews.append(categoryView)
             categoriesStackView.addArrangedSubview(categoryView)
         }
+        guard !emojiCategoryTypes.isEmpty else { return }
+        if #available(iOS 13.0, *), let back = UIImage(systemName: "delete.backward"), deleteBackward != nil {
+            categoriesStackView.addArrangedSubview(
+                UIButton.systemButton(
+                    with: back,
+                    target: self,
+                    action: #selector(deleteBackwardAction)
+                )
+            )
+        }
     }
-    
+
+    @objc func deleteBackwardAction() {
+        deleteBackward?()
+    }
+
     private func toggleCollectionScrollAbility(isEnabled: Bool) {
         collectionView.isScrollEnabled = isEnabled
     }

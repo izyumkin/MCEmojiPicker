@@ -62,6 +62,18 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// in combination with `maxCurrentAvailableOsVersion`.
     public var displayCountOfEmojisInHeader = false
 
+    /// Ability to pass code that will be switching to the next keyboard.
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `abc` button will appear before the categories.
+    public let nextKeyboard: (() -> Void)?
+
+    /// Ablity to pass code that will be called when the back button is hit
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `back` button will appear after the categories.
+    public let deleteBackward: (() -> Void)?
+
     /// Color for the selected emoji category.
     ///
     /// The default value of this property is `.systemBlue`.
@@ -101,13 +113,20 @@ public final class MCEmojiPickerViewController: UIViewController {
         return MCEmojiPickerView(
             categoryTypes: categories,
             delegate: self,
-            displayCountOfEmojisInHeader: displayCountOfEmojisInHeader
+            displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+            deleteBackward: deleteBackward,
+            nextKeyboard: nextKeyboard
         )
     }()
     
     // MARK: - Initializers
     
-    public init(_ maxCurrentAvailableOsVersion: Float? = nil, onlyShowNewEmojisForVersion: Bool = false) {
+    public init(
+        _ maxCurrentAvailableOsVersion: Float? = nil,
+        onlyShowNewEmojisForVersion: Bool = false,
+        nextKeyboard: (() -> Void)? = nil,
+        deleteBackward: (() -> Void)? = nil
+    ) {
         if let maxCurrentAvailableOsVersion {
             let unicodeManager = MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
             unicodeManager.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
@@ -116,6 +135,8 @@ public final class MCEmojiPickerViewController: UIViewController {
         } else {
             viewModel = MCEmojiPickerViewModel()
         }
+        self.nextKeyboard = nextKeyboard
+        self.deleteBackward = deleteBackward
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()
         setupDelegates()

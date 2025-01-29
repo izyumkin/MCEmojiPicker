@@ -93,6 +93,18 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     /// For consistence, when this is `true`, we will ignore `showEmptyEmojiCategories`
     public var onlyShowNewEmojisForVersion = false
 
+    /// Ability to pass code that will be switching to the next keyboard.
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `abc` button will appear before the categories.
+    public let nextKeyboard: (() -> Void)?
+
+    /// Ablity to pass code that will be called when the back button is hit
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `back` button will appear after the categories.
+    public let deleteBackward: (() -> Void)?
+
     // MARK: - Initializers
     
     public init(
@@ -106,7 +118,9 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
         maxCurrentAvailableOsVersion: Float? = nil,
         displayCountOfEmojisInHeader: Bool = false,
-        onlyShowNewEmojisForVersion: Bool = false
+        onlyShowNewEmojisForVersion: Bool = false,
+        nextKeyboard: (() -> Void)? = nil,
+        deleteBackward: (() -> Void)? = nil
     ) {
         self._presentationMode = presentationMode
         self._selectedEmoji = selectedEmoji
@@ -119,6 +133,8 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
         self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
         self.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
+        self.nextKeyboard = nextKeyboard
+        self.deleteBackward = deleteBackward
     }
     
     // MARK: - Public Methods
@@ -164,7 +180,12 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     }
 
     private func emojiPicker(_ context: Context, representableController: UIViewController? = nil) -> MCEmojiPickerViewController {
-        let emojiPicker = MCEmojiPickerViewController(maxCurrentAvailableOsVersion, onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion)
+        let emojiPicker = MCEmojiPickerViewController(
+            maxCurrentAvailableOsVersion,
+            onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion,
+            nextKeyboard: nextKeyboard,
+            deleteBackward: deleteBackward
+        )
         emojiPicker.delegate = context.coordinator
         emojiPicker.sourceView = representableController?.view
         emojiPicker.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
