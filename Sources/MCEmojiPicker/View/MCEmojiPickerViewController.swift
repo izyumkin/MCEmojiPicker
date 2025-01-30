@@ -55,7 +55,30 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// If you want EmojiPicker not to dismissed after emoji selection, you must set this property to `false`.
     /// The default value of this property is `true`.
     public var isDismissAfterChoosing: Bool = true
-    
+
+    /// Wether the Header of the Categories should display how many Emojis are in it.
+    ///
+    /// This can be very useful for example, when displaying the amount of Emojis for a specific iOS Version,
+    /// in combination with `maxCurrentAvailableOsVersion`.
+    public var displayCountOfEmojisInHeader = false
+
+    /// Wether we display the categories at the bottom or not
+    ///
+    /// Defaults to `true`.
+    public var displayCategories = true
+
+    /// Ability to pass code that will be switching to the next keyboard.
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `abc` button will appear before the categories.
+    public let nextKeyboard: (() -> Void)?
+
+    /// Ablity to pass code that will be called when the back button is hit
+    ///
+    /// This will most probably only used when the Emoji Picker is used in a Keyboard
+    /// Default being `nil`, when this is not `nil`, the `back` button will appear after the categories.
+    public let deleteBackward: (() -> Void)?
+
     /// Color for the selected emoji category.
     ///
     /// The default value of this property is `.systemBlue`.
@@ -89,15 +112,39 @@ public final class MCEmojiPickerViewController: UIViewController {
     // MARK: - Private Properties
     
     private var generator: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .light)
-    private var viewModel: MCEmojiPickerViewModelProtocol = MCEmojiPickerViewModel()
+    private var viewModel: MCEmojiPickerViewModelProtocol
     private lazy var emojiPickerView: MCEmojiPickerView = {
         let categories = viewModel.emojiCategories.map { $0.type }
-        return MCEmojiPickerView(categoryTypes: categories, delegate: self)
+        return MCEmojiPickerView(
+            categoryTypes: categories,
+            delegate: self,
+            displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+            displayCategories: displayCategories,
+            deleteBackward: deleteBackward,
+            nextKeyboard: nextKeyboard
+        )
     }()
     
     // MARK: - Initializers
     
-    public init() {
+    public init(
+        _ maxCurrentAvailableOsVersion: Float? = nil,
+        onlyShowNewEmojisForVersion: Bool = false,
+        displayCategories: Bool = true,
+        nextKeyboard: (() -> Void)? = nil,
+        deleteBackward: (() -> Void)? = nil
+    ) {
+        if let maxCurrentAvailableOsVersion {
+            let unicodeManager = MCUnicodeManager(maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion)
+            unicodeManager.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
+            viewModel = MCEmojiPickerViewModel(unicodeManager: unicodeManager)
+            viewModel.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
+        } else {
+            viewModel = MCEmojiPickerViewModel()
+        }
+        self.displayCategories = displayCategories
+        self.nextKeyboard = nextKeyboard
+        self.deleteBackward = deleteBackward
         super.init(nibName: nil, bundle: nil)
         setupPopoverPresentationStyle()
         setupDelegates()

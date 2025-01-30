@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2ED5BC2D3EFF8800128AA3 /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 0C2ED5BB2D3EFF8800128AA3 /* MCEmojiPicker */; };
 		C44B58B529867F5E006478D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44B58B429867F5E006478D5 /* AppDelegate.swift */; };
 		C44B58B929867F5E006478D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44B58B829867F5E006478D5 /* ViewController.swift */; };
 		C44B58BE29867F5F006478D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C44B58BD29867F5F006478D5 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B58AA29867E13006478D5 /* MCEmojiPicker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MCEmojiPicker; path = ..; sourceTree = "<group>"; };
 		C44B58B229867F5E006478D5 /* iOS Example App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C44B58B429867F5E006478D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +67,19 @@
 		C49629E2298747B80070BE66 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0C2ED5AE2D3EFE8500128AA3 /* SwiftUI App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "SwiftUI App"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		0C2ED5AA2D3EFE8500128AA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C2ED5BC2D3EFF8800128AA3 /* MCEmojiPicker in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C44B58AF29867F5E006478D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,6 +96,7 @@
 			children = (
 				C44B58A929867E13006478D5 /* Packages */,
 				C44B58B329867F5E006478D5 /* iOS Example App */,
+				0C2ED5AE2D3EFE8500128AA3 /* SwiftUI App */,
 				C44B589329867DCB006478D5 /* Products */,
 				C44B58AB29867EC5006478D5 /* Frameworks */,
 			);
@@ -91,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				C44B58B229867F5E006478D5 /* iOS Example App.app */,
+				0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +174,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0C2ED5AC2D3EFE8500128AA3 /* EmojiUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "EmojiUI" */;
+			buildPhases = (
+				0C2ED5A92D3EFE8500128AA3 /* Sources */,
+				0C2ED5AA2D3EFE8500128AA3 /* Frameworks */,
+				0C2ED5AB2D3EFE8500128AA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0C2ED5AE2D3EFE8500128AA3 /* SwiftUI App */,
+			);
+			name = EmojiUI;
+			packageProductDependencies = (
+				0C2ED5BB2D3EFF8800128AA3 /* MCEmojiPicker */,
+			);
+			productName = "SwiftUI App";
+			productReference = 0C2ED5AD2D3EFE8500128AA3 /* EmojiUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C44B58B129867F5E006478D5 /* iOS Example App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C44B58C329867F5F006478D5 /* Build configuration list for PBXNativeTarget "iOS Example App" */;
@@ -185,9 +224,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					0C2ED5AC2D3EFE8500128AA3 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					C44B58B129867F5E006478D5 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -246,11 +288,19 @@
 			projectRoot = "";
 			targets = (
 				C44B58B129867F5E006478D5 /* iOS Example App */,
+				0C2ED5AC2D3EFE8500128AA3 /* EmojiUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0C2ED5AB2D3EFE8500128AA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C44B58B029867F5E006478D5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +314,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0C2ED5A92D3EFE8500128AA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C44B58AE29867F5E006478D5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -334,10 +391,76 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0C2ED5B92D3EFE8600128AA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.carrascomolina.SwiftUI-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0C2ED5BA2D3EFE8600128AA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.carrascomolina.SwiftUI-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C44B58A429867DCC006478D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -399,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -466,7 +590,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,7 +620,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -513,6 +637,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0C2ED5B82D3EFE8600128AA3 /* Build configuration list for PBXNativeTarget "EmojiUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C2ED5B92D3EFE8600128AA3 /* Debug */,
+				0C2ED5BA2D3EFE8600128AA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C44B588D29867DCB006478D5 /* Build configuration list for PBXProject "MCEmojiPicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -534,6 +667,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0C2ED5BB2D3EFF8800128AA3 /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MCEmojiPicker;
+		};
 		C44B58C629867F66006478D5 /* MCEmojiPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MCEmojiPicker;

@@ -45,11 +45,18 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     
     /// The maximum number of frequently used emojis to include in the `frequentlyUsed` category.
     public let maxFrequentlyUsedEmojisCount: Int
-    
+    private var maxCurrentAvailableOsVersion: Float?
+    public var onlyShowNewEmojisForVersion = false
+
+    private func availableOsVersion() -> Float {
+        maxCurrentAvailableOsVersion ?? (UIDevice.current.systemVersion as NSString).floatValue
+    }
+
     // MARK: - Initializers
-    
-    public init(maxFrequentlyUsedEmojis: Int = 30) {
+
+    public init(maxFrequentlyUsedEmojis: Int = 30, maxCurrentAvailableOsVersion: Float? = nil) {
         self.maxFrequentlyUsedEmojisCount = maxFrequentlyUsedEmojis
+        self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
     }
     
     // MARK: - Public Methods
@@ -87,9 +94,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
     // MARK: - Private Properties
     
     /// The maximum available emoji version for the current iOS version.
-    private static let maxCurrentAvailableEmojiVersion: Double = {
-        let currentIOSVersion = (UIDevice.current.systemVersion as NSString).floatValue
-        switch currentIOSVersion {
+    private func maxCurrentAvailableEmojiVersion() -> Double {
+        switch availableOsVersion() {
+        case 11.1...12.0:
+            return 5.0
         case 12.1...13.1:
             return 11.0
         case 13.2...14.1:
@@ -100,27 +108,37 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
             return 13.1
         case 15.4...16.3:
             return 14.0
-        case 16.4...:
+        case 16.4...17.3:
             return 15.0
+        case 17.4...:
+            return 15.1
         default:
-            return 5.0
+            return 4.0
         }
-    }()
-    
+    }
+
     private var defaultEmojis: [MCEmojiCategory] {
         [
-            peopleEmojis,
-            natureEmojis,
-            foodAndDrinkEmojis,
-            activityEmojis,
-            travelAndPlacesEmojis,
-            objectEmojis,
-            symbolEmojis,
-            flagEmojis
+            peopleEmojis(),
+            natureEmojis(),
+            foodAndDrinkEmojis(),
+            activityEmojis(),
+            travelAndPlacesEmojis(),
+            objectEmojis(),
+            symbolEmojis(),
+            flagEmojis()
         ]
     }
-    
-    private let peopleEmojis: MCEmojiCategory = .init(
+
+    private func version(of emoji: MCEmoji) -> Bool {
+        if onlyShowNewEmojisForVersion {
+            emoji.version == maxCurrentAvailableEmojiVersion()
+        } else {
+            emoji.version <= maxCurrentAvailableEmojiVersion()
+        }
+    }
+
+    private func peopleEmojis() -> MCEmojiCategory { return MCEmojiCategory(
         type: .people,
         categoryName: MCEmojiCategoryType.people.emojiCategoryTitle,
         emojis: [
@@ -3298,10 +3316,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "footprints",
                 version: 0.6
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-            
-    private let natureEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func natureEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .nature,
         categoryName: MCEmojiCategoryType.nature.emojiCategoryTitle,
         emojis: [
@@ -4217,10 +4235,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "mushroom",
                 version: 0.6
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
-    private let foodAndDrinkEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func foodAndDrinkEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .foodAndDrink,
         categoryName: MCEmojiCategoryType.foodAndDrink.emojiCategoryTitle,
         emojis: [
@@ -5022,10 +5040,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "amphora",
                 version: 1.0
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-            
-    private let activityEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func activityEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .activity,
         categoryName: MCEmojiCategoryType.activity.emojiCategoryTitle,
         emojis: [
@@ -5539,10 +5557,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "knot",
                 version: 13.0
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
-    private let travelAndPlacesEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func travelAndPlacesEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .travelAndPlaces,
         categoryName: MCEmojiCategoryType.travelAndPlaces.emojiCategoryTitle,
         emojis: [
@@ -6854,10 +6872,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "waterWave",
                 version: 0.6
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
-    private let objectEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func objectEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .objects,
         categoryName: MCEmojiCategoryType.objects.emojiCategoryTitle,
         emojis: [
@@ -8427,10 +8445,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "identificationCard",
                 version: 14.0
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
-    private let symbolEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func symbolEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .symbols,
         categoryName: MCEmojiCategoryType.symbols.emojiCategoryTitle,
         emojis: [
@@ -9772,10 +9790,10 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "blackSquareButton",
                 version: 0.6
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
-    private let flagEmojis: MCEmojiCategory = .init(
+        ].filter { version(of: $0) }
+    ) }
+
+    private func flagEmojis() -> MCEmojiCategory { MCEmojiCategory(
         type: .flags,
         categoryName: MCEmojiCategoryType.flags.emojiCategoryTitle,
         emojis: [
@@ -11393,7 +11411,7 @@ final class MCUnicodeManager: MCUnicodeManagerProtocol {
                 searchKey: "flagWales",
                 version: 5.0
             )
-        ].filter({ $0.version <= maxCurrentAvailableEmojiVersion })
-    )
-    
+        ].filter { version(of: $0) }
+    ) }
+
 }

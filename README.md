@@ -62,7 +62,7 @@ If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more i
 ## Requirements
 
 - Swift `4.2` & `5.0`
-- Ready for use on iOS 12.0+
+- Ready for use on iOS 10.3+
 - SwiftUI is supported from iOS 13.0
 
 ## Installation
@@ -179,7 +179,13 @@ MCEmojiPickerRepresentableController(
     horizontalInset: .zero,
     isDismissAfterChoosing: true,
     selectedEmojiCategoryTintColor: .systemBlue,
-    feedBackGeneratorStyle: .light
+    feedBackGeneratorStyle: .light,
+    maxCurrentAvailableOsVersion: 17,
+    displayCountOfEmojisInHeader: true,
+    displaysCategories: false,
+    onlyShowNewEmojisForVersion: true,
+    nextKeyboard: { /* call `handleInputModeList` in Keyboard Extension */ },
+    deleteBackward: { /* e.g. model.selectedEmoji = "" */ }
 )
 ```
 

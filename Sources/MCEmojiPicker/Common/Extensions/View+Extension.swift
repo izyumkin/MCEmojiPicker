@@ -35,6 +35,8 @@ extension View {
     ///     - isDismissAfterChoosing: A boolean value that determines whether the screen will be hidden after the emoji is selected.
     ///     - selectedEmojiCategoryTintColor: Color for the selected emoji category.
     ///     - feedBackGeneratorStyle: Feedback generator style. To turn off, set `nil` to this parameter.
+    ///     - maxCurrentAvailableOsVersion: Maximum current iOS Version that we should display the Emojis for.
+    ///     - displayCountOfEmojisInHeader: Wether the Header of the Categories should display how many Emojis are in it.
     @ViewBuilder public func emojiPicker(
         isPresented: Binding<Bool>,
         selectedEmoji: Binding<String>,
@@ -43,20 +45,29 @@ extension View {
         horizontalInset: CGFloat? = nil,
         isDismissAfterChoosing: Bool? = nil,
         selectedEmojiCategoryTintColor: UIColor? = nil,
-        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil
+        feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
+        maxCurrentAvailableOsVersion: Float? = nil,
+        displayCountOfEmojisInHeader: Bool = false,
+        onlyShowNewEmojisForVersion: Bool = false
     ) -> some View {
         self.overlay(
             MCEmojiPickerRepresentableController(
-                isPresented: isPresented,
+                presentationMode: Binding(
+                    get: { isPresented.wrappedValue ? .sheet : .none },
+                    set: { isPresented.wrappedValue = $0 == .sheet }
+                ),
                 selectedEmoji: selectedEmoji,
                 arrowDirection: arrowDirection,
                 customHeight: customHeight,
                 horizontalInset: horizontalInset,
                 isDismissAfterChoosing: isDismissAfterChoosing,
                 selectedEmojiCategoryTintColor: selectedEmojiCategoryTintColor,
-                feedBackGeneratorStyle: feedBackGeneratorStyle
+                feedBackGeneratorStyle: feedBackGeneratorStyle,
+                maxCurrentAvailableOsVersion: maxCurrentAvailableOsVersion,
+                displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+                onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion
             )
-                .allowsHitTesting(false)
+            .allowsHitTesting(false)
         )
     }
 }

@@ -32,6 +32,8 @@ protocol MCEmojiPickerViewModelProtocol {
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
     var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// Specifies that this will only show the new Emojis from the specified `maxCurrentAvailableOsVersion`
+    var onlyShowNewEmojisForVersion: Bool { get set }
     /// Clears the selected emoji, setting to `nil`.
     func clearSelectedEmoji()
     /// Returns the number of categories with emojis.
@@ -54,8 +56,10 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
     public var showEmptyEmojiCategories = false
+    public var onlyShowNewEmojisForVersion = false
+
     public var emojiCategories: [MCEmojiCategory] {
-        allEmojiCategories.filter({ showEmptyEmojiCategories || $0.emojis.count > 0 })
+        allEmojiCategories.filter { showEmptyEmojiCategories || !$0.emojis.isEmpty || onlyShowNewEmojisForVersion }
     }
     
     // MARK: - Private Properties
@@ -65,7 +69,8 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     // MARK: - Initializers
     
-    init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager()) {
+    init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager(), onlyShowNewEmojisForVersion: Bool = false) {
+        self.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
         allEmojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
         // Increment usage of each emoji upon selection
         selectedEmoji.bind { emoji in
