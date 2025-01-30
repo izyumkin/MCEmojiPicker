@@ -88,6 +88,11 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
     /// in combination with `maxCurrentAvailableOsVersion`.
     public var displayCountOfEmojisInHeader = false
 
+    /// Wether we display the categories at the bottom or not
+    ///
+    /// Defaults to `true`.
+    public var displayCategories = true
+
     /// Wether we will show all the Emojis available until this version of specifically only the new ones
     ///
     /// For consistence, when this is `true`, we will ignore `showEmptyEmojiCategories`
@@ -118,6 +123,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         feedBackGeneratorStyle: UIImpactFeedbackGenerator.FeedbackStyle? = nil,
         maxCurrentAvailableOsVersion: Float? = nil,
         displayCountOfEmojisInHeader: Bool = false,
+        displaysCategories: Bool = true,
         onlyShowNewEmojisForVersion: Bool = false,
         nextKeyboard: (() -> Void)? = nil,
         deleteBackward: (() -> Void)? = nil
@@ -132,6 +138,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         self.feedBackGeneratorStyle = feedBackGeneratorStyle
         self.maxCurrentAvailableOsVersion = maxCurrentAvailableOsVersion
         self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+        self.displayCategories = displaysCategories
         self.onlyShowNewEmojisForVersion = onlyShowNewEmojisForVersion
         self.nextKeyboard = nextKeyboard
         self.deleteBackward = deleteBackward
@@ -183,6 +190,7 @@ public struct MCEmojiPickerRepresentableController: UIViewControllerRepresentabl
         let emojiPicker = MCEmojiPickerViewController(
             maxCurrentAvailableOsVersion,
             onlyShowNewEmojisForVersion: onlyShowNewEmojisForVersion,
+            displayCategories: displayCategories,
             nextKeyboard: nextKeyboard,
             deleteBackward: deleteBackward
         )

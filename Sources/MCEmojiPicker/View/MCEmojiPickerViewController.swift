@@ -62,6 +62,11 @@ public final class MCEmojiPickerViewController: UIViewController {
     /// in combination with `maxCurrentAvailableOsVersion`.
     public var displayCountOfEmojisInHeader = false
 
+    /// Wether we display the categories at the bottom or not
+    ///
+    /// Defaults to `true`.
+    public var displayCategories = true
+
     /// Ability to pass code that will be switching to the next keyboard.
     ///
     /// This will most probably only used when the Emoji Picker is used in a Keyboard
@@ -114,6 +119,7 @@ public final class MCEmojiPickerViewController: UIViewController {
             categoryTypes: categories,
             delegate: self,
             displayCountOfEmojisInHeader: displayCountOfEmojisInHeader,
+            displayCategories: displayCategories,
             deleteBackward: deleteBackward,
             nextKeyboard: nextKeyboard
         )
@@ -124,6 +130,7 @@ public final class MCEmojiPickerViewController: UIViewController {
     public init(
         _ maxCurrentAvailableOsVersion: Float? = nil,
         onlyShowNewEmojisForVersion: Bool = false,
+        displayCategories: Bool = true,
         nextKeyboard: (() -> Void)? = nil,
         deleteBackward: (() -> Void)? = nil
     ) {
@@ -135,6 +142,7 @@ public final class MCEmojiPickerViewController: UIViewController {
         } else {
             viewModel = MCEmojiPickerViewModel()
         }
+        self.displayCategories = displayCategories
         self.nextKeyboard = nextKeyboard
         self.deleteBackward = deleteBackward
         super.init(nibName: nil, bundle: nil)

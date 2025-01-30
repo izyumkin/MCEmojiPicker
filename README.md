@@ -182,6 +182,7 @@ MCEmojiPickerRepresentableController(
     feedBackGeneratorStyle: .light,
     maxCurrentAvailableOsVersion: 17,
     displayCountOfEmojisInHeader: true,
+    displaysCategories: false,
     onlyShowNewEmojisForVersion: true,
     nextKeyboard: { /* call `handleInputModeList` in Keyboard Extension */ },
     deleteBackward: { /* e.g. model.selectedEmoji = "" */ }

@@ -70,6 +70,7 @@ final class MCEmojiPickerView: UIView {
     private let emojiCategoryTypes: [MCEmojiCategoryType]
     
     private let displayCountOfEmojisInHeader: Bool
+    private let displayCategories: Bool
     private let deleteBackward: (() -> Void)?
     private let nextKeyboard: (() -> Void)?
 
@@ -118,12 +119,14 @@ final class MCEmojiPickerView: UIView {
         categoryTypes: [MCEmojiCategoryType] = MCEmojiCategoryType.allCases,
         delegate: MCEmojiPickerViewDelegate,
         displayCountOfEmojisInHeader: Bool = false,
+        displayCategories: Bool = true,
         deleteBackward: (() -> Void)? = nil,
         nextKeyboard: (() -> Void)? = nil
     ) {
         self.delegate = delegate
         self.emojiCategoryTypes = categoryTypes
         self.displayCountOfEmojisInHeader = displayCountOfEmojisInHeader
+        self.displayCategories = displayCategories
         self.deleteBackward = deleteBackward
         self.nextKeyboard = nextKeyboard
         super.init(frame: .zero)
@@ -139,10 +142,14 @@ final class MCEmojiPickerView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        setupCategoryViews()
+        if displayCategories {
+            setupCategoryViews()
+        }
         setupCollectionViewLayout()
-        setupCollectionViewBottomInsets()
-        setupCategoriesControlLayout()
+        if displayCategories {
+            setupCollectionViewBottomInsets()
+            setupCategoriesControlLayout()
+        }
     }
     
     // MARK: - Public Methods
