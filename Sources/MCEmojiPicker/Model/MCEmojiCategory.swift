@@ -23,14 +23,24 @@
 import Foundation
 
 /// The main model that is used to configure the main collection.
-struct MCEmojiCategory {
-    var type: MCEmojiCategoryType
-    var categoryName: String
-    var emojis: [MCEmoji]
+@_spi(JSON)
+public struct MCEmojiCategory: Codable {
+    public var type: MCEmojiCategoryType
+    public var emojis: [MCEmoji]
+
+    public init(type: MCEmojiCategoryType, emojis: [MCEmoji]) {
+        self.type = type
+        self.emojis = emojis
+    }
+
+    var categoryName: String {
+        type.emojiCategoryTitle
+    }
 }
 
 /// This enumeration shows a list of categories that are contained in the main collection.
-enum MCEmojiCategoryType: Int, CaseIterable {
+@_spi(JSON)
+public enum MCEmojiCategoryType: Int, CaseIterable, Codable {
     case frequentlyUsed
     case people
     case nature
@@ -40,9 +50,9 @@ enum MCEmojiCategoryType: Int, CaseIterable {
     case objects
     case symbols
     case flags
-    
+
     /// A constant key for accessing name localization resources for each category.
-    var localizeKey: String {
+    public var localizeKey: String {
         switch self {
         case .frequentlyUsed:
             return "frequentlyUsed"

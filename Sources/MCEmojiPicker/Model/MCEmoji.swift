@@ -23,8 +23,8 @@
 import Foundation
 
 /// The main model for interacting with emojis.
-struct MCEmoji {
-    
+@_spi(JSON)
+public struct MCEmoji: Codable {
     // MARK: - Types
     
     /// Keys for storage in UserDefaults.
@@ -133,7 +133,8 @@ struct MCEmoji {
 }
 
 /// This enumeration allows you to determine which skin tones can be set for `MCEmoji`.
-enum MCEmojiSkinTone: Int, CaseIterable {
+@_spi(JSON)
+public enum MCEmojiSkinTone: Int, CaseIterable {
     case none = 1
     case light = 2
     case mediumLight = 3
@@ -142,7 +143,7 @@ enum MCEmojiSkinTone: Int, CaseIterable {
     case dark = 6
     
     /// Hex value for the skin tone.
-    var skinKey: Int? {
+    public var skinKey: Int? {
         switch self {
         case .none:
             return nil
