@@ -25,7 +25,7 @@ If you know how to fix it - welcome to the [discussion](https://github.com/izyum
 ## Apps Using
 
 <p float="left">
-    <a href="https://apps.apple.com/app/id1500111859"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/17f93db2-441c-41bb-9b32-2e322d6174f6" height="65"></a>
+    <a href="https://apps.apple.com/app/id1500111859"><img src="https://github.com/user-attachments/assets/bc8b8235-b848-43ef-a143-fbce80c195d3" height="65"></a>
     <a href="https://apps.apple.com/app/id6450279059"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/270146ff-d3e7-4c46-97c2-2c796e6bd78d" height="65"></a>
     <a href="https://apps.apple.com/app/id6444636956"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/ecae445c-1683-422b-a0e7-8dbaeac2eb18" height="65"></a>
     <a href="https://github.com/Housemates-Mobile-App/housemates_mobileapp"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/05a8651a-c6fb-419e-9bdc-aa7d68b53af7" height="65"></a>
@@ -36,6 +36,9 @@ If you know how to fix it - welcome to the [discussion](https://github.com/izyum
     <a href="https://github.com/honzachalupa/SymptomsTracker"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/836c08c8-7e60-4403-ad0a-fffaed926d15" height="65"></a>
     <a href="https://github.com/savoirfairelinux/jami-client-ios"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/b2e00327-7c13-407b-8c43-3c189504c3c5" height="65"></a>
     <a href="https://github.com/deltachat/deltachat-ios"><img src="https://github.com/izyumkin/MCEmojiPicker/assets/50948518/6322e6cf-71d4-4f37-893c-44277b277517" height="65"></a>
+    <a href="https://apps.apple.com/app/id6465843931"><img src="https://github.com/user-attachments/assets/efc4408b-f716-4773-b255-d267c2fb5bf7" height="65"></a>
+    <a href="https://apps.apple.com/app/id6499061841"><img src="https://github.com/user-attachments/assets/13bab9ec-7c73-4a3b-bf52-c5c5d3ce14b0" height="65"></a>
+    <a href="https://apps.apple.com/app/id6476229386"><img src="https://github.com/user-attachments/assets/fefc767e-5d07-4bb7-b83a-b190e2188ddb" height="65"></a>
 </p>
 
 If you use a `MCEmojiPicker`, add your application via Pull Request. Fore more information you can see [contribution guide](https://github.com/izyumkin/MCEmojiPicker/blob/main/CONTRIBUTING.md).
