@@ -65,9 +65,11 @@ public struct MCEmoji: Codable {
     public var lastUsage: TimeInterval {
         usage.first ?? .zero
     }
-    
     /// The string representation of the emoji.
-    private(set) public var string: String = ""
+    public var string: String {
+        getEmoji()
+    }
+
     /// The keys used to represent the emoji.
     private(set) public var emojiKeys: [Int]
     /// A boolean indicating whether this emoji has different skin tones available.
@@ -96,8 +98,6 @@ public struct MCEmoji: Codable {
         self.isSkinToneSupport = isSkinToneSupport
         self.searchKey = searchKey
         self.version = version
-        
-        string = getEmoji()
     }
     
     // MARK: - Public Methods
@@ -106,9 +106,8 @@ public struct MCEmoji: Codable {
     
     /// - Parameters:
     ///   - skinToneRawValue: The raw value of the `MCEmojiSkinTone`.
-    public mutating func set(skinToneRawValue: Int) {
+    public func set(skinToneRawValue: Int) {
         UserDefaults.standard.set(skinToneRawValue, forKey: StorageKeys.skinTone(self).key)
-        string = getEmoji()
     }
     
     /// Increments the usage count for this emoji.
