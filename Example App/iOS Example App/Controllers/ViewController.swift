@@ -124,4 +124,8 @@ extension ViewController: MCEmojiPickerDelegate {
     func didGetEmoji(emoji: String) {
         emojiButton.setTitle(emoji, for: .normal)
     }
+    
+    func didClose() {
+        // no-op
+    }
 }
