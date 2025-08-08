@@ -40,6 +40,8 @@ protocol MCEmojiPickerViewDelegate: AnyObject {
 }
 
 final class MCEmojiPickerView: UIView {
+    // Prevent duplicate UI setup on repeated draw/layout cycles
+    private var didSetupUIOnce = false
     
     // MARK: - Public Properties
     
@@ -126,6 +128,8 @@ final class MCEmojiPickerView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        guard didSetupUIOnce == false else { return }
+        didSetupUIOnce = true
         setupCategoryViews()
         setupCollectionViewLayout()
         setupCollectionViewBottomInsets()
@@ -202,6 +206,9 @@ final class MCEmojiPickerView: UIView {
     }
     
     private func setupCategoryViews() {
+        // Make idempotent if called more than once for any reason
+        categoriesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        categoryViews.removeAll()
         for categoryIndex in 0...emojiCategoryTypes.count - 1 {
             let categoryView = MCTouchableEmojiCategoryView(
                 delegate: self,
