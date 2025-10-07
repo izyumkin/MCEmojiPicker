@@ -144,6 +144,9 @@ public final class MCEmojiPickerViewController: UIViewController {
         viewModel.selectedEmojiCategoryIndex.bind { [unowned self] categoryIndex in
             self.emojiPickerView.updateSelectedCategoryIcon(with: categoryIndex)
         }
+        viewModel.searchText.bind { [unowned self] _ in
+            emojiPickerView.reloadData()
+        }
     }
     
     private func setupDelegates() {
@@ -238,6 +241,14 @@ extension MCEmojiPickerViewController: MCEmojiPickerViewDelegate {
     
     func didChoiceEmoji(_ emoji: MCEmoji?) {
         viewModel.selectedEmoji.value = emoji
+    }
+    
+    func didSearchTextChange(_ searchText: String) {
+        viewModel.updateSearchText(searchText)
+    }
+    
+    func clearSearch() {
+        viewModel.clearSearch()
     }
 }
 
