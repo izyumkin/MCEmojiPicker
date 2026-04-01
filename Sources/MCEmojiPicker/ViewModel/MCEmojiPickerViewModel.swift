@@ -32,6 +32,8 @@ protocol MCEmojiPickerViewModelProtocol {
     var selectedEmoji: Observable<MCEmoji?> { get set }
     /// The observed variable that is responsible for the choice of emoji category.
     var selectedEmojiCategoryIndex: Observable<Int> { get set }
+    /// The search text used to filter emojis.
+    var searchText: Observable<String> { get set }
     /// Clears the selected emoji, setting to `nil`.
     func clearSelectedEmoji()
     /// Returns the number of categories with emojis.
@@ -44,6 +46,10 @@ protocol MCEmojiPickerViewModelProtocol {
     func sectionHeaderName(for section: Int) -> String
     /// Updates the emoji skin tone and returns the updated `MCEmoji`.
     func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji
+    /// Updates the search text and filters emojis.
+    func updateSearchText(_ text: String)
+    /// Clears the search text and shows all emojis.
+    func clearSearch()
 }
 
 /// View model which using in `MCEmojiPickerViewController`.
@@ -53,18 +59,32 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     
     public var selectedEmoji = Observable<MCEmoji?>(value: nil)
     public var selectedEmojiCategoryIndex = Observable<Int>(value: 0)
+    public var searchText = Observable<String>(value: "")
     public var showEmptyEmojiCategories = false
     public var emojiCategories: [MCEmojiCategory] {
-        allEmojiCategories.filter({ showEmptyEmojiCategories || $0.emojis.count > 0 })
+        let categories = allEmojiCategories.filter({ showEmptyEmojiCategories || $0.emojis.count > 0 })
+        guard !searchText.value.isEmpty else { return categories }
+        return filterCategoriesBySearchText(categories, searchText: searchText.value)
     }
     
     // MARK: - Private Properties
-    
+
     /// All emoji categories.
     private var allEmojiCategories = [MCEmojiCategory]()
-    
+
+    /// CLDR keyword lookup: emoji character → array of search keywords.
+    /// Loaded once at init from the bundled cldrEmojiKeywords.json resource.
+    /// Enables searching by aliases (e.g. "lettuce" → 🥬, "aubergine" → 🍆).
+    private var cldrKeywords: [String: [String]] = {
+        guard let url = Bundle.module.url(forResource: "cldrEmojiKeywords", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode([String: [String]].self, from: data)
+        else { return [:] }
+        return decoded
+    }()
+
     // MARK: - Initializers
-    
+
     init(unicodeManager: MCUnicodeManagerProtocol = MCUnicodeManager()) {
         allEmojiCategories = unicodeManager.getEmojisForCurrentIOSVersion()
         // Increment usage of each emoji upon selection
@@ -96,9 +116,58 @@ final class MCEmojiPickerViewModel: MCEmojiPickerViewModelProtocol {
     }
     
     public func updateEmojiSkinTone(_ skinToneRawValue: Int, in indexPath: IndexPath) -> MCEmoji {
+        // Get the emoji from the filtered categories (what the user sees)
+        let filteredEmoji = emojiCategories[indexPath.section].emojis[indexPath.row]
         let categoryType: MCEmojiCategoryType = emojiCategories[indexPath.section].type
         let allCategoriesIndex: Int = allEmojiCategories.firstIndex { $0.type == categoryType } ?? 0
-        allEmojiCategories[allCategoriesIndex].emojis[indexPath.row].set(skinToneRawValue: skinToneRawValue)
-        return allEmojiCategories[allCategoriesIndex].emojis[indexPath.row]
+        // Find the correct emoji index in the unfiltered array by matching emojiKeys
+        guard let correctRowIndex = allEmojiCategories[allCategoriesIndex].emojis.firstIndex(where: { $0.emojiKeys == filteredEmoji.emojiKeys }) else {
+            return filteredEmoji
+        }
+        allEmojiCategories[allCategoriesIndex].emojis[correctRowIndex].set(skinToneRawValue: skinToneRawValue)
+        return allEmojiCategories[allCategoriesIndex].emojis[correctRowIndex]
+    }
+
+    public func updateSearchText(_ text: String) {
+        searchText.value = text
+    }
+
+    public func clearSearch() {
+        searchText.value = ""
+    }
+
+    // MARK: - Private Methods
+
+    private func filterCategoriesBySearchText(_ categories: [MCEmojiCategory], searchText: String) -> [MCEmojiCategory] {
+        let lowercasedSearchText = searchText.lowercased()
+        return categories.compactMap { category in
+            let filteredEmojis = category.emojis.filter { emoji in
+                // 1. Match against the camelCase-split primary name (e.g. "leafy green")
+                if searchableText(from: emoji.searchKey).contains(lowercasedSearchText) { return true }
+                // 2. Match against CLDR synonym keywords (e.g. "lettuce", "aubergine")
+                if let keywords = cldrKeywords[emoji.string] {
+                    return keywords.contains { $0.contains(lowercasedSearchText) }
+                }
+                return false
+            }
+            guard !filteredEmojis.isEmpty else { return nil }
+            var filteredCategory = category
+            filteredCategory.emojis = filteredEmojis
+            return filteredCategory
+        }
+    }
+
+    /// Converts a camelCase searchKey (e.g. "leafyGreen") into a lowercased
+    /// space-separated string (e.g. "leafy green") so individual words are
+    /// independently searchable.
+    private func searchableText(from camelCase: String) -> String {
+        var result = ""
+        for char in camelCase {
+            if char.isUppercase, !result.isEmpty {
+                result += " "
+            }
+            result += char.lowercased()
+        }
+        return result
     }
 }
