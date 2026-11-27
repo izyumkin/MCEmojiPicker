@@ -119,6 +119,15 @@ public final class MCEmojiPickerViewController: UIViewController {
         setupPreferredContentSize()
         setupArrowDirections()
     }
+
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        view.layer.cornerRadius = 13
+        if #available(iOS 13.0, *) {
+            view.layer.cornerCurve = .continuous
+        }
+        view.layer.masksToBounds = true
+    }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
